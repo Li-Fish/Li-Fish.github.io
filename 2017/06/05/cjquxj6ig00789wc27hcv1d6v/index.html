@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>使用OpenMP实现并行归并排序（Report） | Fish&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="归并排序算法：归并排序算法是一种经典的分治算法。 分治分治算法分为由三部分组成：分解：将原问题分解为一系列子问题；解决：递归的解决各个子问题。若子问题足够小，那么直接求解。合并：将子问题的结果合并成原问题。 归并排序步骤归并排序完全依照了上述模式，直观的操作如下：分解：将n个元素分成各含n/2个元素的子序列；解决：用合并排序法对两个子序列递归地排序；合并：合并两个已经排序的子序列，已得到排序结果。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用OpenMP实现并行归并排序（Report）">
+<meta property="og:url" content="https://li-fish.github.io/2017/06/05/cjquxj6ig00789wc27hcv1d6v/index.html">
+<meta property="og:site_name" content="Fish&#39;s Blog">
+<meta property="og:description" content="归并排序算法：归并排序算法是一种经典的分治算法。 分治分治算法分为由三部分组成：分解：将原问题分解为一系列子问题；解决：递归的解决各个子问题。若子问题足够小，那么直接求解。合并：将子问题的结果合并成原问题。 归并排序步骤归并排序完全依照了上述模式，直观的操作如下：分解：将n个元素分成各含n/2个元素的子序列；解决：用合并排序法对两个子序列递归地排序；合并：合并两个已经排序的子序列，已得到排序结果。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.blog.csdn.net/20170605171543250?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQUNNX0Zpc2g=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170605210453384?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQUNNX0Zpc2g=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170605210516264?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQUNNX0Zpc2g=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-12-29T08:52:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用OpenMP实现并行归并排序（Report）">
+<meta name="twitter:description" content="归并排序算法：归并排序算法是一种经典的分治算法。 分治分治算法分为由三部分组成：分解：将原问题分解为一系列子问题；解决：递归的解决各个子问题。若子问题足够小，那么直接求解。合并：将子问题的结果合并成原问题。 归并排序步骤归并排序完全依照了上述模式，直观的操作如下：分解：将n个元素分成各含n/2个元素的子序列；解决：用合并排序法对两个子序列递归地排序；合并：合并两个已经排序的子序列，已得到排序结果。">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170605171543250?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQUNNX0Zpc2g=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+  
+    <link rel="alternate" href="/atom.xml" title="Fish&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Fish&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://li-fish.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-使用OpenMP实现并行归并排序（Report）" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/05/cjquxj6ig00789wc27hcv1d6v/" class="article-date">
+  <time datetime="2017-06-05T08:41:18.000Z" itemprop="datePublished">2017-06-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CS课程/">CS课程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用OpenMP实现并行归并排序（Report）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="归并排序算法："><a href="#归并排序算法：" class="headerlink" title="归并排序算法："></a>归并排序算法：</h1><p>归并排序算法是一种经典的分治算法。</p>
+<h2 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h2><p>分治算法分为由三部分组成：<br>分解：将原问题分解为一系列子问题；<br>解决：递归的解决各个子问题。若子问题足够小，那么直接求解。<br>合并：将子问题的结果合并成原问题。</p>
+<h2 id="归并排序步骤"><a href="#归并排序步骤" class="headerlink" title="归并排序步骤"></a>归并排序步骤</h2><p>归并排序完全依照了上述模式，直观的操作如下：<br>分解：将n个元素分成各含n/2个元素的子序列；<br>解决：用合并排序法对两个子序列递归地排序；<br>合并：合并两个已经排序的子序列，已得到排序结果。<br>这里递归的边界是序列长度为1时，显然是有序的。</p>
+<h2 id="合并过程"><a href="#合并过程" class="headerlink" title="合并过程"></a>合并过程</h2><p>这里最关键的步骤，是合并步骤里如何合并两个有序的序列，并保证合并后的序列依然有序。</p>
+<p>假设有序的序列为递增的，A、B为需要合并的序列，C为合并后的结果序列，p、q分别为A和B的下标，top为C的下标。定义如果一个下标大于序列的长度后，表示的值为无穷大。</p>
+<p>初始状态：p、q、top均为0.</p>
+<p>操作：选择A[p]和B[q]中的小的元素，加入到C[top]中，然后让较小的元素所在的序列的下标加一，top加一。当A[p]和B[q]均为无穷大时，结束操作。</p>
+<p>由于每次操作均是比较A[p]和B[q]，然后取较小者加入C中，显然时间复杂度是O(n)的。</p>
+<h2 id="归并排序时间复杂度分析："><a href="#归并排序时间复杂度分析：" class="headerlink" title="归并排序时间复杂度分析："></a>归并排序时间复杂度分析：</h2><p>假设归并排序一个长度为n的序列需要的时间为T(n)。<br>首先归并排序分如下三个步骤：<br>分解：这一步是把序列分为两个子序列，只需要常量时间，O(1)；<br>解决：递归的解决规模为n/2的两个子问题，时间为2*T(n/2)；<br>合并：上面已经证明，只需时间O(n)。</p>
+<p>那么接下来可以UI递归的表示出所需的时间T(n):<br>当n = 1是，T(n) = O(1)；<br>否则：T(n) = 2*T(n/2) + O(n)。</p>
+<p>可以证明出上述的T(n)其实就是O(n*log(n))。</p>
+<p>T(n) = 2<em>T(n/2) + O(n)<br>        = 2</em>(2<em>T(n/4) + O(n/2) + O(n)<br>        = 4</em>T(n/4) + 2<em>O(n/2) + O(n)<br>        = 4</em>T(n/4) + 2<em>O(n)<br>        = 8</em>T(n/8) + 8<em>O(n/8) + 2</em>O(n)<br>        = 8<em>T(n/8) + 3</em>O(n)<br>        = x<em>T(1) + y</em>O(n)</p>
+<p>显然y即为n除多少次才为1，y = log2(n)，x等于2^y，那么T(n) = O(n*log(n))。</p>
+<h2 id="一个容易理解的代码："><a href="#一个容易理解的代码：" class="headerlink" title="一个容易理解的代码："></a>一个容易理解的代码：</h2><p>Python is very beautiful！<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge_sort</span><span class="params">(array)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> len(array) &gt; <span class="number">1</span>:</span><br><span class="line">        mid = len(array) / <span class="number">2</span></span><br><span class="line">        left = merge_sort(array[:mid])</span><br><span class="line">        right = merge_sort(array[mid:])</span><br><span class="line">        <span class="keyword">return</span> merge(left, right)</span><br><span class="line">    <span class="keyword">return</span> array</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span><span class="params">(left, right)</span>:</span></span><br><span class="line">    rst = []</span><br><span class="line">    <span class="keyword">while</span> len(left) &gt; <span class="number">0</span> <span class="keyword">or</span> len(right) &gt; <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">if</span> len(right) == <span class="number">0</span> <span class="keyword">or</span> len(left) != <span class="number">0</span> <span class="keyword">and</span> left[<span class="number">0</span>] &lt; right[<span class="number">0</span>]:</span><br><span class="line">            rst.append(left.pop(<span class="number">0</span>))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            rst.append(right.pop(<span class="number">0</span>))</span><br><span class="line">    <span class="keyword">return</span> rst</span><br></pre></td></tr></table></figure></p>
+<h1 id="串行过程："><a href="#串行过程：" class="headerlink" title="串行过程："></a>串行过程：</h1><h2 id="串行排序代码："><a href="#串行排序代码：" class="headerlink" title="串行排序代码："></a>串行排序代码：</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge_sort</span><span class="params">(<span class="keyword">int</span> *A, <span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> *T)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (y - x &gt; <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> m = x + (y-x)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">int</span> p = x, q = m, i = x;</span><br><span class="line">        merge_sort(A, x, m, T);</span><br><span class="line">        merge_sort(A, m, y, T);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (p &lt; m || q &lt; y) &#123;</span><br><span class="line">            <span class="keyword">if</span> (q &gt;= y || (p &lt; m &amp;&amp; A[p] &lt;= A[q])) &#123;</span><br><span class="line">                T[i++] = A[p++];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                T[i++] = A[q++];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (i = x; i &lt; y; i++) &#123;</span><br><span class="line">            A[i] = T[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="串行求和代码："><a href="#串行求和代码：" class="headerlink" title="串行求和代码："></a>串行求和代码：</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get_sum</span><span class="params">(<span class="keyword">int</span>* data, <span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>, i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">        sum += data[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="运行时间："><a href="#运行时间：" class="headerlink" title="运行时间："></a>运行时间：</h2><table>
+<thead>
+<tr>
+<th>num_elements</th>
+<th>sort time</th>
+<th>sum time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100</td>
+<td>0.000012</td>
+<td>0.000001</td>
+</tr>
+<tr>
+<td>1000</td>
+<td>0.000166</td>
+<td>0.000005</td>
+</tr>
+<tr>
+<td>10000</td>
+<td>0.002162</td>
+<td>0.000045</td>
+</tr>
+<tr>
+<td>100000</td>
+<td>0.022915</td>
+<td>0.000384</td>
+</tr>
+<tr>
+<td>1000000</td>
+<td>0.216075</td>
+<td>0.003397</td>
+</tr>
+<tr>
+<td>10000000</td>
+<td>2.404543</td>
+<td>0.034109</td>
+</tr>
+<tr>
+<td>100000000</td>
+<td>27.204318</td>
+<td>0.340051</td>
+</tr>
+</tbody>
+</table>
+<p>ignore the input time.</p>
+<h1 id="并行过程："><a href="#并行过程：" class="headerlink" title="并行过程："></a>并行过程：</h1><h2 id="归并排序算法的并行化："><a href="#归并排序算法的并行化：" class="headerlink" title="归并排序算法的并行化："></a>归并排序算法的并行化：</h2><p>首先，归并排序的步骤分为已下三步：</p>
+<p>分解：将n个元素分成各含n/2个元素的子序列；<br>解决：用合并排序法对两个子序列递归地排序；<br>合并：合并两个已经排序的子序列，已得到排序结果。</p>
+<p>然后发现，按照这个思路很难并行化，因为许多过程有依赖的，比如当[1, 1], [2, 2] 区间没有合并之前，那么[1, 2], [3, 4]区间是不能进行合并的。</p>
+<p>但是我们可以把归并的步骤反过来。原来归并是要不断的分解一个序列，直到分解成长度为1的区间，最后依次合并。我们现在假设有N个区间，要分别合并，最后合并成一个区间。那么我现在的操作是没有前后依赖的，对于任意两个区间，只需要合并就好，不用考虑其他的线程。</p>
+<p>这样排序的过程就类似一颗线段树（严格的来讲并不是），自底向上的不断合并。</p>
+<p><img src="http://img.blog.csdn.net/20170605171543250?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQUNNX0Zpc2g=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="排序代码："><a href="#排序代码：" class="headerlink" title="排序代码："></a>排序代码：</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//合并两个区间</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> l1, <span class="keyword">int</span> r1, <span class="keyword">int</span> r2, <span class="keyword">int</span>* data, <span class="keyword">int</span>* temp)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> top = l1, p = l1, q = r1;</span><br><span class="line">    <span class="keyword">while</span> (p &lt; r1 || q &lt; r2) &#123;</span><br><span class="line">        <span class="keyword">if</span> (q &gt;= r2 || (p &lt; r1 &amp;&amp; data[p] &lt;= data[q])) &#123;</span><br><span class="line">            temp[top++] = data[p++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            temp[top++] = data[q++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (top = l1; top &lt; r2; top++) &#123;</span><br><span class="line">        data[top] = temp[top];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge_sort</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span>* data, <span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j, t, *temp;</span><br><span class="line">    temp = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(N * <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">    <span class="comment">//这里做了一些优化，预处理合并了单个的区间，略微提高的速度</span></span><br><span class="line">	<span class="meta">#<span class="meta-keyword">pragma</span> omp parallel for private(i, t) shared(N, data)</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N/<span class="number">2</span>; i++)</span><br><span class="line">        <span class="keyword">if</span> (data[i*<span class="number">2</span>] &gt; data[i*<span class="number">2</span>+<span class="number">1</span>]) &#123;</span><br><span class="line">            t = data[i*<span class="number">2</span>];</span><br><span class="line">            data[i*<span class="number">2</span>] = data[i*<span class="number">2</span>+<span class="number">1</span>];</span><br><span class="line">            data[i*<span class="number">2</span>+<span class="number">1</span>] = t;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//i代表每次归并的区间长度，j代表需要归并的两个区间中最小的下标</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">2</span>; i &lt; r; i *= <span class="number">2</span>) &#123;</span><br><span class="line">		<span class="meta">#<span class="meta-keyword">pragma</span> omp parallel for private(j) shared(r, i)</span></span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; r-i; j += i*<span class="number">2</span>) &#123;</span><br><span class="line">            merge(j, j+i, (j+i*<span class="number">2</span> &lt; r ? j+i*<span class="number">2</span> : r), data, temp);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="求和代码："><a href="#求和代码：" class="headerlink" title="求和代码："></a>求和代码：</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get_sum</span><span class="params">(<span class="keyword">int</span>* data, <span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>, i;</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">pragma</span> omp parallel for private(i) reduct(+:sum)</span></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">        sum += data[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="运行时间：-1"><a href="#运行时间：-1" class="headerlink" title="运行时间："></a>运行时间：</h2><table>
+<thead>
+<tr>
+<th>num_elements</th>
+<th>sort time</th>
+<th>sum time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100</td>
+<td>0.000164</td>
+<td>0.000009</td>
+</tr>
+<tr>
+<td>1000</td>
+<td>0.000209</td>
+<td>0.000009</td>
+</tr>
+<tr>
+<td>10000</td>
+<td>0.002318</td>
+<td>0.000052</td>
+</tr>
+<tr>
+<td>100000</td>
+<td>0.010589</td>
+<td>0.000166</td>
+</tr>
+<tr>
+<td>1000000</td>
+<td>0.110090</td>
+<td>0.001279</td>
+</tr>
+<tr>
+<td>10000000</td>
+<td>1.093572</td>
+<td>0.013541</td>
+</tr>
+<tr>
+<td>100000000</td>
+<td>11.872408</td>
+<td>0.127646</td>
+</tr>
+</tbody>
+</table>
+<p>ignore the input time.</p>
+<h1 id="运行时间分析："><a href="#运行时间分析：" class="headerlink" title="运行时间分析："></a>运行时间分析：</h1><h2 id="排序时间对比："><a href="#排序时间对比：" class="headerlink" title="排序时间对比："></a>排序时间对比：</h2><p><img src="http://img.blog.csdn.net/20170605210453384?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQUNNX0Zpc2g=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="求和时间对比："><a href="#求和时间对比：" class="headerlink" title="求和时间对比："></a>求和时间对比：</h2><p><img src="http://img.blog.csdn.net/20170605210516264?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQUNNX0Zpc2g=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="结论："><a href="#结论：" class="headerlink" title="结论："></a>结论：</h2><p>增加线程数在是可以加快程序的运行速度的，但是随着线程的增加，加速的效果逐渐变得不明显，双线程与单线程的差异较大，整体上多线程的用时为单线程的一半。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2017/06/05/cjquxj6ig00789wc27hcv1d6v/" data-id="cjquxj6ig00789wc27hcv1d6v" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/06/11/cjquxj6h7006a9wc21qlh3b5o/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          UVA12511 - Virus（DP+最长公共上升子序列）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/31/cjquxj6bk00239wc2usq9pda0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">HDU3085 - Nightmare Ⅱ（双向BFS）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/">DP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/区间DP/">区间DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/数位DP/">数位DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/斜率优化/">斜率优化</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/树型DP/">树型DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/状压DP/">状压DP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/二分/">二分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/二进制/">二进制</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/命题/">命题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/">图论</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/2-SAT/">2-SAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/匹配/">匹配</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/差分约束/">差分约束</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/最短路/">最短路</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/网络流/">网络流</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/连通性/">连通性</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/">字符串</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/AC自动机/">AC自动机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/后缀数组/">后缀数组</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/回文树/">回文树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/字符串Hash/">字符串Hash</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/搜索/">搜索</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/搜索/BFS/">BFS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/">数学</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/数论/">数论</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/矩阵快速幂/">矩阵快速幂</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/线性基/">线性基</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/高斯消元/">高斯消元</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/">数据结构</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/K-D树/">K-D树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/LCT/">LCT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/ST表/">ST表</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/Splay/">Splay</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/主席树/">主席树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/并查集/">并查集</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/栈/">栈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/树/">树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/树链剖分/">树链剖分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/线段树/">线段树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/虚树/">虚树</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/模拟/">模拟</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/知识小结/">知识小结</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/计算几何/">计算几何</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/贪心/">贪心</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/CS课程/">CS课程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/历程/">历程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/命题/">命题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/想法/">想法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂物/">杂物</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/游戏/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/爬虫-数据处理/">爬虫&数据处理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/Java/">Java</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网页设计/">网页设计</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/网页设计/Web服务器/">Web服务器</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/音乐/">音乐</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/音乐/乐理/">乐理</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/16/cjquxj6id00769wc2ctsx26k6/">二维ST表</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/16/cjquxj6fn00519wc2tmqnvtk5/">SDUTACM十周年题解（Fish出题部分）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/25/cjquxj6da003g9wc2typtyc7q/">LCT(模板-待填坑)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/11/cjquxj6iq007i9wc2i4gd5g6o/">回文树模板</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/04/cjquxj6oj00ff9wc2sc3vo5ed/">2018年暑假集训（应付学校社会实践）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Fish<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+				<!-- MathJax -->
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+				showProcessingMessages: false,
+				tex2jax: {
+					inlineMath: [["$", "$"], ["\\\\(", "\\\\)"]],
+					processEscapes:true
+				},
+				menuSettings: {
+					zoom: "Hover"
+    			}
+			});
+		</script>
+		<script src="//cdn.bootcss.com/mathjax/2.6.0/MathJax.js?config=TeX-AMS_HTML"></script>
+				
+  </div>
+</body>
+</html>

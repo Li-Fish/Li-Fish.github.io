@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>STL在使用算法竞赛中的使用方法 （教程+未完成） | Fish&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言： 本文面向已有 C 语言和部分算法基础的同学。 内容均是个人总结，由于还没有系统的学习过 C++ 的面向对象，也没有翻过 STL 的代码，均以实用的角度来讲，可能不严谨些。 接下来介绍的将是一些 C++ STL 容器的使用，特性及一些常用函数。然后还有部分好用的函数。都会以介绍加代码样例的方式写出。   STL: Vector： 简介：Vector 可以看做是一个不定长数组，可以对其进行插入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STL在使用算法竞赛中的使用方法 （教程+未完成）">
+<meta property="og:url" content="https://li-fish.github.io/2017/03/17/cjquxj6g7005i9wc2dji2i0jr/index.html">
+<meta property="og:site_name" content="Fish&#39;s Blog">
+<meta property="og:description" content="前言： 本文面向已有 C 语言和部分算法基础的同学。 内容均是个人总结，由于还没有系统的学习过 C++ 的面向对象，也没有翻过 STL 的代码，均以实用的角度来讲，可能不严谨些。 接下来介绍的将是一些 C++ STL 容器的使用，特性及一些常用函数。然后还有部分好用的函数。都会以介绍加代码样例的方式写出。   STL: Vector： 简介：Vector 可以看做是一个不定长数组，可以对其进行插入">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-29T08:52:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="STL在使用算法竞赛中的使用方法 （教程+未完成）">
+<meta name="twitter:description" content="前言： 本文面向已有 C 语言和部分算法基础的同学。 内容均是个人总结，由于还没有系统的学习过 C++ 的面向对象，也没有翻过 STL 的代码，均以实用的角度来讲，可能不严谨些。 接下来介绍的将是一些 C++ STL 容器的使用，特性及一些常用函数。然后还有部分好用的函数。都会以介绍加代码样例的方式写出。   STL: Vector： 简介：Vector 可以看做是一个不定长数组，可以对其进行插入">
+  
+    <link rel="alternate" href="/atom.xml" title="Fish&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Fish&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://li-fish.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-STL在使用算法竞赛中的使用方法-（教程-未完成）" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/17/cjquxj6g7005i9wc2dji2i0jr/" class="article-date">
+  <time datetime="2017-03-17T11:34:30.000Z" itemprop="datePublished">2017-03-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/编程语言/">编程语言</a>►<a class="article-category-link" href="/categories/编程语言/C/">C++</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      STL在使用算法竞赛中的使用方法 （教程+未完成）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h1><ul>
+<li>本文面向已有 C 语言和部分算法基础的同学。</li>
+<li>内容均是个人总结，由于还没有系统的学习过 C++ 的面向对象，也没有翻过 STL 的代码，均以实用的角度来讲，可能不严谨些。</li>
+<li>接下来介绍的将是一些 C++ STL 容器的使用，特性及一些常用函数。然后还有部分好用的函数。都会以介绍加代码样例的方式写出。</li>
+</ul>
+<hr>
+<h1 id="STL"><a href="#STL" class="headerlink" title="STL:"></a>STL:</h1><hr>
+<h2 id="Vector："><a href="#Vector：" class="headerlink" title="Vector："></a>Vector：</h2><hr>
+<h3 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h3><p>Vector 可以看做是一个不定长数组，可以对其进行插入元素，删除元素，按下标访问等基本操作。</p>
+<p><strong>重要的一点 Vector 是一个数组 而不是一个链表</strong>，例如对 Vector 进行插入操作，是基于元素的移位进行的，是 O（n）的复杂度而不是链表的 O（1），但是在其尾部添加元素时是 O（1），应该是内部可以自动优化。</p>
+<p>vector 包含在 <code>&lt;vector&gt;</code> 头文件中。</p>
+<hr>
+<h3 id="基本操作："><a href="#基本操作：" class="headerlink" title="基本操作："></a>基本操作：</h3><p>首先创建一个 装着 int 类型元素的 vector。<br>ps：<code>&lt;int&gt;</code>这里其实是使用了模板，具体看概念中的模板部分。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; data;</span><br></pre></td></tr></table></figure></p>
+<p>接下来给 vector 添加元素，这里先向尾部添加元素，也是最常用的添加元素方式。<br>ps：这里添加是O（1）<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data.push_back(<span class="number">1</span>);</span><br><span class="line">data.push_back(<span class="number">2</span>);</span><br><span class="line">data.push_back(<span class="number">3</span>);</span><br></pre></td></tr></table></figure></p>
+<p>接下来可以用下标访问 vector 里面的元素，和数组类似，输出之前插入的1,2,3<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span> &lt;&lt; data[<span class="number">0</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; data[<span class="number">1</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; data[<span class="number">2</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure></p>
+<p>接下来是插入元素和删除元素。下面的插入是<strong>把 t 插入到 下标为 i 的位置上，原来 i 位置及其后面的元素，都往后移一位</strong>。删除是<strong>删除掉下标为 i 的元素，后面的元素全部前移一位</strong>。<br>ps：时间复杂度O（n）<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data.insert(data.begin() + i, t);</span><br><span class="line">data.erase(data.begin() + i);</span><br></pre></td></tr></table></figure></p>
+<p>定义 vector 数组时和普通类型一样使用即可<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; example[<span class="number">112345</span>];</span><br><span class="line">example[<span class="number">233</span>].push_back(<span class="number">666</span>);</span><br></pre></td></tr></table></figure></p>
+<p>接下来是是一些常用的函数，将直接给出代码，代码中加入注释。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回 data 的大小，有 n 个元素即返回 n</span></span><br><span class="line">data.size();</span><br><span class="line"></span><br><span class="line"><span class="comment">//清空 data，恢复 data 的初始状态</span></span><br><span class="line">data.clear();</span><br><span class="line"></span><br><span class="line"><span class="comment">//重新设置 data 的长度，可用来直接截短</span></span><br><span class="line">data.resize(len);</span><br></pre></td></tr></table></figure></p>
+<hr>
+<h3 id="进阶技巧："><a href="#进阶技巧：" class="headerlink" title="进阶技巧："></a>进阶技巧：</h3><p>了解 vector 使用了模板后，其实 vector 可以用来存 vector 的，例如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &gt; example;</span><br><span class="line">   example.push_back(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;());</span><br><span class="line">   example[<span class="number">0</span>].push_back(<span class="number">1</span>);</span><br></pre></td></tr></table></figure></p>
+<p>这里定义时 &gt;&gt; 用空格分开是编译器可能会把这里当成其他的关键字。<br><code>vector&lt;int&gt;()</code> 表示定义一个空的储存 int 类型的 vector。<br>这里可能和 vector 数组有点类似，概念上是不同的，使用方法上也有差异。<br> 同理 vector 也可以储存本文将要介绍的其他 STL 容器。</p>
+<hr>
+<h2 id="Map："><a href="#Map：" class="headerlink" title="Map："></a>Map：</h2><hr>
+<h3 id="简介：-1"><a href="#简介：-1" class="headerlink" title="简介："></a>简介：</h3><p> map容器常用来做映射，map的实现是用了数据结构的红黑树，通常来说是O（logn）比 hash 慢些，在一些时间限制不太紧的题中还是够用。<br>  map 实现的是一种映射关系，详细见概念部分。</p>
+<h2 id="map-包含在头文件-lt-map-gt-中。"><a href="#map-包含在头文件-lt-map-gt-中。" class="headerlink" title="  map 包含在头文件 &lt;map&gt; 中。"></a>  map 包含在头文件 <code>&lt;map&gt;</code> 中。</h2><h3 id="基本使用："><a href="#基本使用：" class="headerlink" title="基本使用："></a>基本使用：</h3><p> 首先创建一个map，这里需要给定两个类型，一个是用来当做访问下标（暂且这样将）的，另一个是储存的数据类型。</p>
+<h1 id="部分概念："><a href="#部分概念：" class="headerlink" title="部分概念："></a>部分概念：</h1><p><strong>本部分内容较啰嗦仅供读者更好的理解后面的 STL 如何工作，只希望了解 STL 用法可以直接略过。</strong></p>
+<h2 id="模板："><a href="#模板：" class="headerlink" title="模板："></a>模板：</h2><p>关于模板这个概念。举个例子，大概意思是，如果要定义一个求两个函数和的函数，需要两个参数 a 和 b，然后返回他们的和。通常来讲我定义函数时如果参数设为 int，那么我这个函数就不可以为 double 类型求和。这时候我需要再为 double 定义一个求和函数。但是你会发现，无不需要关什么 int double 类型，只要输入进来的两个变量，只要定义了他们类型之间的加法应该是什么样子就可以了。</p>
+<p>比如说输入两个整型和浮点型，直接返回他们的和就可以了。有了模板这个概念后，我甚至可以给这两个函数输入两个矩阵 a = [1,2,3,4], b = [2,2,3,4]，求这两个矩阵的和，只要我定义好两个矩阵相加应该是什么样的规则就好了。</p>
+<p>这样以后更深入的话，就可以知道，这样可以实现类的多态。<br>意思是给我两个你自己定义的 结构体/对象 我要求他的和，你只要定义好这个数据类型相加应该是什么样的就好了，不用再去定义一个函数。</p>
+<p>接下来的 STL 容器都用了模板的概念，大概是 <strong>[容器名]&lt;类型名&gt;</strong> 这样的形式，然后类型那里可以随便填了（前提是有），int 也好，自己定义的结构体也好，运用上面的概念，STL 容器不关心他存的是上面类型，只要这个类型定义了某些运算应该符合什么样的规则就可以了。</p>
+<h2 id="迭代器："><a href="#迭代器：" class="headerlink" title="迭代器："></a>迭代器：</h2><p>这里可以当做指针对待，不再作详细介绍，<strong>[容器名].begin()</strong> 返回指向某容器首部的迭代器。</p>
+<h2 id="映射："><a href="#映射：" class="headerlink" title="映射："></a>映射：</h2><p> 这里用数学里面的概念好了，意思是给定一个 x，对应一个唯一的 y。</p>
+<p> 亦可把 map 理解成一个下标为任意类型的数组，比如我可以用一个字符串当下标来储存一个整数。</p>
+<p> 这里用一下 Python 字典的概念好了，map 大概也是这个东西，map 中储存的是无数个 key：value 这样的键值对，不可存在同样的 key，访问 value，通过输入他的 key 来访问。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2017/03/17/cjquxj6g7005i9wc2dji2i0jr/" data-id="cjquxj6g7005i9wc2dji2i0jr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/03/20/cjquxj6jo008c9wc2ossmtbny/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          社交网络图中结点的“重要性“计算（Dijkstra + SPFA + Floyd + 模板）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/16/cjquxj67r00009wc2h0n7vzmr/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">12558 - Egyptian Fractions (HARD version) （IDA* + 剪枝）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/">DP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/区间DP/">区间DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/数位DP/">数位DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/斜率优化/">斜率优化</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/树型DP/">树型DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/状压DP/">状压DP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/二分/">二分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/二进制/">二进制</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/命题/">命题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/">图论</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/2-SAT/">2-SAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/匹配/">匹配</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/差分约束/">差分约束</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/最短路/">最短路</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/网络流/">网络流</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/连通性/">连通性</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/">字符串</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/AC自动机/">AC自动机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/后缀数组/">后缀数组</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/回文树/">回文树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/字符串Hash/">字符串Hash</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/搜索/">搜索</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/搜索/BFS/">BFS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/">数学</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/数论/">数论</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/矩阵快速幂/">矩阵快速幂</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/线性基/">线性基</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/高斯消元/">高斯消元</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/">数据结构</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/K-D树/">K-D树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/LCT/">LCT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/ST表/">ST表</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/Splay/">Splay</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/主席树/">主席树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/并查集/">并查集</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/栈/">栈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/树/">树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/树链剖分/">树链剖分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/线段树/">线段树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/虚树/">虚树</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/模拟/">模拟</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/知识小结/">知识小结</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/计算几何/">计算几何</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/贪心/">贪心</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/CS课程/">CS课程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/历程/">历程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/命题/">命题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/想法/">想法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂物/">杂物</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/游戏/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/爬虫-数据处理/">爬虫&数据处理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/Java/">Java</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网页设计/">网页设计</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/网页设计/Web服务器/">Web服务器</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/音乐/">音乐</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/音乐/乐理/">乐理</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/11/16/cjquxj6id00769wc2ctsx26k6/">二维ST表</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/16/cjquxj6fn00519wc2tmqnvtk5/">SDUTACM十周年题解（Fish出题部分）</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/25/cjquxj6da003g9wc2typtyc7q/">LCT(模板-待填坑)</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/11/cjquxj6iq007i9wc2i4gd5g6o/">回文树模板</a>
+          </li>
+        
+          <li>
+            <a href="/2018/09/04/cjquxj6oj00ff9wc2sc3vo5ed/">2018年暑假集训（应付学校社会实践）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Fish<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+				<!-- MathJax -->
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+				showProcessingMessages: false,
+				tex2jax: {
+					inlineMath: [["$", "$"], ["\\\\(", "\\\\)"]],
+					processEscapes:true
+				},
+				menuSettings: {
+					zoom: "Hover"
+    			}
+			});
+		</script>
+		<script src="//cdn.bootcss.com/mathjax/2.6.0/MathJax.js?config=TeX-AMS_HTML"></script>
+				
+  </div>
+</body>
+</html>
