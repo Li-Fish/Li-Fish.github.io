@@ -62,9 +62,68 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-概率论笔记" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/15/cjqx5558k00dc4kc25xoinlnb/" class="article-date">
+  <time datetime="2019-01-15T02:29:48.000Z" itemprop="datePublished">2019-01-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/CS课程/">CS课程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/15/cjqx5558k00dc4kc25xoinlnb/">概率论笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="01分布"><a href="#01分布" class="headerlink" title="01分布"></a>01分布</h2><p>$$P{X = k} = p^k(1-p)^{1-k}, k=0,1$$</p>
+<p>$$E(X) = p$$</p>
+<p>$D(X) = p(1 - p)$</p>
+<h2 id="二项分布-X-sim-b-n-p"><a href="#二项分布-X-sim-b-n-p" class="headerlink" title="二项分布 $X\sim b(n, p)$"></a>二项分布 $X\sim b(n, p)$</h2><p>$$P(X = k) = \binom{n}{k}p^k(1 - p)^{n - k}, k = 0, 1, 2\cdots n.$$</p>
+<p>$E(X) = n p$</p>
+<p>$D(X) = np(1 - p) $</p>
+<h2 id="泊松分布-X-sim-pi-lambda"><a href="#泊松分布-X-sim-pi-lambda" class="headerlink" title="泊松分布 $X\sim \pi(\lambda)$"></a>泊松分布 $X\sim \pi(\lambda)$</h2><p>$$P(X = k) = \frac{\lambda^ke^{-\lambda}}{k!}, k = 0, 1, 2\cdots$$</p>
+<p>$$E(X) = \lambda$$</p>
+<p>$$D(X) = \lambda$$</p>
+<h2 id="均匀分布-X-sim-U-a-b"><a href="#均匀分布-X-sim-U-a-b" class="headerlink" title="均匀分布 $X\sim U(a, b)$"></a>均匀分布 $X\sim U(a, b)$</h2><p>$$f(x)=\begin{cases}\frac{1}{b-a},&amp;a&lt;x&lt;b \0,&amp;else \end{cases}$$<br>$$E(X)=\frac{a+b}{2}$$<br>$$D(X)=\frac{(b-a)^2}{12}$$<br>$$F(X)=\begin{cases}0,&amp;x&lt;a\\frac{x-a}{b-a},&amp;a\le x&lt;b\1,&amp;x\ge b\end{cases}$$</p>
+<h2 id="指数分布"><a href="#指数分布" class="headerlink" title="指数分布"></a>指数分布</h2><p>$$f(x)=\begin{cases}\frac{1}{\theta}e^{-x/\theta},&amp;x&gt;0 \0,&amp;else \end{cases}$$</p>
+<p>$$E(X) = \theta$$</p>
+<p>$$D(X) = \theta^2$$</p>
+<p>$$F(X)=\begin{cases}1-e^{-x/\theta},&amp;x&gt;0\0,&amp;else\end{cases}$$</p>
+<h2 id="正态分布-X-sim-mu-sigma-2"><a href="#正态分布-X-sim-mu-sigma-2" class="headerlink" title="正态分布 $X\sim (\mu, \sigma^2)$"></a>正态分布 $X\sim (\mu, \sigma^2)$</h2><p>$f(x) = \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{(x-\mu)^2}{2\sigma^2}}, -\infty&lt;x&lt;+\infty$</p>
+<p>$F(X) = \frac{1}{\sqrt{2\pi}\sigma}\int^x_{-\infty}e^{-\frac{(t-\mu)^2}{2\sigma^2}}\text{d} t$</p>
+<p>$E(X) = \mu$</p>
+<p>$D(X) = \sigma^2$</p>
+<p>$F(X) = P(X \le x) = \Phi(\frac{x-\mu}{\sigma})$</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2019/01/15/cjqx5558k00dc4kc25xoinlnb/" data-id="cjqx5558k00dc4kc25xoinlnb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-二维ST表" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/11/16/cjquxj6id00769wc2ctsx26k6/" class="article-date">
+    <a href="/2018/11/16/cjqx5557t00cq4kc2xe81jnux/" class="article-date">
   <time datetime="2018-11-15T20:04:11.000Z" itemprop="datePublished">2018-11-16</time>
 </a>
     
@@ -80,7 +139,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/16/cjquxj6id00769wc2ctsx26k6/">二维ST表</a>
+      <a class="article-title" href="/2018/11/16/cjqx5557t00cq4kc2xe81jnux/">二维ST表</a>
     </h1>
   
 
@@ -97,7 +156,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/11/16/cjquxj6id00769wc2ctsx26k6/" data-id="cjquxj6id00769wc2ctsx26k6" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/11/16/cjqx5557t00cq4kc2xe81jnux/" data-id="cjqx5557t00cq4kc2xe81jnux" class="article-share-link">Share</a>
       
       
     </footer>
@@ -109,7 +168,7 @@
   
     <article id="post-SDUTACM十周年题解（Fish出题部分）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/10/16/cjquxj6fn00519wc2tmqnvtk5/" class="article-date">
+    <a href="/2018/10/16/cjqx554vo00544kc2984bjxi7/" class="article-date">
   <time datetime="2018-10-15T19:48:54.000Z" itemprop="datePublished">2018-10-16</time>
 </a>
     
@@ -125,7 +184,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/16/cjquxj6fn00519wc2tmqnvtk5/">SDUTACM十周年题解（Fish出题部分）</a>
+      <a class="article-title" href="/2018/10/16/cjqx554vo00544kc2984bjxi7/">SDUTACM十周年题解（Fish出题部分）</a>
     </h1>
   
 
@@ -158,7 +217,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/10/16/cjquxj6fn00519wc2tmqnvtk5/" data-id="cjquxj6fn00519wc2tmqnvtk5" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/10/16/cjqx554vo00544kc2984bjxi7/" data-id="cjqx554vo00544kc2984bjxi7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -170,7 +229,7 @@
   
     <article id="post-LCT-模板-待填坑" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/25/cjquxj6da003g9wc2typtyc7q/" class="article-date">
+    <a href="/2018/09/25/cjqx554rh003g4kc2eub9vwa9/" class="article-date">
   <time datetime="2018-09-25T13:02:34.000Z" itemprop="datePublished">2018-09-25</time>
 </a>
     
@@ -186,7 +245,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/25/cjquxj6da003g9wc2typtyc7q/">LCT(模板-待填坑)</a>
+      <a class="article-title" href="/2018/09/25/cjqx554rh003g4kc2eub9vwa9/">LCT(模板-待填坑)</a>
     </h1>
   
 
@@ -202,7 +261,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/09/25/cjquxj6da003g9wc2typtyc7q/" data-id="cjquxj6da003g9wc2typtyc7q" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/09/25/cjqx554rh003g4kc2eub9vwa9/" data-id="cjqx554rh003g4kc2eub9vwa9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -214,7 +273,7 @@
   
     <article id="post-回文树模板" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/11/cjquxj6iq007i9wc2i4gd5g6o/" class="article-date">
+    <a href="/2018/09/11/cjqx5557f00cj4kc2xmh88cf0/" class="article-date">
   <time datetime="2018-09-11T13:29:48.000Z" itemprop="datePublished">2018-09-11</time>
 </a>
     
@@ -230,7 +289,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/11/cjquxj6iq007i9wc2i4gd5g6o/">回文树模板</a>
+      <a class="article-title" href="/2018/09/11/cjqx5557f00cj4kc2xmh88cf0/">回文树模板</a>
     </h1>
   
 
@@ -251,7 +310,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/09/11/cjquxj6iq007i9wc2i4gd5g6o/" data-id="cjquxj6iq007i9wc2i4gd5g6o" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/09/11/cjqx5557f00cj4kc2xmh88cf0/" data-id="cjqx5557f00cj4kc2xmh88cf0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -263,7 +322,7 @@
   
     <article id="post-2018年暑假集训" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/04/cjquxj6oj00ff9wc2sc3vo5ed/" class="article-date">
+    <a href="/2018/09/04/cjqx5556i00c04kc28u4yrih2/" class="article-date">
   <time datetime="2018-09-04T10:48:35.000Z" itemprop="datePublished">2018-09-04</time>
 </a>
     
@@ -279,7 +338,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/04/cjquxj6oj00ff9wc2sc3vo5ed/">2018年暑假集训（应付学校社会实践）</a>
+      <a class="article-title" href="/2018/09/04/cjqx5556i00c04kc28u4yrih2/">2018年暑假集训（应付学校社会实践）</a>
     </h1>
   
 
@@ -329,7 +388,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/09/04/cjquxj6oj00ff9wc2sc3vo5ed/" data-id="cjquxj6oj00ff9wc2sc3vo5ed" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/09/04/cjqx5556i00c04kc28u4yrih2/" data-id="cjqx5556i00c04kc28u4yrih2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -341,7 +400,7 @@
   
     <article id="post-斜率DP小结" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/04/cjquxj6j7007z9wc2r7qma069/" class="article-date">
+    <a href="/2018/09/04/cjqx5558h00da4kc2e0dz71cf/" class="article-date">
   <time datetime="2018-09-03T21:11:05.000Z" itemprop="datePublished">2018-09-04</time>
 </a>
     
@@ -357,7 +416,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/04/cjquxj6j7007z9wc2r7qma069/">斜率DP小结（待填坑）</a>
+      <a class="article-title" href="/2018/09/04/cjqx5558h00da4kc2e0dz71cf/">斜率DP小结（待填坑）</a>
     </h1>
   
 
@@ -369,7 +428,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/09/04/cjquxj6j7007z9wc2r7qma069/" data-id="cjquxj6j7007z9wc2r7qma069" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/09/04/cjqx5558h00da4kc2e0dz71cf/" data-id="cjqx5558h00da4kc2e0dz71cf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -381,7 +440,7 @@
   
     <article id="post-虚树小结" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/04/cjquxj6k4008o9wc2tcthhuki/" class="article-date">
+    <a href="/2018/09/04/cjqx5559f00dy4kc2adhgkgx3/" class="article-date">
   <time datetime="2018-09-03T19:37:52.000Z" itemprop="datePublished">2018-09-04</time>
 </a>
     
@@ -397,7 +456,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/04/cjquxj6k4008o9wc2tcthhuki/">虚树小结</a>
+      <a class="article-title" href="/2018/09/04/cjqx5559f00dy4kc2adhgkgx3/">虚树小结</a>
     </h1>
   
 
@@ -421,7 +480,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/09/04/cjquxj6k4008o9wc2tcthhuki/" data-id="cjquxj6k4008o9wc2tcthhuki" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/09/04/cjqx5559f00dy4kc2adhgkgx3/" data-id="cjqx5559f00dy4kc2adhgkgx3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -433,7 +492,7 @@
   
     <article id="post-2018邀请赛总结（陕西）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/05/23/cjquxj69500089wc2f7bkz29o/" class="article-date">
+    <a href="/2018/05/23/cjqx554mq00084kc2p0ysyvbx/" class="article-date">
   <time datetime="2018-05-23T12:12:51.000Z" itemprop="datePublished">2018-05-23</time>
 </a>
     
@@ -449,7 +508,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/23/cjquxj69500089wc2f7bkz29o/">2018邀请赛总结（陕西）</a>
+      <a class="article-title" href="/2018/05/23/cjqx554mq00084kc2p0ysyvbx/">2018邀请赛总结（陕西）</a>
     </h1>
   
 
@@ -476,7 +535,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/05/23/cjquxj69500089wc2f7bkz29o/" data-id="cjquxj69500089wc2f7bkz29o" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/05/23/cjqx554mq00084kc2p0ysyvbx/" data-id="cjqx554mq00084kc2p0ysyvbx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -488,7 +547,7 @@
   
     <article id="post-树分治小结" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/05/16/cjquxj6je00849wc2rivvn8q2/" class="article-date">
+    <a href="/2018/05/16/cjqx5558q00dh4kc2yobd898g/" class="article-date">
   <time datetime="2018-05-16T15:04:46.000Z" itemprop="datePublished">2018-05-16</time>
 </a>
     
@@ -504,7 +563,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/16/cjquxj6je00849wc2rivvn8q2/">树分治小结</a>
+      <a class="article-title" href="/2018/05/16/cjqx5558q00dh4kc2yobd898g/">树分治小结</a>
     </h1>
   
 
@@ -524,52 +583,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/05/16/cjquxj6je00849wc2rivvn8q2/" data-id="cjquxj6je00849wc2rivvn8q2" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-浅谈应试教育对大学生身体素质的影响（体育作业）" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/16/cjquxj6jh00879wc26o5zz80n/" class="article-date">
-  <time datetime="2018-05-16T13:16:25.000Z" itemprop="datePublished">2018-05-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/杂物/">杂物</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/16/cjquxj6jh00879wc26o5zz80n/">浅谈应试教育对大学生身体素质的影响（体育作业）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文的关注点有两部分，一是现今大学生的身体素质，二是应试教育，然后综合探讨下应试教育对大学生的身体健康的影响。</p>
-<p>首先写这篇文章的目的是找出问题和提出解决方案的，所以我们先谈下如今大学生的身体素质。因为我本身就是一名大学生，对这方面也比较有话语权，这里描述下我在日常中发现的一些事情。</p>
-<p>总的来说大学生如果按身体素质划分分类的话，大抵能划分出来 4 类，这里详细说一下：第一类，属于非常热爱体育运动，平时就喜欢打打篮球、足球、羽毛球之类的，这类人因为平时一直在参与运动身体素质非常好，完全符合一个大学生应该有的身体素质，对于他们来说身体素质上完全没有问题；第二类，对体育运动的热情不如第一类人的高，但是如果需要的话也可以打的还算不错，应付体育考试和体测完全不再话下，但是平时一直在学习或者待在宿舍，不怎么主动参与体育运动，身体素质自从上了大学后逐渐变差；第三类，身体素质本来就不怎么好，经常得病，平时也是一直避免参加各种运动，体育课和体测都是难题，勉强才能通过。第四类，因为身体上的各种因素（体型、疾病）不能参加过于激烈的体育运动（例如竞争性较强的篮球足球等），本身身体素质较差加上不能参加一些运动导致雪崩效应，身体素质越来越差。</p>
-<p>应试教育，又叫填鸭式教育，通常是指只培养学生的应试能力、只关心考试成绩的一种教育方式。从应试教育的这个定义上来看，显然他对大学生的身体素质是有非常重要的影响的。我终结了影响分为两个方面。第一个方面，根据定义，应试教育只注重应试能力考试成绩，所以学校和家长不注重学生的身体素质和体育锻炼。这里拿我的高中当做例子，大家都知道高中是一个非常关键的事情，高考也可以说是人生中一个比较重要转折点，所以大家都非常看重高考成绩，于是我们学校每星期仅安排了一节体育课，再到后来因为课程紧张，唯一的一节体育课也被其他的文化课占了；第二个方面，应试教育为了提高学生的成绩，一天从早上 6 点到晚上 10 点，让学生一直待在教室里学习，对于热爱运动的同学都没有时间去进行运动。</p>
-<p>最后终结一下应试教育对于上面四类同学的影响及解决问题的方法。对于第一类同学，在大学期间完全有充足的时间去参与自己喜欢的运动，完全没有问题，反而应该注意下会不会太贪玩影响了学习成绩；对于第二类同学，要保持对体育运动的热情，保证每周都要固定参加一些体育运动，保持自己的身体素质；对于第三类同学，本身身体素质较差就更应该参加运动，可以从先从羽毛球、乒乓球之类的运动开始，培养运动的爱好；对于第四类同学，不能自暴自弃，应该考虑参加一些舒缓的运动，比如慢跑等，逐步提高自己的身体素质。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/05/16/cjquxj6jh00879wc26o5zz80n/" data-id="cjquxj6jh00879wc26o5zz80n" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/05/16/cjqx5558q00dh4kc2yobd898g/" data-id="cjqx5558q00dh4kc2yobd898g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -609,7 +623,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
     </div>
   </div>
 
@@ -622,23 +636,23 @@
       <ul>
         
           <li>
-            <a href="/2018/11/16/cjquxj6id00769wc2ctsx26k6/">二维ST表</a>
+            <a href="/2019/01/15/cjqx5558k00dc4kc25xoinlnb/">概率论笔记</a>
           </li>
         
           <li>
-            <a href="/2018/10/16/cjquxj6fn00519wc2tmqnvtk5/">SDUTACM十周年题解（Fish出题部分）</a>
+            <a href="/2018/11/16/cjqx5557t00cq4kc2xe81jnux/">二维ST表</a>
           </li>
         
           <li>
-            <a href="/2018/09/25/cjquxj6da003g9wc2typtyc7q/">LCT(模板-待填坑)</a>
+            <a href="/2018/10/16/cjqx554vo00544kc2984bjxi7/">SDUTACM十周年题解（Fish出题部分）</a>
           </li>
         
           <li>
-            <a href="/2018/09/11/cjquxj6iq007i9wc2i4gd5g6o/">回文树模板</a>
+            <a href="/2018/09/25/cjqx554rh003g4kc2eub9vwa9/">LCT(模板-待填坑)</a>
           </li>
         
           <li>
-            <a href="/2018/09/04/cjquxj6oj00ff9wc2sc3vo5ed/">2018年暑假集训（应付学校社会实践）</a>
+            <a href="/2018/09/11/cjqx5557f00cj4kc2xmh88cf0/">回文树模板</a>
           </li>
         
       </ul>

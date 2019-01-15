@@ -62,9 +62,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-HDU5550-Game-room-（DP）" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/21/cjqx554qu00344kc2w9o3vflw/" class="article-date">
+  <time datetime="2017-05-21T06:42:00.000Z" itemprop="datePublished">2017-05-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/DP/">DP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/21/cjqx554qu00344kc2w9o3vflw/">HDU5550 - Game room （DP）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="题目链接："><a href="#题目链接：" class="headerlink" title="题目链接："></a>题目链接：</h1><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=5550" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=5550</a></p>
+<hr>
+<h1 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h1><p> 有一栋楼，有N层，每一层都有ai个想要玩A游戏的，bi个想要玩B游戏的，但是每层只能修建一种游戏厅。每个人移动上下一层楼需要消耗一点体力。使得所有人玩的上游戏并且消耗的体力尽量的少，最少消耗的体力。</p>
+<hr>
+<h1 id="解题过程："><a href="#解题过程：" class="headerlink" title="解题过程："></a>解题过程：</h1><p> 比赛的时候好不容易读懂了题意，发现并不会做，第一个想法是贪心的，从0层向下扫，累加想玩A游戏的人数和想玩B游戏的人数，对于每一层判断是想玩A的人多还是想玩B的人多，修建人多的那个。</p>
+<p> 显然这个思路得不到最优解，如果每个人只能向下走不能向上走的话应该可行。</p>
+<p> 然后这个题放置了好长时间，现在才去补，翻了两三个博客算是看懂了，感觉这种DP只能靠脑洞了，每一种都不一样。</p>
+<p>参考博客：<br><a href="https://ramay7.github.io/2016/11/04/HDU-5550-2015CCPC-K-dp/" target="_blank" rel="noopener">https://ramay7.github.io/2016/11/04/HDU-5550-2015CCPC-K-dp/</a></p>
+<p><a href="http://blog.csdn.net/snowy_smile/article/details/49618219" target="_blank" rel="noopener">http://blog.csdn.net/snowy_smile/article/details/49618219</a></p>
+<hr>
+<h1 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h1><p> 上面两个博客都说的非常详细，我主要是参照是第一个博客，代码加了注释，这里不做过多论述了。</p>
+<hr>
+<h1 id="AC代码："><a href="#AC代码：" class="headerlink" title="AC代码："></a>AC代码：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_N = <span class="number">4010</span>;</span><br><span class="line"><span class="keyword">const</span> ll INF = <span class="number">0x3f3f3f3f3f3f3f3f</span>ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> T, n, cases = <span class="number">0</span>;</span><br><span class="line">ll value[MAX_N][<span class="number">2</span>], sum[MAX_N][<span class="number">2</span>], pre[MAX_N][<span class="number">2</span>], suf[MAX_N][<span class="number">2</span>];</span><br><span class="line">ll dp[MAX_N][<span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//初始化求出前缀和，pre[i]表示从第i层移到第0层所需要的代价，suf[i]代表从第i层移到第n+1层所需要的代价</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        sum[i][<span class="number">0</span>] = sum[i<span class="number">-1</span>][<span class="number">0</span>] + value[i][<span class="number">0</span>];</span><br><span class="line">        sum[i][<span class="number">1</span>] = sum[i<span class="number">-1</span>][<span class="number">1</span>] + value[i][<span class="number">1</span>];</span><br><span class="line">        pre[i][<span class="number">0</span>] = pre[i<span class="number">-1</span>][<span class="number">0</span>] + value[i][<span class="number">0</span>] * i;</span><br><span class="line">        pre[i][<span class="number">1</span>] = pre[i<span class="number">-1</span>][<span class="number">1</span>] + value[i][<span class="number">1</span>] * i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &gt;= <span class="number">1</span>; i--) &#123;</span><br><span class="line">        suf[i][<span class="number">0</span>] = suf[i+<span class="number">1</span>][<span class="number">0</span>] + value[i][<span class="number">0</span>] * (n - i + <span class="number">1</span>);</span><br><span class="line">        suf[i][<span class="number">1</span>] = suf[i+<span class="number">1</span>][<span class="number">1</span>] + value[i][<span class="number">1</span>] * (n - i + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">down</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//表示 [a, b] 这个区间里的人要达到b+1所需要的代价</span></span><br><span class="line">    <span class="keyword">return</span> suf[a][id] - suf[b+<span class="number">1</span>][id] - (sum[b][id] - sum[a<span class="number">-1</span>][id]) * (n-b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">up</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//表示 [a,b] 这个区间里的人要到达a所需要的代价</span></span><br><span class="line">    <span class="keyword">return</span> pre[b][id] - pre[a][id] - (sum[b][id] - sum[a][id]) * a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">work</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (a+b) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//因为dp[i][0]表示的状态是当前是0，i+1是1，如果当前i为n，那么后面就没有1的房间了</span></span><br><span class="line">    <span class="keyword">if</span> (b &lt; n) <span class="keyword">return</span> up(a, mid, id) + down(mid+<span class="number">1</span>, b, id);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> up(a, b, id);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        dp[i][<span class="number">0</span>] = dp[i][<span class="number">1</span>] = INF;</span><br><span class="line">        <span class="comment">//计算前i个全为1或全为0的情况</span></span><br><span class="line">        <span class="keyword">if</span> (i &lt; n) dp[i][<span class="number">0</span>] = down(<span class="number">1</span>, i, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (i &lt; n) dp[i][<span class="number">1</span>] = down(<span class="number">1</span>, i, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= i<span class="number">-1</span>; j++) &#123;</span><br><span class="line">            <span class="comment">//枚举上一个选1或0的位置</span></span><br><span class="line">            dp[i][<span class="number">0</span>] = min(dp[i][<span class="number">0</span>], dp[j][<span class="number">1</span>] + work(j, i, <span class="number">1</span>));</span><br><span class="line">            dp[i][<span class="number">1</span>] = min(dp[i][<span class="number">1</span>], dp[j][<span class="number">0</span>] + work(j, i, <span class="number">0</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Case #%d: %lld\n"</span>, ++cases, min(dp[n][<span class="number">0</span>], dp[n][<span class="number">1</span>]));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>, &amp;value[i][<span class="number">0</span>], &amp;value[i][<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">        solve();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2017/05/21/cjqx554qu00344kc2w9o3vflw/" data-id="cjqx554qu00344kc2w9o3vflw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-HDUOJ3549-Flow-Problem（网络流-最大流最小割-模板）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/19/cjquxj6cx00369wc2d7rqouzr/" class="article-date">
+    <a href="/2017/05/19/cjqx554r100374kc2m7b59lyc/" class="article-date">
   <time datetime="2017-05-19T01:43:24.000Z" itemprop="datePublished">2017-05-19</time>
 </a>
     
@@ -80,7 +132,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/19/cjquxj6cx00369wc2d7rqouzr/">HDUOJ3549 - Flow Problem（网络流+最大流最小割+模板）</a>
+      <a class="article-title" href="/2017/05/19/cjqx554r100374kc2m7b59lyc/">HDUOJ3549 - Flow Problem（网络流+最大流最小割+模板）</a>
     </h1>
   
 
@@ -100,7 +152,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/05/19/cjquxj6cx00369wc2d7rqouzr/" data-id="cjquxj6cx00369wc2d7rqouzr" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/05/19/cjqx554r100374kc2m7b59lyc/" data-id="cjqx554r100374kc2m7b59lyc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -112,7 +164,7 @@
   
     <article id="post-POJ2411-Mondriaan-s-Dream-（状压DP-轮廓线DP）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/18/cjquxj6ee004a9wc2isl48yux/" class="article-date">
+    <a href="/2017/05/18/cjqx554td004f4kc2tf9a5td8/" class="article-date">
   <time datetime="2017-05-18T11:31:41.000Z" itemprop="datePublished">2017-05-18</time>
 </a>
     
@@ -128,7 +180,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/18/cjquxj6ee004a9wc2isl48yux/">POJ2411 - Mondriaan&#39;s Dream （状压DP+轮廓线DP）</a>
+      <a class="article-title" href="/2017/05/18/cjqx554td004f4kc2tf9a5td8/">POJ2411 - Mondriaan&#39;s Dream （状压DP+轮廓线DP）</a>
     </h1>
   
 
@@ -155,7 +207,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/05/18/cjquxj6ee004a9wc2isl48yux/" data-id="cjquxj6ee004a9wc2isl48yux" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/05/18/cjqx554td004f4kc2tf9a5td8/" data-id="cjqx554td004f4kc2tf9a5td8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -167,7 +219,7 @@
   
     <article id="post-POJ3169-Layout-（差分约束）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/15/cjquxj6ek004c9wc2yym1vft4/" class="article-date">
+    <a href="/2017/05/15/cjqx554t0004a4kc2gvxmwhhv/" class="article-date">
   <time datetime="2017-05-15T03:12:44.000Z" itemprop="datePublished">2017-05-15</time>
 </a>
     
@@ -183,7 +235,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/15/cjquxj6ek004c9wc2yym1vft4/">POJ3169 - Layout （差分约束）</a>
+      <a class="article-title" href="/2017/05/15/cjqx554t0004a4kc2gvxmwhhv/">POJ3169 - Layout （差分约束）</a>
     </h1>
   
 
@@ -210,7 +262,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/05/15/cjquxj6ek004c9wc2yym1vft4/" data-id="cjquxj6ek004c9wc2yym1vft4" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/05/15/cjqx554t0004a4kc2gvxmwhhv/" data-id="cjqx554t0004a4kc2gvxmwhhv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -222,7 +274,7 @@
   
     <article id="post-POJ1182-食物链（带权并查集）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/13/cjquxj6e100409wc29qhsefm0/" class="article-date">
+    <a href="/2017/05/13/cjqx554se003v4kc23rjrw308/" class="article-date">
   <time datetime="2017-05-13T02:25:41.000Z" itemprop="datePublished">2017-05-13</time>
 </a>
     
@@ -238,7 +290,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/13/cjquxj6e100409wc29qhsefm0/">POJ1182 - 食物链（带权并查集）</a>
+      <a class="article-title" href="/2017/05/13/cjqx554se003v4kc23rjrw308/">POJ1182 - 食物链（带权并查集）</a>
     </h1>
   
 
@@ -263,7 +315,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/05/13/cjquxj6e100409wc29qhsefm0/" data-id="cjquxj6e100409wc29qhsefm0" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/05/13/cjqx554se003v4kc23rjrw308/" data-id="cjqx554se003v4kc23rjrw308" class="article-share-link">Share</a>
       
       
     </footer>
@@ -275,7 +327,7 @@
   
     <article id="post-ZOJ3777-Problem-Arrangement（状压DP）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/12/cjquxj6hy006w9wc2c9jw6534/" class="article-date">
+    <a href="/2017/05/12/cjqx5556w00c84kc2jhhaycsy/" class="article-date">
   <time datetime="2017-05-12T13:53:47.000Z" itemprop="datePublished">2017-05-12</time>
 </a>
     
@@ -291,7 +343,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/12/cjquxj6hy006w9wc2c9jw6534/">ZOJ3777 - Problem Arrangement（状压DP）</a>
+      <a class="article-title" href="/2017/05/12/cjqx5556w00c84kc2jhhaycsy/">ZOJ3777 - Problem Arrangement（状压DP）</a>
     </h1>
   
 
@@ -316,7 +368,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/05/12/cjquxj6hy006w9wc2c9jw6534/" data-id="cjquxj6hy006w9wc2c9jw6534" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/05/12/cjqx5556w00c84kc2jhhaycsy/" data-id="cjqx5556w00c84kc2jhhaycsy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -328,7 +380,7 @@
   
     <article id="post-第八届acm山东省赛总结" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/09/cjquxj6jr008e9wc204shrytc/" class="article-date">
+    <a href="/2017/05/09/cjqx5559200dr4kc22tzsg6zp/" class="article-date">
   <time datetime="2017-05-09T13:02:43.000Z" itemprop="datePublished">2017-05-09</time>
 </a>
     
@@ -344,7 +396,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/09/cjquxj6jr008e9wc204shrytc/">第八届acm山东省赛总结</a>
+      <a class="article-title" href="/2017/05/09/cjqx5559200dr4kc22tzsg6zp/">第八届acm山东省赛总结</a>
     </h1>
   
 
@@ -366,7 +418,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/05/09/cjquxj6jr008e9wc204shrytc/" data-id="cjquxj6jr008e9wc204shrytc" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/05/09/cjqx5559200dr4kc22tzsg6zp/" data-id="cjqx5559200dr4kc22tzsg6zp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -378,7 +430,7 @@
   
     <article id="post-FZU-2112-Tickets-（欧拉回路-联通块判断）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/04/cjquxj6as001h9wc2o5u0ubmf/" class="article-date">
+    <a href="/2017/05/04/cjqx554oo001q4kc2q5vp53hj/" class="article-date">
   <time datetime="2017-05-04T09:38:11.000Z" itemprop="datePublished">2017-05-04</time>
 </a>
     
@@ -394,7 +446,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/04/cjquxj6as001h9wc2o5u0ubmf/">FZU - 2112 Tickets （欧拉回路+联通块判断）</a>
+      <a class="article-title" href="/2017/05/04/cjqx554oo001q4kc2q5vp53hj/">FZU - 2112 Tickets （欧拉回路+联通块判断）</a>
     </h1>
   
 
@@ -419,7 +471,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/05/04/cjquxj6as001h9wc2o5u0ubmf/" data-id="cjquxj6as001h9wc2o5u0ubmf" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/05/04/cjqx554oo001q4kc2q5vp53hj/" data-id="cjqx554oo001q4kc2q5vp53hj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -431,7 +483,7 @@
   
     <article id="post-DAG上的动态规划" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/26/cjquxj6ap001e9wc24xcd9hpz/" class="article-date">
+    <a href="/2017/04/26/cjqx554oa001c4kc2tjb620rl/" class="article-date">
   <time datetime="2017-04-26T02:49:13.000Z" itemprop="datePublished">2017-04-26</time>
 </a>
     
@@ -447,7 +499,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/26/cjquxj6ap001e9wc24xcd9hpz/">DAG上的动态规划</a>
+      <a class="article-title" href="/2017/04/26/cjqx554oa001c4kc2tjb620rl/">DAG上的动态规划</a>
     </h1>
   
 
@@ -477,7 +529,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/04/26/cjquxj6ap001e9wc24xcd9hpz/" data-id="cjquxj6ap001e9wc24xcd9hpz" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/04/26/cjqx554oa001c4kc2tjb620rl/" data-id="cjqx554oa001c4kc2tjb620rl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -489,7 +541,7 @@
   
     <article id="post-数位DP（模板）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/24/cjquxj6j2007u9wc2vcrin53y/" class="article-date">
+    <a href="/2017/04/24/cjqx5558b00d54kc25e31e3e0/" class="article-date">
   <time datetime="2017-04-24T08:53:28.000Z" itemprop="datePublished">2017-04-24</time>
 </a>
     
@@ -505,7 +557,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/24/cjquxj6j2007u9wc2vcrin53y/">数位DP（模板）</a>
+      <a class="article-title" href="/2017/04/24/cjqx5558b00d54kc25e31e3e0/">数位DP（模板）</a>
     </h1>
   
 
@@ -524,59 +576,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/04/24/cjquxj6j2007u9wc2vcrin53y/" data-id="cjquxj6j2007u9wc2vcrin53y" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-SDUTOJ-2781-二分练习（二分）" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/17/cjquxj6fq00549wc2ma404xj2/" class="article-date">
-  <time datetime="2017-04-17T08:21:20.000Z" itemprop="datePublished">2017-04-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/二分/">二分</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/17/cjquxj6fq00549wc2ma404xj2/">SDUTOJ - 2781 二分练习（二分）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="题目链接："><a href="#题目链接：" class="headerlink" title="题目链接："></a>题目链接：</h1><p><a href="http://acm.sdut.edu.cn/onlinejudge2/index.php/Home/Index/problemdetail/pid/2781.html" target="_blank" rel="noopener">http://acm.sdut.edu.cn/onlinejudge2/index.php/Home/Index/problemdetail/pid/2781.html</a></p>
-<hr>
-<h1 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h1><p> 给你一个序列，然后给你m个元素，让你从序列中找出与每个元素最接近的数字输出来，如果有两个就输出两个。</p>
-<hr>
-<h1 id="解题过程："><a href="#解题过程：" class="headerlink" title="解题过程："></a>解题过程：</h1><p> 刚开始是 WA 了好久，看了博客，听学长讲完才知道做法，这里当作一个二分的模板。</p>
-<hr>
-<h1 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h1><ul>
-<li>本题主要是找二分的下界和上界。</li>
-<li>假设要查找一个数 n，上界是大于等于 n 的数中最小的。下界是小于等于 n 的数中最大的。</li>
-</ul>
-<hr>
-<h1 id="AC代码："><a href="#AC代码：" class="headerlink" title="AC代码："></a>AC代码：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> data[<span class="number">10000000</span>+<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_left</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> rst = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">        <span class="keyword">int</span> m = (l+r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (data[m] &lt;= k) &#123;</span><br><span class="line">            rst = m;</span><br><span class="line">            l = m+<span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            r = m<span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> rst;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">find_right</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> rst = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">        <span class="keyword">int</span> m = (l+r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (data[m] &gt;= k) &#123;</span><br><span class="line">            rst = m;</span><br><span class="line">            r = m<span class="number">-1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            l = m+<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> rst;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, m;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m)) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, data+i);</span><br><span class="line">        &#125;</span><br><span class="line">        sort(data, data+n);</span><br><span class="line">        <span class="keyword">while</span> (m--) &#123;</span><br><span class="line">            <span class="keyword">int</span> k;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;k);</span><br><span class="line">            <span class="keyword">int</span> left = find_left(<span class="number">0</span>, n<span class="number">-1</span>, k);</span><br><span class="line">            <span class="keyword">int</span> right = find_right(<span class="number">0</span>, n<span class="number">-1</span>, k);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">abs</span>(k-data[left]) != <span class="built_in">abs</span>(k-data[right])) &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="built_in">abs</span>(k-data[left]) &lt; <span class="built_in">abs</span>(k-data[right]))</span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, data[left]);</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, data[right]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (data[left] == data[right]) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, data[left]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, data[left], data[right]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">putchar</span>(<span class="string">'\n'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/04/17/cjquxj6fq00549wc2ma404xj2/" data-id="cjquxj6fq00549wc2ma404xj2" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/04/24/cjqx5558b00d54kc25e31e3e0/" data-id="cjqx5558b00d54kc25e31e3e0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -616,7 +616,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
     </div>
   </div>
 
@@ -629,23 +629,23 @@
       <ul>
         
           <li>
-            <a href="/2018/11/16/cjquxj6id00769wc2ctsx26k6/">二维ST表</a>
+            <a href="/2019/01/15/cjqx5558k00dc4kc25xoinlnb/">概率论笔记</a>
           </li>
         
           <li>
-            <a href="/2018/10/16/cjquxj6fn00519wc2tmqnvtk5/">SDUTACM十周年题解（Fish出题部分）</a>
+            <a href="/2018/11/16/cjqx5557t00cq4kc2xe81jnux/">二维ST表</a>
           </li>
         
           <li>
-            <a href="/2018/09/25/cjquxj6da003g9wc2typtyc7q/">LCT(模板-待填坑)</a>
+            <a href="/2018/10/16/cjqx554vo00544kc2984bjxi7/">SDUTACM十周年题解（Fish出题部分）</a>
           </li>
         
           <li>
-            <a href="/2018/09/11/cjquxj6iq007i9wc2i4gd5g6o/">回文树模板</a>
+            <a href="/2018/09/25/cjqx554rh003g4kc2eub9vwa9/">LCT(模板-待填坑)</a>
           </li>
         
           <li>
-            <a href="/2018/09/04/cjquxj6oj00ff9wc2sc3vo5ed/">2018年暑假集训（应付学校社会实践）</a>
+            <a href="/2018/09/11/cjqx5557f00cj4kc2xmh88cf0/">回文树模板</a>
           </li>
         
       </ul>

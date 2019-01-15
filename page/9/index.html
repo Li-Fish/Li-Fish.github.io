@@ -62,9 +62,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-HDU2196-Computer（树的直径-DP）" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/28/cjqx554p400234kc23jr5fzxv/" class="article-date">
+  <time datetime="2017-06-28T12:41:14.000Z" itemprop="datePublished">2017-06-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/DP/">DP</a>►<a class="article-category-link" href="/categories/ACM/DP/树型DP/">树型DP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/28/cjqx554p400234kc23jr5fzxv/">HDU2196 - Computer（树的直径+DP）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="题目链接："><a href="#题目链接：" class="headerlink" title="题目链接："></a>题目链接：</h1><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2196" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=2196</a></p>
+<hr>
+<h1 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h1><p>给定一个无向连通无环图，求每个节点到达的最远的节点的距离。</p>
+<hr>
+<h1 id="解题过程："><a href="#解题过程：" class="headerlink" title="解题过程："></a>解题过程：</h1><p>上午看了一下DP进阶之路的PDF，突然想学树型DP。然后找到了这个题，之前做了一个POJ的BFS求树的直径的，这次再来一发DP的。</p>
+<hr>
+<h1 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h1><p>由于题目给的是无向连通无环图，这里构造出一颗树来，不妨假设节点$1$为根。</p>
+<p>那么对于任意一个节点，他能到达的最远的节点一定是他子树中的一个节点，或者经过他父亲到达的一个节点。</p>
+<p>这里可以经过一次DFS求出每个节点到他子树中最远的节点的距离。</p>
+<p>然后第二次DFS的时候求出每个节点经过他根节点能到达的最远的距离，求经过根节点能到达的最远的距离时，需要当前节点到根节点的距离加上根节点到最远的节点的距离。不过要注意的是，可能当前节点在根节点最远距离的路径上。</p>
+<p>这里解决的方法是，求出每个节点最远的距离和次远的距离，如果当前节点在最远的距离路径上那么就选择次远的距离，判断是否在路径上需要记录下最远的距离是由那个儿子求出来的。</p>
+<hr>
+<h1 id="AC代码："><a href="#AC代码：" class="headerlink" title="AC代码："></a>AC代码：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX = <span class="number">11234</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; &gt; edge[MAX];</span><br><span class="line"></span><br><span class="line"><span class="comment">//dis1记录最远距离，dis2记录次远距离，num用来标记最远距离由那个节点而来的</span></span><br><span class="line"><span class="keyword">int</span> num[MAX], dis1[MAX], dis2[MAX], dp[MAX];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">read</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        edge[i].clear();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> v, w;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;v, &amp;w);</span><br><span class="line">        edge[v].push_back(make_pair(i, w));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    dis1[u] = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//这里的含义是，对于每个节点求他所有儿子节点的最远距离，那么当前节点的最远距离就是到儿子节点的距离加上儿子节点的最远距离</span></span><br><span class="line">    <span class="comment">//显然对于一个叶子节点，最远距离是0</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; edge[u].size(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = edge[u][i].first;</span><br><span class="line">        <span class="keyword">int</span> w = edge[u][i].second;</span><br><span class="line">        dfs1(v);</span><br><span class="line">        <span class="keyword">if</span> (dis1[v] + w &gt; dis1[u]) &#123;</span><br><span class="line">            dis1[u] = dis1[v] + w;</span><br><span class="line">            num[u] = v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//和上一步相似，求次远距离</span></span><br><span class="line">    dis2[u] = -INF;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; edge[u].size(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = edge[u][i].first;</span><br><span class="line">        <span class="keyword">int</span> w = edge[u][i].second;</span><br><span class="line">        <span class="comment">//当前距离不能是最远距离</span></span><br><span class="line">        <span class="keyword">if</span> (v != num[u] &amp;&amp; dis1[v] + w &gt; dis2[u]) &#123;</span><br><span class="line">            dis2[u] = dis1[v] + w;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; edge[u].size(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = edge[u][i].first;</span><br><span class="line">        <span class="keyword">int</span> w = edge[u][i].second;</span><br><span class="line">        <span class="comment">//dp[u]的含义是，当前节点经过父节点能到达的最远的距离</span></span><br><span class="line">        <span class="comment">//如果当前节点在最远距离的路径上，那么用次远距离，否则用最远距离</span></span><br><span class="line">        <span class="keyword">if</span> (v == num[u])</span><br><span class="line">            dp[v] = max(dp[u], dis2[u]) + w;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            dp[v] = max(dp[u], dis1[u]) + w;</span><br><span class="line">        dfs2(v);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">go</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    dfs1(<span class="number">1</span>);</span><br><span class="line">    dfs2(<span class="number">1</span>);</span><br><span class="line">    <span class="comment">//输出每个点的最远距离</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, max(dp[i], dis1[i]));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n)) &#123;</span><br><span class="line">        read();</span><br><span class="line">        go();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2017/06/28/cjqx554p400234kc23jr5fzxv/" data-id="cjqx554p400234kc23jr5fzxv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-UVA11235-Frequent-values（游程编码-线段树）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/28/cjquxj6h300679wc2ciudoq6f/" class="article-date">
+    <a href="/2017/06/28/cjqx554yy006a4kc2z5swwadq/" class="article-date">
   <time datetime="2017-06-28T08:56:32.000Z" itemprop="datePublished">2017-06-28</time>
 </a>
     
@@ -80,7 +132,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/28/cjquxj6h300679wc2ciudoq6f/">UVA11235 - Frequent values（游程编码+线段树）</a>
+      <a class="article-title" href="/2017/06/28/cjqx554yy006a4kc2z5swwadq/">UVA11235 - Frequent values（游程编码+线段树）</a>
     </h1>
   
 
@@ -101,7 +153,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/28/cjquxj6h300679wc2ciudoq6f/" data-id="cjquxj6h300679wc2ciudoq6f" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/28/cjqx554yy006a4kc2z5swwadq/" data-id="cjqx554yy006a4kc2z5swwadq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -113,7 +165,7 @@
   
     <article id="post-CodeForces743D-Chloe-and-pleasant-prizes（树型DP）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/27/cjquxj6ad00149wc2086mtusv/" class="article-date">
+    <a href="/2017/06/27/cjqx554nx00124kc29zidkncx/" class="article-date">
   <time datetime="2017-06-27T09:10:50.000Z" itemprop="datePublished">2017-06-27</time>
 </a>
     
@@ -129,7 +181,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/27/cjquxj6ad00149wc2086mtusv/">CodeForces743D - Chloe and pleasant prizes（树型DP）</a>
+      <a class="article-title" href="/2017/06/27/cjqx554nx00124kc29zidkncx/">CodeForces743D - Chloe and pleasant prizes（树型DP）</a>
     </h1>
   
 
@@ -150,7 +202,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/27/cjquxj6ad00149wc2086mtusv/" data-id="cjquxj6ad00149wc2086mtusv" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/27/cjqx554nx00124kc29zidkncx/" data-id="cjqx554nx00124kc29zidkncx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -162,7 +214,7 @@
   
     <article id="post-CodeForces734E-Anton-and-Tree（缩点-树的直径）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/27/cjquxj6a900119wc2avdu62cs/" class="article-date">
+    <a href="/2017/06/27/cjqx554nt000y4kc2v8whxgli/" class="article-date">
   <time datetime="2017-06-27T02:17:47.000Z" itemprop="datePublished">2017-06-27</time>
 </a>
     
@@ -178,7 +230,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/27/cjquxj6a900119wc2avdu62cs/">CodeForces734E - Anton and Tree（缩点+树的直径）</a>
+      <a class="article-title" href="/2017/06/27/cjqx554nt000y4kc2v8whxgli/">CodeForces734E - Anton and Tree（缩点+树的直径）</a>
     </h1>
   
 
@@ -202,7 +254,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/27/cjquxj6a900119wc2avdu62cs/" data-id="cjquxj6a900119wc2avdu62cs" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/27/cjqx554nt000y4kc2v8whxgli/" data-id="cjqx554nt000y4kc2v8whxgli" class="article-share-link">Share</a>
       
       
     </footer>
@@ -214,7 +266,7 @@
   
     <article id="post-HackerRank-pairs-again（暴力-预处理）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/26/cjquxj6d000399wc2vxpl9ojd/" class="article-date">
+    <a href="/2017/06/26/cjqx554r9003b4kc2eql1u4sh/" class="article-date">
   <time datetime="2017-06-26T03:13:15.000Z" itemprop="datePublished">2017-06-26</time>
 </a>
     
@@ -230,7 +282,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/26/cjquxj6d000399wc2vxpl9ojd/">HackerRank - pairs-again（暴力+预处理）</a>
+      <a class="article-title" href="/2017/06/26/cjqx554r9003b4kc2eql1u4sh/">HackerRank - pairs-again（暴力+预处理）</a>
     </h1>
   
 
@@ -252,7 +304,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/26/cjquxj6d000399wc2vxpl9ojd/" data-id="cjquxj6d000399wc2vxpl9ojd" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/26/cjqx554r9003b4kc2eql1u4sh/" data-id="cjqx554r9003b4kc2eql1u4sh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -264,7 +316,7 @@
   
     <article id="post-ZOJ3385-Hanami-Party-（贪心）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/25/cjquxj6hv006t9wc2f29hzxj6/" class="article-date">
+    <a href="/2017/06/25/cjqx5556u00c74kc2x84a8yfd/" class="article-date">
   <time datetime="2017-06-25T12:48:24.000Z" itemprop="datePublished">2017-06-25</time>
 </a>
     
@@ -280,7 +332,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/25/cjquxj6hv006t9wc2f29hzxj6/">ZOJ3385 - Hanami Party （贪心）</a>
+      <a class="article-title" href="/2017/06/25/cjqx5556u00c74kc2x84a8yfd/">ZOJ3385 - Hanami Party （贪心）</a>
     </h1>
   
 
@@ -306,7 +358,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/25/cjquxj6hv006t9wc2f29hzxj6/" data-id="cjquxj6hv006t9wc2f29hzxj6" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/25/cjqx5556u00c74kc2x84a8yfd/" data-id="cjqx5556u00c74kc2x84a8yfd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -318,7 +370,7 @@
   
     <article id="post-HDU5527-Too-Rich（贪心）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/25/cjquxj6cm002x9wc2imr4yyei/" class="article-date">
+    <a href="/2017/06/25/cjqx554qh002x4kc28cvkf4od/" class="article-date">
   <time datetime="2017-06-25T10:56:29.000Z" itemprop="datePublished">2017-06-25</time>
 </a>
     
@@ -334,7 +386,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/25/cjquxj6cm002x9wc2imr4yyei/">HDU5527 - Too Rich（贪心）</a>
+      <a class="article-title" href="/2017/06/25/cjqx554qh002x4kc28cvkf4od/">HDU5527 - Too Rich（贪心）</a>
     </h1>
   
 
@@ -358,7 +410,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/25/cjquxj6cm002x9wc2imr4yyei/" data-id="cjquxj6cm002x9wc2imr4yyei" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/25/cjqx554qh002x4kc28cvkf4od/" data-id="cjqx554qh002x4kc28cvkf4od" class="article-share-link">Share</a>
       
       
     </footer>
@@ -370,7 +422,7 @@
   
     <article id="post-CodeChef-MOU2H-Mountain-Holidays-2-（DP）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/25/cjquxj69z000s9wc2z3zisugx/" class="article-date">
+    <a href="/2017/06/25/cjqx554nw00114kc2uequtlwc/" class="article-date">
   <time datetime="2017-06-25T03:09:59.000Z" itemprop="datePublished">2017-06-25</time>
 </a>
     
@@ -386,7 +438,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/25/cjquxj69z000s9wc2z3zisugx/">CodeChef MOU2H - Mountain Holidays 2 （DP）</a>
+      <a class="article-title" href="/2017/06/25/cjqx554nw00114kc2uequtlwc/">CodeChef MOU2H - Mountain Holidays 2 （DP）</a>
     </h1>
   
 
@@ -414,7 +466,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/25/cjquxj69z000s9wc2z3zisugx/" data-id="cjquxj69z000s9wc2z3zisugx" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/25/cjqx554nw00114kc2uequtlwc/" data-id="cjqx554nw00114kc2uequtlwc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -426,7 +478,7 @@
   
     <article id="post-HDU4027-Can-you-answer-these-queries-（线段树）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/21/cjquxj6c4002i9wc2snfq7g4e/" class="article-date">
+    <a href="/2017/06/21/cjqx554po002k4kc2krqhas3s/" class="article-date">
   <time datetime="2017-06-21T07:57:00.000Z" itemprop="datePublished">2017-06-21</time>
 </a>
     
@@ -442,7 +494,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/21/cjquxj6c4002i9wc2snfq7g4e/">HDU4027 - Can you answer these queries? （线段树）</a>
+      <a class="article-title" href="/2017/06/21/cjqx554po002k4kc2krqhas3s/">HDU4027 - Can you answer these queries? （线段树）</a>
     </h1>
   
 
@@ -469,7 +521,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/21/cjquxj6c4002i9wc2snfq7g4e/" data-id="cjquxj6c4002i9wc2snfq7g4e" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/21/cjqx554po002k4kc2krqhas3s/" data-id="cjqx554po002k4kc2krqhas3s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -481,7 +533,7 @@
   
     <article id="post-HDU1394-Minimum-Inversion-Number（线段树）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/21/cjquxj6b5001t9wc22dn8pm6o/" class="article-date">
+    <a href="/2017/06/21/cjqx554or001t4kc2ntm82eh7/" class="article-date">
   <time datetime="2017-06-21T06:49:36.000Z" itemprop="datePublished">2017-06-21</time>
 </a>
     
@@ -497,7 +549,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/21/cjquxj6b5001t9wc22dn8pm6o/">HDU1394 - Minimum Inversion Number（线段树）</a>
+      <a class="article-title" href="/2017/06/21/cjqx554or001t4kc2ntm82eh7/">HDU1394 - Minimum Inversion Number（线段树）</a>
     </h1>
   
 
@@ -520,83 +572,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/21/cjquxj6b5001t9wc22dn8pm6o/" data-id="cjquxj6b5001t9wc22dn8pm6o" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-线段树小结" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/06/19/cjquxj6jw008j9wc2s0r3zjqy/" class="article-date">
-  <time datetime="2017-06-19T04:46:32.000Z" itemprop="datePublished">2017-06-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/知识小结/">知识小结</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/19/cjquxj6jw008j9wc2s0r3zjqy/">线段树小结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h1><p>实验室要开展每周的算法讲堂活动，大概是每周一个集训队员来给大家将一个知识点，于是我去讲线段树来开头了，但是自己好弱啊，自从寒假集训后就一直没敲过线段树代码了，于是这几天一直在照着金巨巨的博客刷线段树的题（也是抄的金巨巨的模板…）。</p>
-<p>这里总结一些做到的题，一些线段树的基本思路，也当做理一下总结的思路。</p>
-<p>用到的一些宏定义：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lson root&lt;&lt;1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rson root&lt;&lt;1|1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MID int m = (l + r) / 2</span></span><br></pre></td></tr></table></figure></p>
-<hr>
-<h1 id="线段树的基本概念："><a href="#线段树的基本概念：" class="headerlink" title="线段树的基本概念："></a>线段树的基本概念：</h1><p>如果把线段树当做一个数据结构的话，那么可以这样解释线段树：</p>
-<p>首先线段树是一颗二叉树，特殊的是线段树的每个节点，用来维护一段区间的信息，通常的写法都是这样，假设父节点维护的区间是$[a, b]$，那么他的左右儿子维护的区间分别是$[a, (a+b)/2], [(a+b)/2+1, b]$。</p>
-<p>一个节点维护的信息通常有，区间和，区间连续子串和，区间最大值，区间最小值等。</p>
-<h2 id="建树过程："><a href="#建树过程：" class="headerlink" title="建树过程："></a>建树过程：</h2><p>构造一颗线段树的过程，可以参考分治算法的步骤：</p>
-<ol>
-<li>假设要计算区间$[a, b]$中需要维护的信息，我们将这个问题分解成计算$[a, (a+b)/2], [(a+b)/2+1, b]$中需要维护的信息两个子问题，这样子问题与原问题的形式一样，只是规模更小.</li>
-<li>对于第一步分解出的每个子问题，继续使用第一步进行分解得到规模更小的子问题，直到问题的规模足够小，可以直接求解。通常来讲是区间长度为$1$的时候，这样容易计算出需要维护的信息，比如区间和、区间极值等可以以$O(1)$的时间直接计算出。</li>
-<li>最后一步是将上面分解出的子问题的解，合并成原问题的解，通常这一步也是最难的一步。</li>
-</ol>
-<p>下面是建树的代码，完美的符合了上述过程。<br>这里需要注意的一点是，对于每个节点，要么他是一个叶子节点，要么他是一个同时具有左右儿子的节点。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span> <span class="params">(<span class="keyword">int</span> root ,<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">        tree[root].maintain(data[l], l);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    MID;</span><br><span class="line">    build(lson, l, m);</span><br><span class="line">    build(rson, m+<span class="number">1</span>, r);</span><br><span class="line">    tree[root] = tree[lson] + tree[rson];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>通过上述分治的步骤，我们也可以另一种方式理解线段树：<br>我们要解决一个大问题，然后我们用分治的方法是解决这个问题，不过这里我们要把每一步解决的子问题的解都记录下来。这样所有子问题的解，和原问题的解就构成了一颗线段树。</p>
-<h2 id="更新："><a href="#更新：" class="headerlink" title="更新："></a>更新：</h2><p>线段树的更新过程，也是递归来实现的。这里以单点更新来举例，因为线段树是储存着许多子问题的解的，所以对一个点进行更新，可能会对多个子问题有影响，这里我们也用分治算法去更新。</p>
-<p>假设要对$[1,n]$的区间下标为$p$的点进行更新。那么对于$[1,n]$区间可以先对他的两个儿子节点$[1,(1+n)/2], [(1+n)/2+1, r]$进行更新，$[1,n]$区间可由更新后的两个儿子节点组合而成。对他的两个儿子节点也进行如下操作，直到一个节点可以直接计算出更新后的变化。</p>
-<p>下面是更新的代码，符合上述过程，不过这里加入了一个剪枝，如果需要更新的点不在当前节点维护的区间，那么这次更新对当前节点一点没有影响，不需要继续向下更新。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">updata</span><span class="params">(<span class="keyword">int</span> root, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> pos, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pos &lt; l || r &lt; pos)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">        tree[root].maintain(v, pos);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    MID;</span><br><span class="line">    updata(lson, l, m, pos, v);</span><br><span class="line">    updata(rson, m+<span class="number">1</span>, r, pos, v);</span><br><span class="line">    tree[root] = tree[lson] + tree[rson];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="查询："><a href="#查询：" class="headerlink" title="查询："></a>查询：</h2><p>查询过程其实就是用已经解决的子问题的解去构造新问题的解的过程。</p>
-<p>比如之前说过，对于一个维护$[1,n]$区间的线段树，它里面就存着着分治解决$[1,n]$这个问题的所有子问题的解。那么对于每次查询区间$[l,r],1\leq l \leq r \leq n$，都是一个规模小于$[1,n]$的问题。那么对于这个问题的解，可以用解决$[1,n]$问题的子问题的解构造出来。</p>
-<p>以下是查询过程中的代码，就是遍历原问题的所有子问题的解，去构造新问题的解，这里加入了剪枝，如果一个区间和需要查询的区间没有交集，那么就可以剪枝。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Info <span class="title">query</span><span class="params">(<span class="keyword">int</span> root, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> ql, <span class="keyword">int</span> qr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (qr &lt; l || r &lt; ql)</span><br><span class="line">        <span class="keyword">return</span> Info();</span><br><span class="line">    <span class="keyword">if</span> (ql &lt;= l &amp;&amp; r &lt;= qr) &#123;</span><br><span class="line">        <span class="keyword">return</span> tree[root];</span><br><span class="line">    &#125;</span><br><span class="line">    MID;</span><br><span class="line">    <span class="keyword">return</span> query(lson, l, m, ql, qr) + query(rson, m+<span class="number">1</span>, r, ql, qr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
-<h1 id="合并："><a href="#合并：" class="headerlink" title="合并："></a>合并：</h1><p>所谓合并就是合并两个节点为一个节点，也就是合并子问题，构造原问题解的过程。</p>
-<p>比如我分别知道$[a, b]$和$[b+1, c]$区间的最大值为$x_1, x_2$，那么区间$[a, b]$的最大值，那么就是$max(x_1, x_2)$。这样就用这两段区间的解构造出了另一个区间的解。</p>
-<p>这里重载了加号，用起来比较方便。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Info <span class="keyword">operator</span> + (<span class="keyword">const</span> Info &amp; a, <span class="keyword">const</span> Info &amp; b) &#123;</span><br><span class="line">    Info rst;</span><br><span class="line">    rst.value = max(a.value, b.value);</span><br><span class="line">    <span class="keyword">return</span> rst;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>当然这只是一个简单的例子，在许多线段树中合并起来非常麻烦，比如求一段区间内的最大的连续子串和。</p>
-<p>对于区间$[1, n]$，那么最长连续子串和一定来自于以下的三种：</p>
-<ul>
-<li>区间$[1,(n+1)/2]$的最长连续子串和；</li>
-<li>区间$[(n+1)/2+1, n]$的最长连续子串和；</li>
-<li>区间$[1,(n+1)/2]$的从右端开始的最长连续子串和加上区间$[(n+1)/2+1,n]$从左端开始的最长连续子串和。</li>
-</ul>
-<p>对于每段区间需要维护三个信息，从左端开始的最长连续子串和，从右端开始的最长连续子串和，最长连续子串和。分别记为<code>lmax,rmax,value</code>。</p>
-<p>那么合并两个区间的代码如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Info <span class="keyword">operator</span> + (<span class="keyword">const</span> Info &amp; a, <span class="keyword">const</span> Info &amp; b) &#123;</span><br><span class="line">    Info rst;</span><br><span class="line">    rst.lmax = max(a.lmax, a.sum + b.lmax);</span><br><span class="line">    rst.rmax = max(b.rmax, a.rmax + b.sum);</span><br><span class="line">    rst.sum = a.sum + b.sum;</span><br><span class="line">    rst.value = max(max(a.value, b.value), a.rmax + b.lmax);</span><br><span class="line">    <span class="keyword">return</span> rst;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这里为了方便操作，记录了区间的和。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/19/cjquxj6jw008j9wc2s0r3zjqy/" data-id="cjquxj6jw008j9wc2s0r3zjqy" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/21/cjqx554or001t4kc2ntm82eh7/" data-id="cjqx554or001t4kc2ntm82eh7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -636,7 +612,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
     </div>
   </div>
 
@@ -649,23 +625,23 @@
       <ul>
         
           <li>
-            <a href="/2018/11/16/cjquxj6id00769wc2ctsx26k6/">二维ST表</a>
+            <a href="/2019/01/15/cjqx5558k00dc4kc25xoinlnb/">概率论笔记</a>
           </li>
         
           <li>
-            <a href="/2018/10/16/cjquxj6fn00519wc2tmqnvtk5/">SDUTACM十周年题解（Fish出题部分）</a>
+            <a href="/2018/11/16/cjqx5557t00cq4kc2xe81jnux/">二维ST表</a>
           </li>
         
           <li>
-            <a href="/2018/09/25/cjquxj6da003g9wc2typtyc7q/">LCT(模板-待填坑)</a>
+            <a href="/2018/10/16/cjqx554vo00544kc2984bjxi7/">SDUTACM十周年题解（Fish出题部分）</a>
           </li>
         
           <li>
-            <a href="/2018/09/11/cjquxj6iq007i9wc2i4gd5g6o/">回文树模板</a>
+            <a href="/2018/09/25/cjqx554rh003g4kc2eub9vwa9/">LCT(模板-待填坑)</a>
           </li>
         
           <li>
-            <a href="/2018/09/04/cjquxj6oj00ff9wc2sc3vo5ed/">2018年暑假集训（应付学校社会实践）</a>
+            <a href="/2018/09/11/cjqx5557f00cj4kc2xmh88cf0/">回文树模板</a>
           </li>
         
       </ul>

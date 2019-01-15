@@ -62,9 +62,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-数独问题（工具）" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/05/cjqx5558800d34kc2z3q92pn7/" class="article-date">
+  <time datetime="2016-12-05T14:58:34.000Z" itemprop="datePublished">2016-12-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/搜索/">搜索</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/05/cjqx5558800d34kc2z3q92pn7/">数独问题（工具）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="功能："><a href="#功能：" class="headerlink" title="功能："></a>功能：</h1><ul>
+<li>输入一个数独（用二维数组表示），求出数独的解。</li>
+</ul>
+<hr>
+<h1 id="效果图："><a href="#效果图：" class="headerlink" title="效果图："></a>效果图：</h1><p><img src="http://img.blog.csdn.net/20161205225435004" alt="这里写图片描述"><img src="http://img.blog.csdn.net/20161205225446699" alt="这里写图片描述"></p>
+<hr>
+<h1 id="实现原理："><a href="#实现原理：" class="headerlink" title="实现原理："></a>实现原理：</h1><ul>
+<li>DFS搜索遍历。</li>
+<li>二维数组储存数据。</li>
+</ul>
+<hr>
+<h1 id="源代码："><a href="#源代码：" class="headerlink" title="源代码："></a>源代码：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int data[112][112];</span><br><span class="line"></span><br><span class="line">void put()</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; &quot;----------------------&quot; &lt;&lt; endl;</span><br><span class="line">    for (int i = 0; i &lt; 9; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        for (int j = 0; j &lt; 9; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            cout &lt;&lt; data[i][j] &lt;&lt; &quot; &quot;;</span><br><span class="line">            if ((j+1)%3 == 0)</span><br><span class="line">                cout &lt;&lt; &quot; &quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">        if ((i+1)%3 == 0)</span><br><span class="line">            cout &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; &quot;----------------------&quot; &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">bool check(int x, int y)</span><br><span class="line">&#123;</span><br><span class="line">    for (int i = 0; i &lt;= 9; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if (data[i][y] == data[x][y] &amp;&amp; i != x)</span><br><span class="line">            return false;</span><br><span class="line">        if (data[x][i] == data[x][y] &amp;&amp; i != y)</span><br><span class="line">            return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int x0 = x/3*3;</span><br><span class="line">    int y0 = y/3*3;</span><br><span class="line"></span><br><span class="line">    for (int i = 0; i &lt; 3; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        for (int j = 0; j &lt; 3; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            if (i+x0 == x &amp;&amp; j+y0 == y)</span><br><span class="line">                continue;</span><br><span class="line">            if (data[i+x0][j+y0] == data[x][y])</span><br><span class="line">                return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int fun(int cnt)</span><br><span class="line">&#123;</span><br><span class="line">    int x, y;</span><br><span class="line">    if (cnt == 81)</span><br><span class="line">        return 1;</span><br><span class="line"></span><br><span class="line">    x = cnt/9;</span><br><span class="line">    y = cnt%9;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    if (data[x][y] != 0)</span><br><span class="line">    &#123;</span><br><span class="line">        fun(cnt+1);</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        for (int i = 1; i &lt;= 9; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            data[x][y] = i;</span><br><span class="line">            if (check(x, y))</span><br><span class="line">            &#123;</span><br><span class="line">                if(fun(cnt+1))</span><br><span class="line">                    return 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        data[x][y] = 0;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n, x, y, t;</span><br><span class="line">    while (cin &gt;&gt; n)</span><br><span class="line">    &#123;</span><br><span class="line">        memset(data, 0, sizeof(data));</span><br><span class="line">        for (int i = 0; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cin &gt;&gt; x &gt;&gt; y &gt;&gt; t;</span><br><span class="line">            data[x-1][y-1] = t;</span><br><span class="line">        &#125;</span><br><span class="line">        fun(0);</span><br><span class="line">        cout &lt;&lt; &quot;end&quot; &lt;&lt; endl;</span><br><span class="line">        put();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="PS："><a href="#PS：" class="headerlink" title="PS："></a>PS：</h1><p>当初群里有人问一个数独怎么解时，然后自己DFS也不太熟练，花了半个小时写了这个，满满的成就感！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2016/12/05/cjqx5558800d34kc2z3q92pn7/" data-id="cjqx5558800d34kc2z3q92pn7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-HDOJ1176-免费馅饼-（DP）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/12/05/cjquxj6ax001m9wc2j402siog/" class="article-date">
+    <a href="/2016/12/05/cjqx554oh001j4kc23mncx48d/" class="article-date">
   <time datetime="2016-12-05T14:05:33.000Z" itemprop="datePublished">2016-12-05</time>
 </a>
     
@@ -80,7 +133,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/05/cjquxj6ax001m9wc2j402siog/">HDOJ1176. 免费馅饼.（DP）</a>
+      <a class="article-title" href="/2016/12/05/cjqx554oh001j4kc23mncx48d/">HDOJ1176. 免费馅饼.（DP）</a>
     </h1>
   
 
@@ -114,7 +167,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2016/12/05/cjquxj6ax001m9wc2j402siog/" data-id="cjquxj6ax001m9wc2j402siog" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2016/12/05/cjqx554oh001j4kc23mncx48d/" data-id="cjqx554oh001j4kc23mncx48d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -126,7 +179,7 @@
   
     <article id="post-CodeForces-255C-Almost-Arithmetical-Progression-DP" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/12/05/cjquxj6a1000u9wc28hxish6o/" class="article-date">
+    <a href="/2016/12/05/cjqx554nr000x4kc24ctjjcpg/" class="article-date">
   <time datetime="2016-12-05T09:50:28.000Z" itemprop="datePublished">2016-12-05</time>
 </a>
     
@@ -142,7 +195,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/05/cjquxj6a1000u9wc28hxish6o/">CodeForces 255C. Almost Arithmetical Progression (DP)</a>
+      <a class="article-title" href="/2016/12/05/cjqx554nr000x4kc24ctjjcpg/">CodeForces 255C. Almost Arithmetical Progression (DP)</a>
     </h1>
   
 
@@ -175,7 +228,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2016/12/05/cjquxj6a1000u9wc28hxish6o/" data-id="cjquxj6a1000u9wc28hxish6o" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2016/12/05/cjqx554nr000x4kc24ctjjcpg/" data-id="cjqx554nr000x4kc24ctjjcpg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -187,7 +240,7 @@
   
     <article id="post-SDUTOJ-LCS问题-DP" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/12/05/cjquxj6fs00569wc229eww0n2/" class="article-date">
+    <a href="/2016/12/05/cjqx554vt00564kc2a2j5s4sf/" class="article-date">
   <time datetime="2016-12-05T09:50:22.000Z" itemprop="datePublished">2016-12-05</time>
 </a>
     
@@ -203,7 +256,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/05/cjquxj6fs00569wc229eww0n2/">SDUTOJ. LCS问题.(DP)</a>
+      <a class="article-title" href="/2016/12/05/cjqx554vt00564kc2a2j5s4sf/">SDUTOJ. LCS问题.(DP)</a>
     </h1>
   
 
@@ -236,7 +289,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2016/12/05/cjquxj6fs00569wc229eww0n2/" data-id="cjquxj6fs00569wc229eww0n2" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2016/12/05/cjqx554vt00564kc2a2j5s4sf/" data-id="cjqx554vt00564kc2a2j5s4sf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -276,7 +329,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
     </div>
   </div>
 
@@ -289,23 +342,23 @@
       <ul>
         
           <li>
-            <a href="/2018/11/16/cjquxj6id00769wc2ctsx26k6/">二维ST表</a>
+            <a href="/2019/01/15/cjqx5558k00dc4kc25xoinlnb/">概率论笔记</a>
           </li>
         
           <li>
-            <a href="/2018/10/16/cjquxj6fn00519wc2tmqnvtk5/">SDUTACM十周年题解（Fish出题部分）</a>
+            <a href="/2018/11/16/cjqx5557t00cq4kc2xe81jnux/">二维ST表</a>
           </li>
         
           <li>
-            <a href="/2018/09/25/cjquxj6da003g9wc2typtyc7q/">LCT(模板-待填坑)</a>
+            <a href="/2018/10/16/cjqx554vo00544kc2984bjxi7/">SDUTACM十周年题解（Fish出题部分）</a>
           </li>
         
           <li>
-            <a href="/2018/09/11/cjquxj6iq007i9wc2i4gd5g6o/">回文树模板</a>
+            <a href="/2018/09/25/cjqx554rh003g4kc2eub9vwa9/">LCT(模板-待填坑)</a>
           </li>
         
           <li>
-            <a href="/2018/09/04/cjquxj6oj00ff9wc2sc3vo5ed/">2018年暑假集训（应付学校社会实践）</a>
+            <a href="/2018/09/11/cjqx5557f00cj4kc2xmh88cf0/">回文树模板</a>
           </li>
         
       </ul>
