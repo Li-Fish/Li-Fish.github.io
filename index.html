@@ -62,9 +62,64 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-吉比特实习面试经历" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/26/cjsli5qs500773oc2mdgw2p6a/" class="article-date">
+  <time datetime="2019-02-26T07:29:53.000Z" itemprop="datePublished">2019-02-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/历程/">历程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/26/cjsli5qs500773oc2mdgw2p6a/">吉比特实习面试</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一面"><a href="#一面" class="headerlink" title="一面"></a>一面</h1><p><strong>一定要找一个稳定的网络面试！！！</strong></p>
+<p>通过牛客网进行的视频面试，本地测试的时候特别稳定，然后和面试官面试的时候网络就特别差，之后让面试官等了一下才开始的正式面试。</p>
+<p>首先面试官先说要自我介绍一下，就说了一下自己的姓名、学校、学院、专业班级之类的，提了下从大一开始打 ACM 的经历。</p>
+<p>然后面试官就开始问我 C++ 学的怎么样，我说还可以，然后就开始问对 C++11 了解吗，我提到了比赛中只用到过 auto 关键字和范围 for 遍历，又说了一下智能指针、lambda 表达式只了解过但是没实际用过。</p>
+<p>接下来就开始问我智能指针有三种，分别介绍一下他们，这里我忘记了第三种的 weak_prt 了，就直接开始介绍 shared_ptr 和 unique_ptr ，提了下 unique 和 shared 的最大区别在于 unique 不能拷贝，然后面试官问我怎么实现不能拷贝，就是直接把拷贝构造函数和拷贝运算符删掉就 ok 了。</p>
+<p>之后我提了一下右值引用（我也忘记是怎么提到的了），然后面试官问我右值引用大概是什么东西，为什么要用得到右值引用。我感觉右值引用就是引用右值吧，介绍了下右值的特点。</p>
+<p>之后问了我学校集训队的情况，人数和队内的情况怎么样，自己擅长哪方面的算法之类的。我提到我擅长数据结构、动态规划，然后接下来就给我了一道算法题。</p>
+<p>给出一个 n 行 m 列的矩阵，每个位置有 1 或 0，1 代表可以放棋子，0 不能放，任意两个棋子不能相邻放（四连通），问有多少种放的方案。 $n, m &lt; 13$</p>
+<p>数据范围这么小，考虑从左上往右下依次放的话，每个棋子只考虑他上方和他左方的棋子就好了，然后考虑转移的话，只需要维护一条轮廓线的状态，大概 $O(n \cdot m \cdot  2^m)$</p>
+<p>但是写起来太麻烦了，当时没写出来，和面试官说了一下思路就开始接下来的问题了。</p>
+<p>因为我简历中写了一个通过 WebSocket 实现的聊天室，然后面试官问了一下我 WebScoket 协议的工作原理，以及实现方式。使用 WebSocket 协议首先通过发送一个 HTTP 请求将当前协议切换成 WebSocket 协议，大概类似于握手的一个过程，前端我是直接使用的 JavaScript 的 Socket.io 库，后端通过 Python 的 Socket 实现了 WebSocket 协议。</p>
+<p>随后问了多线程了解的怎么样，我和他说了一下我上面聊天室项目中多线程的应用，提了下为什么 Python 多线程只对 IO 密集型有用，顺便提了下之前使用多线程优化 Sort。</p>
+<p>然后问我编译原理学的好吗，我就直接说考的挺好，但是学的不怎么样，然后就没继续问了。</p>
+<p>之后问我对游戏开发感兴趣了，我就聊了一下之前做过一个 H5 的飞机大战游戏，并且看了一下游戏如何实现同步。</p>
+<p>最后面试官问我有什么问题问他吗，我就问了他们公司后端开发需要学那些技术，他告诉我他们后端基本上都是自己写的，不用什么框架，甚至开发了自己的一套脚本语言。然后我问了下厦门和深圳那个地方好，薪资啥的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2019/02/26/cjsli5qs500773oc2mdgw2p6a/" data-id="cjsli5qs500773oc2mdgw2p6a" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-概率论笔记" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/01/15/cjqx5558k00dc4kc25xoinlnb/" class="article-date">
+    <a href="/2019/01/15/cjsli5quk008d3oc2kcqw2aez/" class="article-date">
   <time datetime="2019-01-15T02:29:48.000Z" itemprop="datePublished">2019-01-15</time>
 </a>
     
@@ -80,7 +135,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/15/cjqx5558k00dc4kc25xoinlnb/">概率论笔记</a>
+      <a class="article-title" href="/2019/01/15/cjsli5quk008d3oc2kcqw2aez/">概率论笔记</a>
     </h1>
   
 
@@ -111,7 +166,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2019/01/15/cjqx5558k00dc4kc25xoinlnb/" data-id="cjqx5558k00dc4kc25xoinlnb" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2019/01/15/cjsli5quk008d3oc2kcqw2aez/" data-id="cjsli5quk008d3oc2kcqw2aez" class="article-share-link">Share</a>
       
       
     </footer>
@@ -123,7 +178,7 @@
   
     <article id="post-二维ST表" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/11/16/cjqx5557t00cq4kc2xe81jnux/" class="article-date">
+    <a href="/2018/11/16/cjsli5qs800793oc2c5bz1tsh/" class="article-date">
   <time datetime="2018-11-15T20:04:11.000Z" itemprop="datePublished">2018-11-16</time>
 </a>
     
@@ -139,7 +194,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/16/cjqx5557t00cq4kc2xe81jnux/">二维ST表</a>
+      <a class="article-title" href="/2018/11/16/cjsli5qs800793oc2c5bz1tsh/">二维ST表</a>
     </h1>
   
 
@@ -156,7 +211,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/11/16/cjqx5557t00cq4kc2xe81jnux/" data-id="cjqx5557t00cq4kc2xe81jnux" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/11/16/cjsli5qs800793oc2c5bz1tsh/" data-id="cjsli5qs800793oc2c5bz1tsh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -168,7 +223,7 @@
   
     <article id="post-SDUTACM十周年题解（Fish出题部分）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/10/16/cjqx554vo00544kc2984bjxi7/" class="article-date">
+    <a href="/2018/10/16/cjsli5qo000553oc2advqly91/" class="article-date">
   <time datetime="2018-10-15T19:48:54.000Z" itemprop="datePublished">2018-10-16</time>
 </a>
     
@@ -184,7 +239,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/16/cjqx554vo00544kc2984bjxi7/">SDUTACM十周年题解（Fish出题部分）</a>
+      <a class="article-title" href="/2018/10/16/cjsli5qo000553oc2advqly91/">SDUTACM十周年题解（Fish出题部分）</a>
     </h1>
   
 
@@ -217,7 +272,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/10/16/cjqx554vo00544kc2984bjxi7/" data-id="cjqx554vo00544kc2984bjxi7" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/10/16/cjsli5qo000553oc2advqly91/" data-id="cjsli5qo000553oc2advqly91" class="article-share-link">Share</a>
       
       
     </footer>
@@ -229,7 +284,7 @@
   
     <article id="post-LCT-模板-待填坑" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/25/cjqx554rh003g4kc2eub9vwa9/" class="article-date">
+    <a href="/2018/09/25/cjsli5qla003p3oc221qr9bgx/" class="article-date">
   <time datetime="2018-09-25T13:02:34.000Z" itemprop="datePublished">2018-09-25</time>
 </a>
     
@@ -245,7 +300,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/25/cjqx554rh003g4kc2eub9vwa9/">LCT(模板-待填坑)</a>
+      <a class="article-title" href="/2018/09/25/cjsli5qla003p3oc221qr9bgx/">LCT(模板-待填坑)</a>
     </h1>
   
 
@@ -261,7 +316,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/09/25/cjqx554rh003g4kc2eub9vwa9/" data-id="cjqx554rh003g4kc2eub9vwa9" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/09/25/cjsli5qla003p3oc221qr9bgx/" data-id="cjsli5qla003p3oc221qr9bgx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -273,7 +328,7 @@
   
     <article id="post-回文树模板" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/11/cjqx5557f00cj4kc2xmh88cf0/" class="article-date">
+    <a href="/2018/09/11/cjsli5qsz007o3oc2dyb2xzjn/" class="article-date">
   <time datetime="2018-09-11T13:29:48.000Z" itemprop="datePublished">2018-09-11</time>
 </a>
     
@@ -289,7 +344,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/11/cjqx5557f00cj4kc2xmh88cf0/">回文树模板</a>
+      <a class="article-title" href="/2018/09/11/cjsli5qsz007o3oc2dyb2xzjn/">回文树模板</a>
     </h1>
   
 
@@ -310,7 +365,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/09/11/cjqx5557f00cj4kc2xmh88cf0/" data-id="cjqx5557f00cj4kc2xmh88cf0" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/09/11/cjsli5qsz007o3oc2dyb2xzjn/" data-id="cjsli5qsz007o3oc2dyb2xzjn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -322,7 +377,7 @@
   
     <article id="post-2018年暑假集训" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/04/cjqx5556i00c04kc28u4yrih2/" class="article-date">
+    <a href="/2018/09/04/cjsli5r2000f93oc2nbbgrur8/" class="article-date">
   <time datetime="2018-09-04T10:48:35.000Z" itemprop="datePublished">2018-09-04</time>
 </a>
     
@@ -338,7 +393,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/04/cjqx5556i00c04kc28u4yrih2/">2018年暑假集训（应付学校社会实践）</a>
+      <a class="article-title" href="/2018/09/04/cjsli5r2000f93oc2nbbgrur8/">2018年暑假集训（应付学校社会实践）</a>
     </h1>
   
 
@@ -388,7 +443,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/09/04/cjqx5556i00c04kc28u4yrih2/" data-id="cjqx5556i00c04kc28u4yrih2" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/09/04/cjsli5r2000f93oc2nbbgrur8/" data-id="cjsli5r2000f93oc2nbbgrur8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -400,7 +455,7 @@
   
     <article id="post-斜率DP小结" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/04/cjqx5558h00da4kc2e0dz71cf/" class="article-date">
+    <a href="/2018/09/04/cjsli5qu200863oc2ccxspox8/" class="article-date">
   <time datetime="2018-09-03T21:11:05.000Z" itemprop="datePublished">2018-09-04</time>
 </a>
     
@@ -416,7 +471,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/04/cjqx5558h00da4kc2e0dz71cf/">斜率DP小结（待填坑）</a>
+      <a class="article-title" href="/2018/09/04/cjsli5qu200863oc2ccxspox8/">斜率DP小结（待填坑）</a>
     </h1>
   
 
@@ -428,7 +483,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/09/04/cjqx5558h00da4kc2e0dz71cf/" data-id="cjqx5558h00da4kc2e0dz71cf" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/09/04/cjsli5qu200863oc2ccxspox8/" data-id="cjsli5qu200863oc2ccxspox8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -440,7 +495,7 @@
   
     <article id="post-虚树小结" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/04/cjqx5559f00dy4kc2adhgkgx3/" class="article-date">
+    <a href="/2018/09/04/cjsli5qvl008x3oc2akllnv45/" class="article-date">
   <time datetime="2018-09-03T19:37:52.000Z" itemprop="datePublished">2018-09-04</time>
 </a>
     
@@ -456,7 +511,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/04/cjqx5559f00dy4kc2adhgkgx3/">虚树小结</a>
+      <a class="article-title" href="/2018/09/04/cjsli5qvl008x3oc2akllnv45/">虚树小结</a>
     </h1>
   
 
@@ -480,7 +535,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/09/04/cjqx5559f00dy4kc2adhgkgx3/" data-id="cjqx5559f00dy4kc2adhgkgx3" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/09/04/cjsli5qvl008x3oc2akllnv45/" data-id="cjsli5qvl008x3oc2akllnv45" class="article-share-link">Share</a>
       
       
     </footer>
@@ -492,7 +547,7 @@
   
     <article id="post-2018邀请赛总结（陕西）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/05/23/cjqx554mq00084kc2p0ysyvbx/" class="article-date">
+    <a href="/2018/05/23/cjsli5qf100073oc28wt0a5rb/" class="article-date">
   <time datetime="2018-05-23T12:12:51.000Z" itemprop="datePublished">2018-05-23</time>
 </a>
     
@@ -508,7 +563,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/23/cjqx554mq00084kc2p0ysyvbx/">2018邀请赛总结（陕西）</a>
+      <a class="article-title" href="/2018/05/23/cjsli5qf100073oc28wt0a5rb/">2018邀请赛总结（陕西）</a>
     </h1>
   
 
@@ -535,55 +590,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/05/23/cjqx554mq00084kc2p0ysyvbx/" data-id="cjqx554mq00084kc2p0ysyvbx" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-树分治小结" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/16/cjqx5558q00dh4kc2yobd898g/" class="article-date">
-  <time datetime="2018-05-16T15:04:46.000Z" itemprop="datePublished">2018-05-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/数据结构/">数据结构</a>►<a class="article-category-link" href="/categories/ACM/数据结构/树/">树</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/16/cjqx5558q00dh4kc2yobd898g/">树分治小结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h1><p>首先树分治是一种在树上的分治算法，分为点分治和边分治，边分治不常见并且不能保证复杂度，所以没学。那么对于点分治，核心实现是每次选取一个点当做根节点，然后解决根节点的问题，再去递归到每个子树去解决子树的问题。</p>
-<p>分治的一个核心在于根据树的重心去划分递归子树，重心是树上的一个点，删去这个点后剩下的最大的子树最小。可以保证删去这个点后剩下的所有子树的大小不会超过原来的一半。由此保证递归深度至多 $\log n$ 层，如果解决每层的问题需要 $O(n)$，那么总时间复杂度是 $O(n\log n)$。</p>
-<h1 id="两道例题"><a href="#两道例题" class="headerlink" title="两道例题"></a>两道例题</h1><h2 id="POJ-1741"><a href="#POJ-1741" class="headerlink" title="POJ 1741"></a>POJ 1741</h2><p>给出一棵树，每条边有边权，设树上任意两点 $u, v$ ($u\neq v$)的最短距离为 $dist(u,v) $ 问有多少个序偶 $(u, v)$ 使得 $dist(u, v) \le K$。</p>
-<p>节点数不超过 $10^4$，边权不超过 $10^3$ 。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX = <span class="number">112345</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, K;</span><br><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; &gt; edge[MAX];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> size, root, ans;</span><br><span class="line"><span class="keyword">int</span> num[MAX], max_son[MAX], depth[MAX];</span><br><span class="line"><span class="keyword">bool</span> done[MAX];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dep;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_root</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa)</span> </span>&#123;</span><br><span class="line">    max_son[u] = <span class="number">0</span>;</span><br><span class="line">    num[u] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; edge[u].size(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = edge[u][i].first;</span><br><span class="line">        <span class="keyword">if</span> (done[v] || v == fa) <span class="keyword">continue</span>;</span><br><span class="line">        get_root(v, u);</span><br><span class="line">        num[u] += num[v];</span><br><span class="line">        max_son[u] = max(max_son[u], num[v]);</span><br><span class="line">    &#125;</span><br><span class="line">    max_son[u] = max(max_son[u], size - num[u]);</span><br><span class="line">    <span class="keyword">if</span> (max_son[u] &lt; max_son[root]) root = u;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_dep</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa)</span> </span>&#123;</span><br><span class="line">    dep.push_back(depth[u]);</span><br><span class="line">    num[u] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; edge[u].size(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = edge[u][i].first;</span><br><span class="line">        <span class="keyword">int</span> w = edge[u][i].second;</span><br><span class="line">        <span class="keyword">if</span> (done[v] || v == fa) <span class="keyword">continue</span>;</span><br><span class="line">        depth[v] = depth[u] + w;</span><br><span class="line">        get_dep(v, u);</span><br><span class="line">        num[u] += num[v];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">calc</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> init)</span> </span>&#123;</span><br><span class="line">    dep.clear();</span><br><span class="line">    depth[u] = init;</span><br><span class="line">    get_dep(u, <span class="number">0</span>);</span><br><span class="line">    sort(dep.begin(), dep.end());</span><br><span class="line">    <span class="keyword">int</span> rst = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">0</span>, r = dep.size() - <span class="number">1</span>; l &lt; r;) &#123;</span><br><span class="line">        <span class="keyword">if</span> (dep[l] + dep[r] &lt;= K) rst += r - l++;</span><br><span class="line">        <span class="keyword">else</span> r--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> rst;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    ans += calc(u, <span class="number">0</span>);</span><br><span class="line">    done[u] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; edge[u].size(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = edge[u][i].first;</span><br><span class="line">        <span class="keyword">int</span> w = edge[u][i].second;</span><br><span class="line">        <span class="keyword">if</span> (done[v]) <span class="keyword">continue</span>;</span><br><span class="line">        ans -= calc(v, w);</span><br><span class="line">        max_son[<span class="number">0</span>] = size = num[v];</span><br><span class="line">        get_root(v, root = <span class="number">0</span>);</span><br><span class="line">        solve(root);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; K) &#123;</span><br><span class="line">        <span class="keyword">if</span> (n == <span class="number">0</span> &amp;&amp; K == <span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">        <span class="built_in">memset</span>(done, <span class="number">0</span>, <span class="keyword">sizeof</span>(done));</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) edge[i].clear();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> u, v, w;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v &gt;&gt; w;</span><br><span class="line">            edge[u].push_back(make_pair(v, w));</span><br><span class="line">            edge[v].push_back(make_pair(u, w));</span><br><span class="line">        &#125;</span><br><span class="line">        max_son[<span class="number">0</span>] = size = n;</span><br><span class="line">        root = <span class="number">0</span>;</span><br><span class="line">        get_root(<span class="number">1</span>, <span class="number">-1</span>);</span><br><span class="line">        ans = <span class="number">0</span>;</span><br><span class="line">        solve(root);</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="CF-715C"><a href="#CF-715C" class="headerlink" title="CF 715C"></a>CF 715C</h2><p>给出一棵树，每条边有边权，定义$dist(u, v)$的值为将从ｕ到ｖ经过的点权依次写成１０进制数，问多少个序偶 $(u, v)$ 使得 $dist(u, v) \equiv 0  \mod m$。</p>
-<p>节点数不超过 $10^5$，边权范围为$1-9$，$m \le 10^9$</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX = <span class="number">112345</span>;</span><br><span class="line"><span class="keyword">int</span> MOD;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exgcd</span><span class="params">(ll a, ll b, ll &amp;d, ll &amp;x, ll &amp;y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!b) &#123;</span><br><span class="line">        d = a;</span><br><span class="line">        x = <span class="number">1</span>;</span><br><span class="line">        y = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        exgcd(b, a % b, d, y, x);</span><br><span class="line">        y -= x * (a / b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">inv</span><span class="params">(ll a, ll p)</span> </span>&#123;</span><br><span class="line">    ll d, x, y;</span><br><span class="line">    exgcd(a, p, d, x, y);</span><br><span class="line">    <span class="keyword">return</span> d == <span class="number">1</span> ? (x + p) % p : <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">pow_mod</span><span class="params">(ll a, ll k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (MOD == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    ll rst = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (k) &#123;</span><br><span class="line">        <span class="keyword">if</span> (k &amp; <span class="number">1</span>) rst = rst * a % MOD;</span><br><span class="line">        a = a * a % MOD;</span><br><span class="line">        k &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> rst;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; &gt; edge[MAX];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> siz, root;</span><br><span class="line">ll ans;</span><br><span class="line"><span class="keyword">int</span> num[MAX], max_son[MAX];</span><br><span class="line"><span class="keyword">bool</span> done[MAX];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_root</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa)</span> </span>&#123;</span><br><span class="line">    max_son[u] = <span class="number">0</span>;</span><br><span class="line">    num[u] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;e : edge[u]) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = e.first;</span><br><span class="line">        <span class="keyword">if</span> (done[v] || v == fa) <span class="keyword">continue</span>;</span><br><span class="line">        get_root(v, u);</span><br><span class="line">        num[u] += num[v];</span><br><span class="line">        max_son[u] = max(max_son[u], num[v]);</span><br><span class="line">    &#125;</span><br><span class="line">    max_son[u] = max(max_son[u], siz - num[u]);</span><br><span class="line">    <span class="keyword">if</span> (max_son[u] &lt; max_son[root]) root = u;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ll pow_num[MAX], rev_pow[MAX];</span><br><span class="line"><span class="built_in">map</span>&lt;ll, ll&gt; pre;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    pow_num[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    rev_pow[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; MAX; i++) pow_num[i] = pow_num[i - <span class="number">1</span>] * <span class="number">10</span> % MOD;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; MAX; i++) rev_pow[i] = inv(pow_num[i], MOD);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(ll t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pre.count(t)) pre[t]++;</span><br><span class="line">    <span class="keyword">else</span> pre[t] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">get</span><span class="params">(ll t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pre.count(t)) <span class="keyword">return</span> pre[t];</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ll rst;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa, <span class="keyword">int</span> len, ll now)</span> </span>&#123;</span><br><span class="line">    num[u] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;e : edge[u]) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = e.first;</span><br><span class="line">        <span class="keyword">int</span> w = e.second;</span><br><span class="line">        <span class="keyword">if</span> (done[v] || v == fa) <span class="keyword">continue</span>;</span><br><span class="line">        ll t = (now + pow_num[len] * w) % MOD;</span><br><span class="line">        add(t);</span><br><span class="line">        dfs1(v, u, len + <span class="number">1</span>, t);</span><br><span class="line">        num[u] += num[v];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa, ll now, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;e : edge[u]) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = e.first;</span><br><span class="line">        <span class="keyword">int</span> w = e.second;</span><br><span class="line">        <span class="keyword">if</span> (done[v] || v == fa) <span class="keyword">continue</span>;</span><br><span class="line">        ll t = (now * <span class="number">10</span> + w) % MOD;</span><br><span class="line">        rst += get((MOD - t) * rev_pow[len] % MOD);</span><br><span class="line">        dfs2(v, u, t, len + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">calc</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> init)</span> </span>&#123;</span><br><span class="line">    rst = <span class="number">0</span>;</span><br><span class="line">    pre.clear();</span><br><span class="line">    dfs1(u, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (init) &#123;</span><br><span class="line">        ll t = (init * <span class="number">10</span> + init) % MOD;</span><br><span class="line">        add(<span class="number">0</span>);</span><br><span class="line">        rst += get((MOD - t) * rev_pow[<span class="number">2</span>] % MOD);</span><br><span class="line">        dfs2(u, <span class="number">0</span>, t, <span class="number">3</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        rst += get(<span class="number">0</span>);</span><br><span class="line">        add(<span class="number">0</span>);</span><br><span class="line">        dfs2(u, <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> rst;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">solve</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    ans += calc(u, <span class="number">0</span>);</span><br><span class="line">    done[u] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span> &amp;e : edge[u]) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = e.first;</span><br><span class="line">        <span class="keyword">int</span> w = e.second;</span><br><span class="line">        <span class="keyword">if</span> (done[v]) <span class="keyword">continue</span>;</span><br><span class="line">        ans -= calc(v, w);</span><br><span class="line">        max_son[<span class="number">0</span>] = siz = num[v];</span><br><span class="line">        get_root(v, root = <span class="number">0</span>);</span><br><span class="line">        solve(root);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="keyword">int</span> n, m;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    MOD = m;</span><br><span class="line"></span><br><span class="line">    init();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> u, v, w;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; u &gt;&gt; v &gt;&gt; w;</span><br><span class="line">        u++, v++;</span><br><span class="line">        edge[u].push_back(make_pair(v, w));</span><br><span class="line">        edge[v].push_back(make_pair(u, w));</span><br><span class="line">    &#125;</span><br><span class="line">    max_son[<span class="number">0</span>] = siz = n;</span><br><span class="line">    get_root(<span class="number">1</span>, root = <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; solve(root) &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/05/16/cjqx5558q00dh4kc2yobd898g/" data-id="cjqx5558q00dh4kc2yobd898g" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/05/23/cjsli5qf100073oc28wt0a5rb/" data-id="cjsli5qf100073oc28wt0a5rb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -623,7 +630,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
     </div>
   </div>
 
@@ -636,23 +643,23 @@
       <ul>
         
           <li>
-            <a href="/2019/01/15/cjqx5558k00dc4kc25xoinlnb/">概率论笔记</a>
+            <a href="/2019/02/26/cjsli5qs500773oc2mdgw2p6a/">吉比特实习面试</a>
           </li>
         
           <li>
-            <a href="/2018/11/16/cjqx5557t00cq4kc2xe81jnux/">二维ST表</a>
+            <a href="/2019/01/15/cjsli5quk008d3oc2kcqw2aez/">概率论笔记</a>
           </li>
         
           <li>
-            <a href="/2018/10/16/cjqx554vo00544kc2984bjxi7/">SDUTACM十周年题解（Fish出题部分）</a>
+            <a href="/2018/11/16/cjsli5qs800793oc2c5bz1tsh/">二维ST表</a>
           </li>
         
           <li>
-            <a href="/2018/09/25/cjqx554rh003g4kc2eub9vwa9/">LCT(模板-待填坑)</a>
+            <a href="/2018/10/16/cjsli5qo000553oc2advqly91/">SDUTACM十周年题解（Fish出题部分）</a>
           </li>
         
           <li>
-            <a href="/2018/09/11/cjqx5557f00cj4kc2xmh88cf0/">回文树模板</a>
+            <a href="/2018/09/25/cjsli5qla003p3oc221qr9bgx/">LCT(模板-待填坑)</a>
           </li>
         
       </ul>
