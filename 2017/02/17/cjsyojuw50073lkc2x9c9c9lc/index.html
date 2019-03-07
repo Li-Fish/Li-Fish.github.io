@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>webpy服务器（Linux+Web+HTML） | Fish&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言： 刚开始在慕课网上面看到了一个webpy的视频，正好自己有个服务器，想搭个网站玩玩，然后webpy比较简单，所以拿这个动手了，以后可能去用别的库去做网页。 网页也是看了一下午的HTML的标签什么的，CSS还没学，随手写了个简单的，带个 POST 请求。 Web程序： URL解析： 首先在程序开头放上这样一段代码：1234urls = (&apos;/&apos;,&apos;index&apos;,        &apos;/(\d+)&apos;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpy服务器（Linux+Web+HTML）">
+<meta property="og:url" content="https://li-fish.github.io/2017/02/17/cjsyojuw50073lkc2x9c9c9lc/index.html">
+<meta property="og:site_name" content="Fish&#39;s Blog">
+<meta property="og:description" content="前言： 刚开始在慕课网上面看到了一个webpy的视频，正好自己有个服务器，想搭个网站玩玩，然后webpy比较简单，所以拿这个动手了，以后可能去用别的库去做网页。 网页也是看了一下午的HTML的标签什么的，CSS还没学，随手写了个简单的，带个 POST 请求。 Web程序： URL解析： 首先在程序开头放上这样一段代码：1234urls = (&apos;/&apos;,&apos;index&apos;,        &apos;/(\d+)&apos;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-29T08:52:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="webpy服务器（Linux+Web+HTML）">
+<meta name="twitter:description" content="前言： 刚开始在慕课网上面看到了一个webpy的视频，正好自己有个服务器，想搭个网站玩玩，然后webpy比较简单，所以拿这个动手了，以后可能去用别的库去做网页。 网页也是看了一下午的HTML的标签什么的，CSS还没学，随手写了个简单的，带个 POST 请求。 Web程序： URL解析： 首先在程序开头放上这样一段代码：1234urls = (&apos;/&apos;,&apos;index&apos;,        &apos;/(\d+)&apos;">
+  
+    <link rel="alternate" href="/atom.xml" title="Fish&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Fish&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://li-fish.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-webpy服务器（Linux-Web-HTML）" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/17/cjsyojuw50073lkc2x9c9c9lc/" class="article-date">
+  <time datetime="2017-02-17T03:38:51.000Z" itemprop="datePublished">2017-02-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/网页设计/">网页设计</a>►<a class="article-category-link" href="/categories/网页设计/Web服务器/">Web服务器</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      webpy服务器（Linux+Web+HTML）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h1><hr>
+<p>刚开始在慕课网上面看到了一个webpy的视频，正好自己有个服务器，想搭个网站玩玩，然后webpy比较简单，所以拿这个动手了，以后可能去用别的库去做网页。</p>
+<p>网页也是看了一下午的HTML的标签什么的，CSS还没学，随手写了个简单的，带个 POST 请求。</p>
+<h1 id="Web程序："><a href="#Web程序：" class="headerlink" title="Web程序："></a>Web程序：</h1><hr>
+<h2 id="URL解析："><a href="#URL解析：" class="headerlink" title="URL解析："></a>URL解析：</h2><hr>
+<p>首先在程序开头放上这样一段代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">urls = (<span class="string">'/'</span>,<span class="string">'index'</span>,</span><br><span class="line">        <span class="string">'/(\d+)'</span>, <span class="string">'read'</span>,</span><br><span class="line">        <span class="string">'/(.*)'</span>, <span class="string">'other'</span>)</span><br><span class="line">app = web.application(urls, globals())</span><br></pre></td></tr></table></figure></p>
+<p>这样用来匹配访问url，要去执行那个类。</p>
+<p>匹配方式，分<strong>精确匹配</strong>，<strong>模糊匹配</strong>两种，模糊匹配可以实现带组匹配，即上面加的那一个括号，这样会把括号中匹配的数据以 <strong>name</strong> 变量传递给类的方法。</p>
+<h2 id="实现响应："><a href="#实现响应：" class="headerlink" title="实现响应："></a>实现响应：</h2><hr>
+<p>每个url匹配后对应一个类，在类里面实现网页中请求的方法就好了，比如 <strong>GET</strong>，<strong>POST</strong> 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">index</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.reader = read()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GET</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">'html/index.html'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            html = f.read()</span><br><span class="line">        <span class="keyword">return</span> html</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">POST</span><span class="params">(self)</span>:</span></span><br><span class="line">        data = web.data()</span><br><span class="line">        data = urllib.unquote_plus(data)</span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">'temp '</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            f.write(data)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">read</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GET</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> name</span><br></pre></td></tr></table></figure>
+<h2 id="启动Web程序："><a href="#启动Web程序：" class="headerlink" title="启动Web程序："></a>启动Web程序：</h2><hr>
+<p>因为是在 Linux 服务器上运行的，直接输入一下代码：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup python test.py 45.76.206.109:80 &amp;</span><br></pre></td></tr></table></figure></p>
+<p>记得 ip 后面带上端口号。</p>
+<h1 id="HTML网页："><a href="#HTML网页：" class="headerlink" title="HTML网页："></a>HTML网页：</h1><hr>
+<h2 id="from标签："><a href="#from标签：" class="headerlink" title="from标签："></a>from标签：</h2><hr>
+<p>这里的 action 大概是指用 method 里面的方法，访问了<strong> [主域名] + [action]</strong>。<br>例如下面的，相当于 <strong>POST</strong> 了 <strong>acmfish.top/</strong>，然后根据 URL 匹配，调用了 <strong>index</strong> 类的 <strong>POST</strong> 方法。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">action</span>=<span class="string">"/"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">align</span>=<span class="string">"center"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">label</span>&gt;</span>PID:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"PID"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"Submit"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="全部代码："><a href="#全部代码：" class="headerlink" title="全部代码："></a>全部代码：</h1><hr>
+<h2 id="Web程序：-1"><a href="#Web程序：-1" class="headerlink" title="Web程序："></a>Web程序：</h2><hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> web</span><br><span class="line"></span><br><span class="line">urls = (<span class="string">'/'</span>,<span class="string">'index'</span>,</span><br><span class="line">        <span class="string">'/(\d+)'</span>, <span class="string">'read'</span>,</span><br><span class="line">        <span class="string">'/(.*)'</span>, <span class="string">'other'</span>)</span><br><span class="line">app = web.application(urls, globals())</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">index</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.reader = read()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GET</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">with</span> open(<span class="string">'html/index.html'</span>, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">            html = f.read()</span><br><span class="line">        <span class="keyword">return</span> html</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">POST</span><span class="params">(self)</span>:</span></span><br><span class="line">        data = web.data()</span><br><span class="line">        <span class="keyword">return</span> self.reader.GET(data[<span class="number">4</span>:])</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">read</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.head = <span class="string">'''&lt;html&gt;</span></span><br><span class="line"><span class="string">&lt;head&gt;</span></span><br><span class="line"><span class="string">        &lt;meta charset="utf-8"/&gt;</span></span><br><span class="line"><span class="string">        &lt;title&gt;Code&lt;/title&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;body&gt;</span></span><br><span class="line"><span class="string">&lt;pre&gt;'''</span></span><br><span class="line">        self.tail = <span class="string">'''&lt;/pre&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;'''</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GET</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        path = <span class="string">'code/'</span>+name</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">with</span> open(path, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">                text = f.read()</span><br><span class="line">                <span class="keyword">return</span> text</span><br><span class="line">        <span class="keyword">except</span> IOError:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">'File not find'</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">other</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">GET</span><span class="params">(self, name)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Not find'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    app.run()</span><br></pre></td></tr></table></figure>
+<h2 id="HTML："><a href="#HTML：" class="headerlink" title="HTML："></a>HTML：</h2><hr>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span><span class="tag">&lt;<span class="name">head</span>&gt;</span><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=UTF-8"</span>&gt;</span></span><br><span class="line">	</span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Get Code<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">		a&#123;</span></span><br><span class="line"><span class="undefined">		color:#40668c;</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">		label&#123;</span></span><br><span class="line"><span class="undefined">		color:#000000;</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">		input&#123;</span></span><br><span class="line"><span class="undefined">		color:#000000;</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">	</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">align</span>=<span class="string">"center"</span>&gt;</span>Get Code<span class="tag">&lt;/<span class="name">h1</span>&gt;</span> <span class="tag">&lt;<span class="name">hr</span> <span class="attr">color</span>=<span class="string">"#000000"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span> <span class="attr">align</span>=<span class="string">"center"</span>&gt;</span>请直接访问<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/1000"</span>&gt;</span>45.76.206.109/1000<span class="tag">&lt;/<span class="name">a</span>&gt;</span>以获取PID为1000题目代码。<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span> <span class="attr">align</span>=<span class="string">"center"</span>&gt;</span>或<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h2</span> <span class="attr">align</span>=<span class="string">"center"</span>&gt;</span>快捷搜索<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">"post"</span> <span class="attr">action</span>=<span class="string">"/"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">align</span>=<span class="string">"center"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">label</span>&gt;</span>PID:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"PID"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"Submit"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2017/02/17/cjsyojuw50073lkc2x9c9c9lc/" data-id="cjsyojuw50073lkc2x9c9c9lc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/02/18/cjsyojuus0060lkc2iyobirt7/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          UVA 10603 - Fill（dijkstra + 状态图）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/02/16/cjsyojut7004wlkc2thk5wlqn/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SDUT 2622 - 最短路径（SPFA+二维）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/">DP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/区间DP/">区间DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/数位DP/">数位DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/斜率优化/">斜率优化</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/树型DP/">树型DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/状压DP/">状压DP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/二分/">二分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/二进制/">二进制</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/命题/">命题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/">图论</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/2-SAT/">2-SAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/匹配/">匹配</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/差分约束/">差分约束</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/最短路/">最短路</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/网络流/">网络流</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/连通性/">连通性</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/">字符串</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/AC自动机/">AC自动机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/后缀数组/">后缀数组</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/回文树/">回文树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/字符串Hash/">字符串Hash</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/搜索/">搜索</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/搜索/BFS/">BFS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/">数学</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/数论/">数论</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/矩阵快速幂/">矩阵快速幂</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/线性基/">线性基</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/高斯消元/">高斯消元</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/">数据结构</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/K-D树/">K-D树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/LCT/">LCT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/ST表/">ST表</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/Splay/">Splay</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/主席树/">主席树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/并查集/">并查集</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/栈/">栈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/树/">树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/树链剖分/">树链剖分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/线段树/">线段树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/虚树/">虚树</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/模拟/">模拟</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/知识小结/">知识小结</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/计算几何/">计算几何</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/贪心/">贪心</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/CS课程/">CS课程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/历程/">历程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/命题/">命题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/想法/">想法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂物/">杂物</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/游戏/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/爬虫-数据处理/">爬虫&数据处理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/Java/">Java</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网页设计/">网页设计</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/网页设计/Web服务器/">Web服务器</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/音乐/">音乐</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/音乐/乐理/">乐理</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/07/cjsyojuya008mlkc25p7bhv3z/">腾讯 IEG 后台开发面试</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/26/cjsyojuwe007blkc28j84ag52/">吉比特实习面试</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/15/cjsyojuxu0089lkc2um2ehdcz/">概率论笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/16/cjsyojuwb0078lkc22v23vzy5/">二维ST表</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/16/cjsyojutc004zlkc2kjvk6d3r/">SDUTACM十周年题解（Fish出题部分）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Fish<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+				<!-- MathJax -->
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+				showProcessingMessages: false,
+				tex2jax: {
+					inlineMath: [["$", "$"], ["\\\\(", "\\\\)"]],
+					processEscapes:true
+				},
+				menuSettings: {
+					zoom: "Hover"
+    			}
+			});
+		</script>
+		<script src="//cdn.bootcss.com/mathjax/2.6.0/MathJax.js?config=TeX-AMS_HTML"></script>
+				
+  </div>
+</body>
+</html>

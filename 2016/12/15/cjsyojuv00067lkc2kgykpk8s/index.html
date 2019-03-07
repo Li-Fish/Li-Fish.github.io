@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>UVA10129-Play on Words（欧拉道路） | Fish&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目链接：UVA10129-Play on Words  题目大意：给出一些单词，如果一个单词的首部字母和另一个单词的尾部字母相同，则可以首尾连接，每个单词只能使用一次，判断这些字母是否可以全部连接成一个串。  解题过程： 刚开始没弄清有向图和无向图欧拉路的定义，以为只判断边就可以了，于是简单写了一个只判读边的。 显然是错误的，自己试了几组数据就不对。我这样想可能是被这个题带偏了节奏（误  然后仔">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UVA10129-Play on Words（欧拉道路）">
+<meta property="og:url" content="https://li-fish.github.io/2016/12/15/cjsyojuv00067lkc2kgykpk8s/index.html">
+<meta property="og:site_name" content="Fish&#39;s Blog">
+<meta property="og:description" content="题目链接：UVA10129-Play on Words  题目大意：给出一些单词，如果一个单词的首部字母和另一个单词的尾部字母相同，则可以首尾连接，每个单词只能使用一次，判断这些字母是否可以全部连接成一个串。  解题过程： 刚开始没弄清有向图和无向图欧拉路的定义，以为只判断边就可以了，于是简单写了一个只判读边的。 显然是错误的，自己试了几组数据就不对。我这样想可能是被这个题带偏了节奏（误  然后仔">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.blog.csdn.net/20161215170447246?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQUNNX0Zpc2g=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20161215170542887?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQUNNX0Zpc2g=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20161215170612992?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQUNNX0Zpc2g=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2017-12-29T08:52:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UVA10129-Play on Words（欧拉道路）">
+<meta name="twitter:description" content="题目链接：UVA10129-Play on Words  题目大意：给出一些单词，如果一个单词的首部字母和另一个单词的尾部字母相同，则可以首尾连接，每个单词只能使用一次，判断这些字母是否可以全部连接成一个串。  解题过程： 刚开始没弄清有向图和无向图欧拉路的定义，以为只判断边就可以了，于是简单写了一个只判读边的。 显然是错误的，自己试了几组数据就不对。我这样想可能是被这个题带偏了节奏（误  然后仔">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20161215170447246?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQUNNX0Zpc2g=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+  
+    <link rel="alternate" href="/atom.xml" title="Fish&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Fish&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://li-fish.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-UVA10129-Play-on-Words（欧拉道路）" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/15/cjsyojuv00067lkc2kgykpk8s/" class="article-date">
+  <time datetime="2016-12-15T08:32:06.000Z" itemprop="datePublished">2016-12-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/图论/">图论</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      UVA10129-Play on Words（欧拉道路）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="题目链接："><a href="#题目链接：" class="headerlink" title="题目链接："></a>题目链接：</h1><p><a href="https://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;page=show_problem&amp;problem=1070" target="_blank" rel="noopener">UVA10129-Play on Words</a></p>
+<hr>
+<h1 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h1><p>给出一些单词，如果一个单词的首部字母和另一个单词的尾部字母相同，则可以首尾连接，每个单词只能使用一次，判断这些字母是否可以全部连接成一个串。</p>
+<hr>
+<h1 id="解题过程："><a href="#解题过程：" class="headerlink" title="解题过程："></a>解题过程：</h1><ul>
+<li>刚开始没弄清有向图和无向图欧拉路的定义，以为只判断边就可以了，于是简单写了一个只判读边的。</li>
+<li><p>显然是错误的，自己试了几组数据就不对。<br><a href="http://acm.sdut.edu.cn/onlinejudge2/index.php/Home/Index/problemdetail/pid/3683.html" target="_blank" rel="noopener">我这样想可能是被这个题带偏了节奏（误</a></p>
+</li>
+<li><p>然后仔细看了下书上的定义，还要保证图必须是连同的才可以，于是写了下，一发AC。</p>
+</li>
+<li></li>
+</ul>
+<hr>
+<h1 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h1><ul>
+<li><strong>首先明确欧拉路的充要条件：</strong></li>
+<li>对于无向图，最多只有两个点的度为1，则一定存在欧拉回路。</li>
+<li>对于有向图，最多只能有两个点的入度不等于出度，而且一个是入度恰好比出度大1，另一个是出度比入度大1。</li>
+<li>以上两个图都要保证<strong>底图</strong>（忽略边的方向后得到的图）是连通的。</li>
+<li>如果一个图不存在<strong>奇点</strong>（度数为奇数的点）则构成欧拉回路，否则为欧拉路。</li>
+</ul>
+<hr>
+<ul>
+<li>题目是有向图，把每个字母当做点，用两个数组统计每个点入度和出度，并判断。</li>
+<li>用dfs的方法把图遍历一遍，看是否每个点都到达过，是的话则是连通的图。</li>
+<li>两个判断条件与运算即是结果。</li>
+<li></li>
+</ul>
+<hr>
+<h1 id="AC代码："><a href="#AC代码：" class="headerlink" title="AC代码："></a>AC代码：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> head[<span class="number">26</span>], tail[<span class="number">26</span>], data[<span class="number">26</span>][<span class="number">26</span>], mark[<span class="number">26</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    mark[k] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (data[k][i])</span><br><span class="line">        &#123;</span><br><span class="line">            data[k][i] = <span class="number">0</span>;</span><br><span class="line">            data[i][k] = <span class="number">0</span>;</span><br><span class="line">            dfs(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">judge</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (mark[i] != <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            k = i;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(k);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">        <span class="keyword">if</span> (mark[i])</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; T;</span><br><span class="line">    <span class="keyword">while</span> (T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(head, <span class="number">0</span>, <span class="keyword">sizeof</span>(head));</span><br><span class="line">        <span class="built_in">memset</span>(tail, <span class="number">0</span>, <span class="keyword">sizeof</span>(tail));</span><br><span class="line">        <span class="built_in">memset</span>(data, <span class="number">0</span>, <span class="keyword">sizeof</span>(data));</span><br><span class="line">        <span class="built_in">memset</span>(mark, <span class="number">0</span>, <span class="keyword">sizeof</span>(mark));</span><br><span class="line">        <span class="keyword">int</span> n, flag = <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">        <span class="built_in">string</span> str;</span><br><span class="line">        <span class="keyword">while</span> (n--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; str;</span><br><span class="line">            head[str[<span class="number">0</span>]-<span class="string">'a'</span>]++;</span><br><span class="line">            tail[str[str.size()<span class="number">-1</span>]-<span class="string">'a'</span>]++;</span><br><span class="line"></span><br><span class="line">            data[str[<span class="number">0</span>]-<span class="string">'a'</span>][str[str.size()<span class="number">-1</span>]-<span class="string">'a'</span>] = <span class="number">1</span>;</span><br><span class="line">            data[str[str.size()<span class="number">-1</span>]-<span class="string">'a'</span>][str[<span class="number">0</span>]-<span class="string">'a'</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            mark[str[<span class="number">0</span>]-<span class="string">'a'</span>] = <span class="number">1</span>;</span><br><span class="line">            mark[str[str.size()<span class="number">-1</span>]-<span class="string">'a'</span>] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">0</span>, b = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (head[i]-tail[i] == <span class="number">1</span>)</span><br><span class="line">                a++;</span><br><span class="line">            <span class="keyword">if</span> (tail[i]-head[i] == <span class="number">1</span>)</span><br><span class="line">                b++;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">abs</span>(head[i]-tail[i]) &gt; <span class="number">1</span>)</span><br><span class="line">                flag = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag &amp;&amp; a == b &amp;&amp; a &lt;= <span class="number">1</span> &amp;&amp; judge())</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Ordering is possible."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"The door cannot be opened."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="扩展应用："><a href="#扩展应用：" class="headerlink" title="扩展应用："></a>扩展应用：</h1><p>按书上的说法欧拉回路的来源好像就是为了解决一笔画问题，于是写了一个有意思的程序，给定一个含有欧拉路的图，求如何打印欧拉路。</p>
+<hr>
+<h1 id="功能用法："><a href="#功能用法：" class="headerlink" title="功能用法："></a>功能用法：</h1><p>首先打开一个游戏<br><img src="http://img.blog.csdn.net/20161215170447246?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQUNNX0Zpc2g=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>然后分析出有几条边和点。<br><img src="http://img.blog.csdn.net/20161215170542887?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQUNNX0Zpc2g=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>输入数据，即可得出结果。<br><img src="http://img.blog.csdn.net/20161215170612992?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQUNNX0Zpc2g=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<hr>
+<h1 id="源代码："><a href="#源代码：" class="headerlink" title="源代码："></a>源代码：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;stack&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">const int MAX = 1123;</span><br><span class="line"></span><br><span class="line">int m, n;</span><br><span class="line">int data[MAX][MAX];</span><br><span class="line">stack&lt;int&gt; ans;</span><br><span class="line"></span><br><span class="line">void dfs(int pos)</span><br><span class="line">&#123;</span><br><span class="line">    for (int i = 1; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if (data[pos][i])</span><br><span class="line">        &#123;</span><br><span class="line">            data[pos][i] = 0;</span><br><span class="line">            data[i][pos] = 0;</span><br><span class="line">            dfs(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ans.push(pos);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void put()</span><br><span class="line">&#123;</span><br><span class="line">    while (!ans.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; &quot;-&gt;&quot; &lt;&lt; ans.top();</span><br><span class="line">        ans.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    while (cin &gt;&gt; n &gt;&gt; m)</span><br><span class="line">    &#123;</span><br><span class="line">        memset(data, 0, sizeof(data));</span><br><span class="line">        int a, b;</span><br><span class="line">        for (int i = 0; i &lt; m; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">            data[a][b] = 1;</span><br><span class="line">            data[b][a] = 1;</span><br><span class="line">        &#125;</span><br><span class="line">        dfs(1);</span><br><span class="line">        put();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2016/12/15/cjsyojuv00067lkc2kgykpk8s/" data-id="cjsyojuv00067lkc2kgykpk8s" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/12/26/cjsyojut5004ulkc2upoxkzo3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SDUT Problem_5 二哥的狗（水题）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/12/05/cjsyojv3m00fjlkc2kkh3ul7u/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2048（游戏）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/">DP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/区间DP/">区间DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/数位DP/">数位DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/斜率优化/">斜率优化</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/树型DP/">树型DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/状压DP/">状压DP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/二分/">二分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/二进制/">二进制</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/命题/">命题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/">图论</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/2-SAT/">2-SAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/匹配/">匹配</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/差分约束/">差分约束</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/最短路/">最短路</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/网络流/">网络流</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/连通性/">连通性</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/">字符串</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/AC自动机/">AC自动机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/后缀数组/">后缀数组</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/回文树/">回文树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/字符串Hash/">字符串Hash</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/搜索/">搜索</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/搜索/BFS/">BFS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/">数学</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/数论/">数论</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/矩阵快速幂/">矩阵快速幂</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/线性基/">线性基</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/高斯消元/">高斯消元</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/">数据结构</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/K-D树/">K-D树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/LCT/">LCT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/ST表/">ST表</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/Splay/">Splay</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/主席树/">主席树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/并查集/">并查集</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/栈/">栈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/树/">树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/树链剖分/">树链剖分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/线段树/">线段树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/虚树/">虚树</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/模拟/">模拟</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/知识小结/">知识小结</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/计算几何/">计算几何</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/贪心/">贪心</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/CS课程/">CS课程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/历程/">历程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/命题/">命题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/想法/">想法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂物/">杂物</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/游戏/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/爬虫-数据处理/">爬虫&数据处理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/Java/">Java</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网页设计/">网页设计</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/网页设计/Web服务器/">Web服务器</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/音乐/">音乐</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/音乐/乐理/">乐理</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/07/cjsyojuya008mlkc25p7bhv3z/">腾讯 IEG 后台开发面试</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/26/cjsyojuwe007blkc28j84ag52/">吉比特实习面试</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/15/cjsyojuxu0089lkc2um2ehdcz/">概率论笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/16/cjsyojuwb0078lkc22v23vzy5/">二维ST表</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/16/cjsyojutc004zlkc2kjvk6d3r/">SDUTACM十周年题解（Fish出题部分）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Fish<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+				<!-- MathJax -->
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+				showProcessingMessages: false,
+				tex2jax: {
+					inlineMath: [["$", "$"], ["\\\\(", "\\\\)"]],
+					processEscapes:true
+				},
+				menuSettings: {
+					zoom: "Hover"
+    			}
+			});
+		</script>
+		<script src="//cdn.bootcss.com/mathjax/2.6.0/MathJax.js?config=TeX-AMS_HTML"></script>
+				
+  </div>
+</body>
+</html>

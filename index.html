@@ -62,9 +62,117 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-腾讯-IEG-后台开发面试" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/07/cjsyojuya008mlkc25p7bhv3z/" class="article-date">
+  <time datetime="2019-03-07T13:04:22.000Z" itemprop="datePublished">2019-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/历程/">历程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/07/cjsyojuya008mlkc25p7bhv3z/">腾讯 IEG 后台开发面试</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一面"><a href="#一面" class="headerlink" title="一面"></a>一面</h1><p>其实前一天就接到了电话，问了一下 ACM 获奖情况，对游戏开发的了解，最后问了一个 interesting 的问题，「王者荣耀怎么实现同步」，因为之前了解过同步机制并且实现过一个状态同步，于是稍微讲了一下，然后当晚在外面吃饭于是说明天下午面试了。</p>
+<p>面试官刚开始就直接说了，我这几年几乎都在打 ACM-ICPC 比赛，于是先面数据结构和算法了。</p>
+<ul>
+<li><p>STL 容器使用过吗，deque 了解吗，他支持在首位插入删除和随机访问，你考虑过怎么实现吗？</p>
+<p>我在竞赛中实现过，开一个特别大的数组，并且使用指针指向数组的中央，一个首指针一个尾指针，并且通过首指针加一个偏移量实现随机访问。</p>
+</li>
+<li><p>当储存空间不够时怎么办？</p>
+<p>使用类似于 vector 的方式进行扩容。</p>
+</li>
+<li><p>如果按你这种方式，如果一直插入到首部，后面的好多空间没有用到，有优化方式吗？</p>
+<p>写一个循环队列，例如当首指针达到边界时，让他移到尾部，这样就可以利用全部的存储空间。</p>
+</li>
+<li><p>考虑游戏服务器的高并发场景，假设这个容器我 push 了许多元素之后又 pop 了许多元素，怎么回收空闲的内存？</p>
+<p>因为直接申请一整块内存的话，不容易直接回收部分内存，可以考虑牺牲一部分效率，使用一种块状链表的结构去实现 deque。</p>
+</li>
+<li><p>那你考虑过可以不使用链表这种结构去实现这个功能吗？</p>
+<p>emmm 接下来的问题没有答上来。</p>
+</li>
+<li><p>考虑有一个定时器，他到达某个时刻的时候会执行某个 callback，假设我现在需要一个容器去储存这些定时器，并且一直要查询有没有定时器需要执行，你会使用什么样的数据结构？</p>
+<p>可以用一个小根堆，并且把时间当作 key 来排序，那么堆顶的元素就是时刻最早的，每次可以 $O(1)$ 的查询堆顶。或者使用二叉平衡树也可以实现这个功能，查询是 $O(\log n)$的。</p>
+</li>
+<li><p>讲一下堆和二叉平衡树的删除操作吧，假设我有一个指向堆 or 平衡二叉树的指针，怎么高效的删除这个节点？</p>
+<p>emmm，因为比赛很少遇到这种情况，我只好和面试官讲了下 Splay 这种数据结构…感觉回答的不是很好。</p>
+</li>
+<li><p>sort 了解过吗，你们比赛中怎么使用 sort，关于他的 &lt; 语义或者比较函数有什么要求吗？</p>
+<p>基本上就用 std::sort 了，如果要求稳定排序的话把下标当作第二关键字用就好咯。关于比较函数的要求，数学上是要求定义一个严格的弱序关系，我当时说的是两个条件，可传递，并且非对称，a &lt; b and b &lt; c then a &lt; c, a &lt; b 和 b &lt; a  有且只有一个条件成立。</p>
+</li>
+<li><p>map 使用过吗，unordered_map 和 map 有什么区别？</p>
+<p>map 使用红黑树来实现的，我只了解过各种接口的复杂度，不清楚内部实现。unorder_map 使用哈希表来实现。</p>
+</li>
+<li><p>你可以自己实现一个 unordered_map 吗，讲一下怎么实现？</p>
+<p>最简单的一种实现就是开一个桶，然后用桶的大小对 hash 后的 value 取模，然后放入桶里面。</p>
+</li>
+<li><p>如果有 hash 碰撞怎么解决？</p>
+<p>开一张链表。</p>
+</li>
+<li><p>如果 hash 碰撞太高了怎么优化？</p>
+<p>可以从两方面入手，一个是 hash 函数本身的优化要做好。另外一点面试官提示了我一下，其实就是鸽巢定理，10 个抽屉放 11 个球，那么至少有一个抽屉有两个及以上的球。当我放入 100 个元素到 大小为 10 的 hash 表中，那么是很容易 hash 碰撞的。这时候我考虑了用之前的方法，对桶进行扩容，这里继续沿用 vector 的方式就 ok 了。</p>
+</li>
+<li><p>你了解过多线程吗，怎么实现一个线程安全的 hash 表？</p>
+<p>我了解过互斥锁，可以考虑给每个元素加一个互斥锁。</p>
+</li>
+<li><p>那我插入时，需要修改一个链表的结构，发生了冲突怎么办？</p>
+<p>给每个链表加一个互斥锁…</p>
+</li>
+<li><p>那我插入的时候，hash 表需要扩容怎么办？</p>
+<p>增加一个变量，用来标志当前是否正在扩容，如果扩容就让所有的插入查询操作阻塞。</p>
+</li>
+<li><p>这样扩容会阻塞掉所有的访问，有更好的做法吗？</p>
+<p>可以将扩容的锁放到每个链表上，然后这样扩容时只阻塞掉正在移动的元素。</p>
+</li>
+<li><p>好的接下来做一个编程题吧，逆转一个字符串？</p>
+<p>水题…</p>
+</li>
+<li><p>逆转单词？ hello world -&gt; world hello</p>
+<p>水题，面试官要看如何分割字符串，于是简单的写了一下，被吐槽代码不规范了 orz。</p>
+</li>
+<li><p>加权随机数？给定一个权重表 [2, 1, 3, 5, 4]，编写一个输入函数 rand_select(weight[])，返回一个 1 - len(weight) 的整数，这个数是随机的，并且保证出现 0, 1, 2 ,3 ,4 , 5 的概率之比为 2, 1, 3, 5, 4。</p>
+<p>写了两个做法，思路都是把权重当作一个区间，然后根据权重区间长度不同，random 从总区间长度中选一个数，落到那个区间中，就把那个区间的编号当作随机的答案。</p>
+</li>
+<li><p>你有什么问题问我吗？</p>
+<ul>
+<li>假设我能实习的话，我能学到什么内容，在后台开发岗位的话？</li>
+<li>我的表现怎么样，有什么不足的地方？</li>
+<li>有什么开源项目推荐吗，或者好数推荐？</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2019/03/07/cjsyojuya008mlkc25p7bhv3z/" data-id="cjsyojuya008mlkc25p7bhv3z" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-吉比特实习面试经历" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/02/26/cjsli5qs500773oc2mdgw2p6a/" class="article-date">
+    <a href="/2019/02/26/cjsyojuwe007blkc28j84ag52/" class="article-date">
   <time datetime="2019-02-26T07:29:53.000Z" itemprop="datePublished">2019-02-26</time>
 </a>
     
@@ -80,7 +188,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/26/cjsli5qs500773oc2mdgw2p6a/">吉比特实习面试</a>
+      <a class="article-title" href="/2019/02/26/cjsyojuwe007blkc28j84ag52/">吉比特实习面试</a>
     </h1>
   
 
@@ -154,7 +262,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2019/02/26/cjsli5qs500773oc2mdgw2p6a/" data-id="cjsli5qs500773oc2mdgw2p6a" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2019/02/26/cjsyojuwe007blkc28j84ag52/" data-id="cjsyojuwe007blkc28j84ag52" class="article-share-link">Share</a>
       
       
     </footer>
@@ -166,7 +274,7 @@
   
     <article id="post-概率论笔记" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/01/15/cjsli5quk008d3oc2kcqw2aez/" class="article-date">
+    <a href="/2019/01/15/cjsyojuxu0089lkc2um2ehdcz/" class="article-date">
   <time datetime="2019-01-15T02:29:48.000Z" itemprop="datePublished">2019-01-15</time>
 </a>
     
@@ -182,7 +290,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/15/cjsli5quk008d3oc2kcqw2aez/">概率论笔记</a>
+      <a class="article-title" href="/2019/01/15/cjsyojuxu0089lkc2um2ehdcz/">概率论笔记</a>
     </h1>
   
 
@@ -213,7 +321,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2019/01/15/cjsli5quk008d3oc2kcqw2aez/" data-id="cjsli5quk008d3oc2kcqw2aez" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2019/01/15/cjsyojuxu0089lkc2um2ehdcz/" data-id="cjsyojuxu0089lkc2um2ehdcz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -225,7 +333,7 @@
   
     <article id="post-二维ST表" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/11/16/cjsli5qs800793oc2c5bz1tsh/" class="article-date">
+    <a href="/2018/11/16/cjsyojuwb0078lkc22v23vzy5/" class="article-date">
   <time datetime="2018-11-15T20:04:11.000Z" itemprop="datePublished">2018-11-16</time>
 </a>
     
@@ -241,7 +349,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/16/cjsli5qs800793oc2c5bz1tsh/">二维ST表</a>
+      <a class="article-title" href="/2018/11/16/cjsyojuwb0078lkc22v23vzy5/">二维ST表</a>
     </h1>
   
 
@@ -258,7 +366,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/11/16/cjsli5qs800793oc2c5bz1tsh/" data-id="cjsli5qs800793oc2c5bz1tsh" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/11/16/cjsyojuwb0078lkc22v23vzy5/" data-id="cjsyojuwb0078lkc22v23vzy5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -270,7 +378,7 @@
   
     <article id="post-SDUTACM十周年题解（Fish出题部分）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/10/16/cjsli5qo000553oc2advqly91/" class="article-date">
+    <a href="/2018/10/16/cjsyojutc004zlkc2kjvk6d3r/" class="article-date">
   <time datetime="2018-10-15T19:48:54.000Z" itemprop="datePublished">2018-10-16</time>
 </a>
     
@@ -286,7 +394,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/16/cjsli5qo000553oc2advqly91/">SDUTACM十周年题解（Fish出题部分）</a>
+      <a class="article-title" href="/2018/10/16/cjsyojutc004zlkc2kjvk6d3r/">SDUTACM十周年题解（Fish出题部分）</a>
     </h1>
   
 
@@ -319,7 +427,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/10/16/cjsli5qo000553oc2advqly91/" data-id="cjsli5qo000553oc2advqly91" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/10/16/cjsyojutc004zlkc2kjvk6d3r/" data-id="cjsyojutc004zlkc2kjvk6d3r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -331,7 +439,7 @@
   
     <article id="post-LCT-模板-待填坑" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/25/cjsli5qla003p3oc221qr9bgx/" class="article-date">
+    <a href="/2018/09/25/cjsyojuqu003glkc2p92s682k/" class="article-date">
   <time datetime="2018-09-25T13:02:34.000Z" itemprop="datePublished">2018-09-25</time>
 </a>
     
@@ -347,7 +455,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/25/cjsli5qla003p3oc221qr9bgx/">LCT(模板-待填坑)</a>
+      <a class="article-title" href="/2018/09/25/cjsyojuqu003glkc2p92s682k/">LCT(模板-待填坑)</a>
     </h1>
   
 
@@ -363,7 +471,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/09/25/cjsli5qla003p3oc221qr9bgx/" data-id="cjsli5qla003p3oc221qr9bgx" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/09/25/cjsyojuqu003glkc2p92s682k/" data-id="cjsyojuqu003glkc2p92s682k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -375,7 +483,7 @@
   
     <article id="post-回文树模板" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/11/cjsli5qsz007o3oc2dyb2xzjn/" class="article-date">
+    <a href="/2018/09/11/cjsyojuwz007plkc2vxsm5efs/" class="article-date">
   <time datetime="2018-09-11T13:29:48.000Z" itemprop="datePublished">2018-09-11</time>
 </a>
     
@@ -391,7 +499,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/11/cjsli5qsz007o3oc2dyb2xzjn/">回文树模板</a>
+      <a class="article-title" href="/2018/09/11/cjsyojuwz007plkc2vxsm5efs/">回文树模板</a>
     </h1>
   
 
@@ -412,7 +520,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/09/11/cjsli5qsz007o3oc2dyb2xzjn/" data-id="cjsli5qsz007o3oc2dyb2xzjn" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/09/11/cjsyojuwz007plkc2vxsm5efs/" data-id="cjsyojuwz007plkc2vxsm5efs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -424,7 +532,7 @@
   
     <article id="post-2018年暑假集训" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/04/cjsli5r2000f93oc2nbbgrur8/" class="article-date">
+    <a href="/2018/09/04/cjsyojv3p00fklkc2ex4y04cw/" class="article-date">
   <time datetime="2018-09-04T10:48:35.000Z" itemprop="datePublished">2018-09-04</time>
 </a>
     
@@ -440,7 +548,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/04/cjsli5r2000f93oc2nbbgrur8/">2018年暑假集训（应付学校社会实践）</a>
+      <a class="article-title" href="/2018/09/04/cjsyojv3p00fklkc2ex4y04cw/">2018年暑假集训（应付学校社会实践）</a>
     </h1>
   
 
@@ -490,7 +598,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/09/04/cjsli5r2000f93oc2nbbgrur8/" data-id="cjsli5r2000f93oc2nbbgrur8" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/09/04/cjsyojv3p00fklkc2ex4y04cw/" data-id="cjsyojv3p00fklkc2ex4y04cw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -502,7 +610,7 @@
   
     <article id="post-斜率DP小结" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/04/cjsli5qu200863oc2ccxspox8/" class="article-date">
+    <a href="/2018/09/04/cjsyojuxl0082lkc27rdv7ied/" class="article-date">
   <time datetime="2018-09-03T21:11:05.000Z" itemprop="datePublished">2018-09-04</time>
 </a>
     
@@ -518,7 +626,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/04/cjsli5qu200863oc2ccxspox8/">斜率DP小结（待填坑）</a>
+      <a class="article-title" href="/2018/09/04/cjsyojuxl0082lkc27rdv7ied/">斜率DP小结（待填坑）</a>
     </h1>
   
 
@@ -530,7 +638,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/09/04/cjsli5qu200863oc2ccxspox8/" data-id="cjsli5qu200863oc2ccxspox8" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/09/04/cjsyojuxl0082lkc27rdv7ied/" data-id="cjsyojuxl0082lkc27rdv7ied" class="article-share-link">Share</a>
       
       
     </footer>
@@ -542,7 +650,7 @@
   
     <article id="post-虚树小结" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/04/cjsli5qvl008x3oc2akllnv45/" class="article-date">
+    <a href="/2018/09/04/cjsyojuyq008ylkc2o1p33p4h/" class="article-date">
   <time datetime="2018-09-03T19:37:52.000Z" itemprop="datePublished">2018-09-04</time>
 </a>
     
@@ -558,7 +666,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/04/cjsli5qvl008x3oc2akllnv45/">虚树小结</a>
+      <a class="article-title" href="/2018/09/04/cjsyojuyq008ylkc2o1p33p4h/">虚树小结</a>
     </h1>
   
 
@@ -582,62 +690,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/09/04/cjsli5qvl008x3oc2akllnv45/" data-id="cjsli5qvl008x3oc2akllnv45" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-2018邀请赛总结（陕西）" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/23/cjsli5qf100073oc28wt0a5rb/" class="article-date">
-  <time datetime="2018-05-23T12:12:51.000Z" itemprop="datePublished">2018-05-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/历程/">历程</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/23/cjsli5qf100073oc28wt0a5rb/">2018邀请赛总结（陕西）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="热身赛"><a href="#热身赛" class="headerlink" title="热身赛"></a>热身赛</h1><p>首先看的 A 题，这个题目有问题，最后讨论区更正了下题面后才 AC，弄得心态有点不好。</p>
-<p>B 题刚开始理解错了题意，当成了 2-SAT 问题，后来发现有 20 多个队伍 A 了，重新看了下觉得应该是是个简单题就随便写写 A 了，不想写并查集强行 DFS 染色 + 二分。</p>
-<p>C 刚开始没给数据范围，给出数据范围后一眼看过去就是状压 DP（听说还有其他更优秀的做法），最后统计答案的时候换了个方式，比赛结束 5 分钟前 A 了。</p>
-<p>最后看了下榜，全场做出三题的队伍只有10 个（我们是第 10 个），已经很开心了，幻想着明天正式赛也这个成绩就很 OK 了。</p>
-<h1 id="正式赛"><a href="#正式赛" class="headerlink" title="正式赛"></a>正式赛</h1><p>首先看的 E 题，很显然的一个几何的结论三分钟 A 了。</p>
-<p>然后看的 A 题，猜了个显然不对的做法，WA 一次，然后和 szq 讨论后又写了一个优化版的做法，还是 WA，最后又讨论了下，算是推出来了出题人认为的正解，不过这个题目出错了，在我们推出来正解后讨论区裁判公布了正解。算是可惜了两发罚时，不过裁判组处理也是比较得当，如果不这样的话会有好多有水平的队伍卡在 A 题。</p>
-<p>在我敲 A 题的时候 szq 就已经在看 D 题，看上去就是 nim 博弈的变种，推出来 SG 函数就基本上做出来的了，不过他没有打好表，还是我上去记忆化搜索一波后打出来表，规律非常显然，出了个小失误 WA 一发后就 AC 了。</p>
-<p>然后 lxw 告诉我了下 B 题（最后也没写出来）的题意后我就去看 K 了，这里我大概敲了一个小时，思路越敲越乱，大概浪费了一个多小时，最后 szq 说他有一个比较简单的做法，我就让开机位去让他敲了，自己去洗了把脸清醒一下…最后 szq 写完调试了半个小时多才 A 掉这个题，算是这次比赛里面最大的失误了。</p>
-<p>之前看榜上有好多人过了 G 题，并且 szq 和 lxw 已经讨论出来了这是一个简单的板子题，于是 A 完 K 题后直接去做 G 题了，敲完板子后一直 WA，最后我打印代码让他们两个看，去敲了 C 题，C 题在 szq 敲 K 题的时候我已经和 lxw 讨论的差不多了。</p>
-<p>最后实在没找到其他的错误，于是只好试试改精度，然后改完之后 G 题居然 AC 了，随后我敲完 C 题过了样例也顺利 1A 了。</p>
-<p>这时候刚好封榜，只有一个小时剩余的时间了，看榜上其他有人做出来的题只有 B 和 H 题，F 题只有 GDUT 穷游中国做出来了，感觉可能比较难，于是就去做 B 题了（后来发现这个是错误选择）。</p>
-<p>最后让 lxw 读出来了 H 题的题目，B 和 H 最后也没有思路。</p>
-<p>比赛后听他们讨论说封榜前没人过的 I 和 J 题都是数据结构的模板题，感觉自己没看有点可惜。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>排除省赛拿的金牌之后，这算是自己摸到的第二块金牌，本以为邀请赛没有那么正式，结果主办方办的规模和区域赛差不多。这次邀请赛好多强校没有来，比如清华北大复旦等，基本上他们每来一个队伍我们排名都要加一的。这个结果自己还是挺满意的，颁奖的时候读完银牌没有自己的时候感觉非常开心。另外就是终于能打得过山大一次了，去年区域赛一直都是被山大的骑士王的荣耀队碾压的，一直定为打不过的队伍…</p>
-<p>接下来的基本目标是区域赛金牌，努力打进 Final！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/05/23/cjsli5qf100073oc28wt0a5rb/" data-id="cjsli5qf100073oc28wt0a5rb" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/09/04/cjsyojuyq008ylkc2o1p33p4h/" data-id="cjsyojuyq008ylkc2o1p33p4h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -677,7 +730,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
     </div>
   </div>
 
@@ -690,23 +743,23 @@
       <ul>
         
           <li>
-            <a href="/2019/02/26/cjsli5qs500773oc2mdgw2p6a/">吉比特实习面试</a>
+            <a href="/2019/03/07/cjsyojuya008mlkc25p7bhv3z/">腾讯 IEG 后台开发面试</a>
           </li>
         
           <li>
-            <a href="/2019/01/15/cjsli5quk008d3oc2kcqw2aez/">概率论笔记</a>
+            <a href="/2019/02/26/cjsyojuwe007blkc28j84ag52/">吉比特实习面试</a>
           </li>
         
           <li>
-            <a href="/2018/11/16/cjsli5qs800793oc2c5bz1tsh/">二维ST表</a>
+            <a href="/2019/01/15/cjsyojuxu0089lkc2um2ehdcz/">概率论笔记</a>
           </li>
         
           <li>
-            <a href="/2018/10/16/cjsli5qo000553oc2advqly91/">SDUTACM十周年题解（Fish出题部分）</a>
+            <a href="/2018/11/16/cjsyojuwb0078lkc22v23vzy5/">二维ST表</a>
           </li>
         
           <li>
-            <a href="/2018/09/25/cjsli5qla003p3oc221qr9bgx/">LCT(模板-待填坑)</a>
+            <a href="/2018/10/16/cjsyojutc004zlkc2kjvk6d3r/">SDUTACM十周年题解（Fish出题部分）</a>
           </li>
         
       </ul>

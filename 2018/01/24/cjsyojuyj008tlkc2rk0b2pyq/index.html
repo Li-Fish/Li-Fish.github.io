@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>高斯消元小结 | Fish&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="介绍高斯消元是一种解线性方程组的 $O(N ^ 3)$ 的方法。其实也就是线性代数中说的将一个矩阵化为上三角矩阵的的过程，最后再求解每个未知量的值。 类比下，高斯消元的在解方程组的作用，和最短路在查分约束中的作用、网络流在网络流的图论模型中的作用差不多。都只是一个计算的工具，题目考察的核心点并不在高斯消元上而是在如何列出对应的线性方程组。 另外要说的高斯消元大致有三种写法，第一种是简单的，矩阵的值">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高斯消元小结">
+<meta property="og:url" content="https://li-fish.github.io/2018/01/24/cjsyojuyj008tlkc2rk0b2pyq/index.html">
+<meta property="og:site_name" content="Fish&#39;s Blog">
+<meta property="og:description" content="介绍高斯消元是一种解线性方程组的 $O(N ^ 3)$ 的方法。其实也就是线性代数中说的将一个矩阵化为上三角矩阵的的过程，最后再求解每个未知量的值。 类比下，高斯消元的在解方程组的作用，和最短路在查分约束中的作用、网络流在网络流的图论模型中的作用差不多。都只是一个计算的工具，题目考察的核心点并不在高斯消元上而是在如何列出对应的线性方程组。 另外要说的高斯消元大致有三种写法，第一种是简单的，矩阵的值">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-24T00:48:52.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高斯消元小结">
+<meta name="twitter:description" content="介绍高斯消元是一种解线性方程组的 $O(N ^ 3)$ 的方法。其实也就是线性代数中说的将一个矩阵化为上三角矩阵的的过程，最后再求解每个未知量的值。 类比下，高斯消元的在解方程组的作用，和最短路在查分约束中的作用、网络流在网络流的图论模型中的作用差不多。都只是一个计算的工具，题目考察的核心点并不在高斯消元上而是在如何列出对应的线性方程组。 另外要说的高斯消元大致有三种写法，第一种是简单的，矩阵的值">
+  
+    <link rel="alternate" href="/atom.xml" title="Fish&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Fish&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://li-fish.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-高斯消元小结" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/24/cjsyojuyj008tlkc2rk0b2pyq/" class="article-date">
+  <time datetime="2018-01-24T00:17:30.000Z" itemprop="datePublished">2018-01-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/数学/">数学</a>►<a class="article-category-link" href="/categories/ACM/数学/高斯消元/">高斯消元</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      高斯消元小结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>高斯消元是一种解线性方程组的 $O(N ^ 3)$ 的方法。其实也就是线性代数中说的将一个矩阵化为上三角矩阵的的过程，最后再求解每个未知量的值。</p>
+<p>类比下，高斯消元的在解方程组的作用，和最短路在查分约束中的作用、网络流在网络流的图论模型中的作用差不多。都只是一个计算的工具，题目考察的核心点并不在高斯消元上而是在如何列出对应的线性方程组。</p>
+<p>另外要说的高斯消元大致有三种写法，第一种是简单的，矩阵的值只有 0 和 1，这里高斯消元中只用异或运算就可以了，其实就是求解线性基的过程；第二种是解一些模线性方程组，答案需要整数解，这里消元的时候需要取下最小公倍数；最后一种是没有特殊要求，直接上 Double 类型的，解决概率期望的问题会用到。</p>
+<h1 id="消元过程"><a href="#消元过程" class="headerlink" title="消元过程"></a>消元过程</h1><h1 id="01矩阵"><a href="#01矩阵" class="headerlink" title="01矩阵"></a>01矩阵</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//rst 代表确定的未知量个数，也就是矩阵的秩、最大无关组</span></span><br><span class="line">    <span class="comment">//r 代表当前进行到了第几行，之前的行都化为了阶梯型</span></span><br><span class="line">    <span class="keyword">int</span> rst = <span class="number">0</span>, r = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(lib, <span class="number">0</span>, <span class="keyword">sizeof</span>(lib));</span><br><span class="line">    <span class="comment">//代表当前进行到了第几列</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="comment">//枚举这一列的所有行，将一个 i 列不为 0 的行换到第 r 行</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = r; j &lt; n; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!data[j][i]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt;= n; k++) &#123;</span><br><span class="line">                swap(data[j][k], data[r][k]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//如果当前行的第 i 列全都为 0 那么就跳过这一列</span></span><br><span class="line">        <span class="keyword">if</span> (!data[r][i]) <span class="keyword">continue</span>;</span><br><span class="line">        rst++;</span><br><span class="line">        <span class="comment">//用第 r 行去消去其他行，如果其他行第 i 列是 1 的话</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (j == r || !data[j][i]) <span class="keyword">continue</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt;= n; k++) data[j][k] ^= data[r][k];</span><br><span class="line">        &#125;</span><br><span class="line">        lib[i] = <span class="literal">true</span>, r++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="模线性方程组"><a href="#模线性方程组" class="headerlink" title="模线性方程组"></a>模线性方程组</h2><p>前面的部分都一样，只是进行消元的地方修改一下，求个最小公倍数。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (j == r || !data[j][i]) <span class="keyword">continue</span>;</span><br><span class="line">    <span class="keyword">int</span> t = lcm(data[r][i], data[j][i]);</span><br><span class="line">    <span class="keyword">int</span> t1 = t / data[r][i];</span><br><span class="line">    <span class="keyword">int</span> t2 = t / data[j][i];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt;= n; k++) &#123;</span><br><span class="line">        data[j][k] = ((data[j][k] * t2 - data[r][k] * t1) % MOD + MOD) % MOD;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="浮点数矩阵"><a href="#浮点数矩阵" class="headerlink" title="浮点数矩阵"></a>浮点数矩阵</h2><p>消元的地方直接求个浮点数的倍数就可以。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (j == r || eq(data[j][i], <span class="number">0</span>)) <span class="keyword">continue</span>;</span><br><span class="line">    <span class="keyword">double</span> temp = data[j][i] / data[r][i];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt;= n; k++) &#123;</span><br><span class="line">        data[j][k] -= data[r][k] * temp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="处理答案"><a href="#处理答案" class="headerlink" title="处理答案"></a>处理答案</h1><p>高斯消元算法执行结束后，会得到如下信息：自由未知量的个数，那些列是自由未知量，方程的一个解。</p>
+<p>01矩阵处理答案的过程是这样的，这里默认让所有自由未知量为 0 。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    <span class="comment">//如果第 n 列不为 0，其他列全为 0，说明增广矩阵的秩大于原矩阵，方程无解</span></span><br><span class="line">    <span class="keyword">if</span> (data[i][n]) &#123;</span><br><span class="line">        <span class="keyword">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (data[i][j]) flag = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!flag) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果有自由未知量直接跳过</span></span><br><span class="line">    <span class="keyword">if</span> (!l[i]) <span class="keyword">continue</span>;</span><br><span class="line">    <span class="comment">//否则这个变量的值就等于第 n 列的值，因为当前这一列除了自由未知量的列，其他列全为 0</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (data[j][i]) ans[i] = data[j][n];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> n - rst;</span><br></pre></td></tr></table></figure>
+<p>01矩阵有时候需要的一种做法是枚举所有的自由未知量，求取 1 的变量最少的解。</p>
+<p>一般是直接用二进制去枚举。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> anss = INF;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">16</span>; k++) &#123;</span><br><span class="line">    <span class="keyword">int</span> cnt1 = <span class="number">0</span>, cnt2 = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> num = (k &amp; <span class="number">1</span>) + (k &gt;&gt; <span class="number">1</span> &amp; <span class="number">1</span>) + (k &gt;&gt; <span class="number">2</span> &amp; <span class="number">1</span>) + (k &gt;&gt; <span class="number">3</span> &amp; <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">12</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> t = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">4</span>; j++) <span class="keyword">if</span> (data[i][<span class="number">12</span> + j]) t ^= ((k &gt;&gt; j) &amp; <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span> (t != data[i][n]) cnt1++;</span><br><span class="line">        <span class="keyword">if</span> (t != data[i][n + <span class="number">1</span>]) cnt2++;</span><br><span class="line">    &#125;</span><br><span class="line">    anss = min(min(cnt1, cnt2) + num, anss);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="推荐题集"><a href="#推荐题集" class="headerlink" title="推荐题集"></a>推荐题集</h1><p><a href="https://vjudge.net/contest/207993" target="_blank" rel="noopener">https://vjudge.net/contest/207993</a></p>
+<p>起始也就是 kuangbin 的题集。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2018/01/24/cjsyojuyj008tlkc2rk0b2pyq/" data-id="cjsyojuyj008tlkc2rk0b2pyq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/01/24/cjsyojux3007slkc27fby64x6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          差分约束系统小结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/01/23/cjsyojuln000nlkc24tm5z5ey/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CF895 - String Mark（组合数学）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/">DP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/区间DP/">区间DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/数位DP/">数位DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/斜率优化/">斜率优化</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/树型DP/">树型DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/状压DP/">状压DP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/二分/">二分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/二进制/">二进制</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/命题/">命题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/">图论</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/2-SAT/">2-SAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/匹配/">匹配</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/差分约束/">差分约束</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/最短路/">最短路</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/网络流/">网络流</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/连通性/">连通性</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/">字符串</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/AC自动机/">AC自动机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/后缀数组/">后缀数组</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/回文树/">回文树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/字符串Hash/">字符串Hash</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/搜索/">搜索</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/搜索/BFS/">BFS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/">数学</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/数论/">数论</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/矩阵快速幂/">矩阵快速幂</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/线性基/">线性基</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/高斯消元/">高斯消元</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/">数据结构</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/K-D树/">K-D树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/LCT/">LCT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/ST表/">ST表</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/Splay/">Splay</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/主席树/">主席树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/并查集/">并查集</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/栈/">栈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/树/">树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/树链剖分/">树链剖分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/线段树/">线段树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/虚树/">虚树</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/模拟/">模拟</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/知识小结/">知识小结</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/计算几何/">计算几何</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/贪心/">贪心</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/CS课程/">CS课程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/历程/">历程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/命题/">命题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/想法/">想法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂物/">杂物</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/游戏/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/爬虫-数据处理/">爬虫&数据处理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/Java/">Java</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网页设计/">网页设计</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/网页设计/Web服务器/">Web服务器</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/音乐/">音乐</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/音乐/乐理/">乐理</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/07/cjsyojuya008mlkc25p7bhv3z/">腾讯 IEG 后台开发面试</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/26/cjsyojuwe007blkc28j84ag52/">吉比特实习面试</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/15/cjsyojuxu0089lkc2um2ehdcz/">概率论笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/16/cjsyojuwb0078lkc22v23vzy5/">二维ST表</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/16/cjsyojutc004zlkc2kjvk6d3r/">SDUTACM十周年题解（Fish出题部分）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Fish<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+				<!-- MathJax -->
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+				showProcessingMessages: false,
+				tex2jax: {
+					inlineMath: [["$", "$"], ["\\\\(", "\\\\)"]],
+					processEscapes:true
+				},
+				menuSettings: {
+					zoom: "Hover"
+    			}
+			});
+		</script>
+		<script src="//cdn.bootcss.com/mathjax/2.6.0/MathJax.js?config=TeX-AMS_HTML"></script>
+				
+  </div>
+</body>
+</html>

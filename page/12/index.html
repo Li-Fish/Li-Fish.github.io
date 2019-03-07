@@ -62,9 +62,67 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-DAG上的动态规划" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/26/cjsyojumo0018lkc2yzd5x7th/" class="article-date">
+  <time datetime="2017-04-26T02:49:13.000Z" itemprop="datePublished">2017-04-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/DP/">DP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/26/cjsyojumo0018lkc2yzd5x7th/">DAG上的动态规划</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="不定终点的最长路："><a href="#不定终点的最长路：" class="headerlink" title="不定终点的最长路："></a>不定终点的最长路：</h1><hr>
+<h2 id="矩阵嵌套问题："><a href="#矩阵嵌套问题：" class="headerlink" title="矩阵嵌套问题："></a>矩阵嵌套问题：</h2><hr>
+<h3 id="题目链接："><a href="#题目链接：" class="headerlink" title="题目链接："></a>题目链接：</h3><p><a href="http://acm.nyist.net/JudgeOnline/problem.php?pid=16" target="_blank" rel="noopener">http://acm.nyist.net/JudgeOnline/problem.php?pid=16</a></p>
+<hr>
+<h3 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h3><p> 如果一个矩形的长和宽都大于另一个矩形，那么说这个矩形可以嵌套另一个矩形，现在有很多个矩形，输入矩形的长宽，求出他们的最大嵌套数。注意矩形的长宽是可以互换的。</p>
+<hr>
+<h3 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h3><p> 这是一道经典的DAG上的动态规划问题，需要把问题转化成DAG上的最长路问题，把每个矩形看成点，如果两个矩形可以嵌套，那么他们建边，这样问题就是求最长路了。</p>
+<p> 状态的定义是对于第 i 个节点，由他出发最长的距离，根据边转移，如果一个矩形可以装下另一个矩形，那么这个矩形出发的最长距离就是他可以装下的那个矩形的最长距离加一。</p>
+<p> 递归边界是隐含的，如果一个矩形无法嵌套嵌套的矩阵，那么由他出发的最长距离是 1 ，即只有他本身。</p>
+<hr>
+<h3 id="AC代码："><a href="#AC代码：" class="headerlink" title="AC代码："></a>AC代码：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> edge[<span class="number">1123</span>][<span class="number">1123</span>];</span><br><span class="line"><span class="keyword">int</span> d[<span class="number">1123</span>], n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dp</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>&amp; ans =  d[i];</span><br><span class="line">    <span class="keyword">if</span> (ans &gt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (edge[i][j])</span><br><span class="line">            ans = max(ans, dp(j)+<span class="number">1</span>);<span class="comment">//状态转移</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">        <span class="keyword">int</span> data[<span class="number">1123</span>][<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;data[i][<span class="number">0</span>], &amp;data[i][<span class="number">1</span>]);</span><br><span class="line">            <span class="keyword">if</span> (data[i][<span class="number">0</span>] &gt; data[i][<span class="number">1</span>])</span><br><span class="line">                swap(data[i][<span class="number">0</span>], data[i][<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">memset</span>(edge, <span class="number">0</span>, <span class="keyword">sizeof</span>(edge));</span><br><span class="line">        <span class="built_in">memset</span>(d, <span class="number">0</span>, <span class="keyword">sizeof</span>(d));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i ++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (i == j)</span><br><span class="line">                    <span class="keyword">continue</span>;</span><br><span class="line">                <span class="keyword">if</span> (data[i][<span class="number">0</span>] &gt; data[j][<span class="number">0</span>] &amp;&amp; data[i][<span class="number">1</span>] &gt; data[j][<span class="number">1</span>])</span><br><span class="line">                    edge[i][j] = <span class="number">1</span>;<span class="comment">//如果可以嵌套那么建边</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            ans = max(ans, dp(i));<span class="comment">//最终答案是所有节点出发最长的那个</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="The-Tower-of-Babylon"><a href="#The-Tower-of-Babylon" class="headerlink" title="The Tower of Babylon"></a>The Tower of Babylon</h2><hr>
+<h3 id="题目链接：-1"><a href="#题目链接：-1" class="headerlink" title="题目链接："></a>题目链接：</h3><p><a href="https://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;page=show_problem&amp;problem=378" target="_blank" rel="noopener">https://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;page=show_problem&amp;problem=378</a></p>
+<hr>
+<h3 id="题目大意：-1"><a href="#题目大意：-1" class="headerlink" title="题目大意："></a>题目大意：</h3><p> 现在有很多立方体，每个立方体输入他的三个棱长即可确定，现在规定如果一个立方体的面的长和宽都大于另一个立方体的长和宽，那么这两个立方体是可以堆叠起来的。现在输入很多立方体，求堆叠出的最高高度。注意两个立方体三个棱长都要考虑，两个棱长确定是否可堆叠，一个决定堆起来的高度。立方体可以重复使用。</p>
+<hr>
+<h3 id="题目分析：-1"><a href="#题目分析：-1" class="headerlink" title="题目分析："></a>题目分析：</h3><p> 和上一题近似，不过这里我可以把每个立方体拆成三个，分别对于三个不同的面和高，然后根据面的长宽大小，对他们建边。然后就是求DAG上的最长路问题，不过这题的不同是，每条边有权了，并且不能直接拿长宽的大小当数组的下标。</p>
+<hr>
+<h3 id="AC代码：-1"><a href="#AC代码：-1" class="headerlink" title="AC代码："></a>AC代码：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> a, b;</span><br><span class="line">    <span class="keyword">int</span> h;</span><br><span class="line">    Node(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> h) &#123;</span><br><span class="line">        <span class="keyword">if</span> (a &gt; b)</span><br><span class="line">            swap(a, b);</span><br><span class="line">        <span class="keyword">this</span>-&gt;a = a;</span><br><span class="line">        <span class="keyword">this</span>-&gt;b = b;</span><br><span class="line">        <span class="keyword">this</span>-&gt;h = h;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> struct Node&amp; a, <span class="keyword">const</span> struct Node&amp; b) &#123;</span><br><span class="line">    <span class="keyword">if</span> (a.a &lt; b.a &amp;&amp; a.b &lt; b.b)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;Node&gt; data;</span><br><span class="line"><span class="keyword">int</span> edge[<span class="number">1123</span>][<span class="number">1123</span>];</span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">1123</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>&amp; rst = dp[u];</span><br><span class="line">    <span class="keyword">if</span> (rst &gt;= <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> rst;</span><br><span class="line">    rst = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; data.size(); i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (edge[u][i])</span><br><span class="line">            rst = max(rst, dfs(i));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//最后要加上当前的立方体的高度</span></span><br><span class="line">    <span class="keyword">return</span> rst += data[u].h;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n, cases = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n) &amp;&amp; n) &#123;</span><br><span class="line">        data.clear();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> a, b, c;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;a, &amp;b, &amp;c);</span><br><span class="line">            <span class="comment">//把立方体根据每个面拆成三个</span></span><br><span class="line">            data.push_back(Node(a, b, c));</span><br><span class="line">            data.push_back(Node(a, c, b));</span><br><span class="line">            data.push_back(Node(b, c, a));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">memset</span>(edge, <span class="number">0</span>, <span class="keyword">sizeof</span>(edge));</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; data.size(); i++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; data.size(); j++) &#123;</span><br><span class="line">                <span class="comment">//如果可以堆叠，那么建边</span></span><br><span class="line">                <span class="keyword">if</span> (data[i] &lt; data[j]) &#123;</span><br><span class="line">                    edge[i][j] = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">memset</span>(dp, <span class="number">-1</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; data.size(); i++) &#123;</span><br><span class="line">            ans = max(dfs(i), ans);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Case %d: maximum height = %d\n"</span>, ++cases, ans);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2017/04/26/cjsyojumo0018lkc2yzd5x7th/" data-id="cjsyojumo0018lkc2yzd5x7th" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-数位DP（模板）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/24/cjsli5qtq007y3oc21l07zxoh/" class="article-date">
+    <a href="/2017/04/24/cjsyojuxc007xlkc2af6qj5e8/" class="article-date">
   <time datetime="2017-04-24T08:53:28.000Z" itemprop="datePublished">2017-04-24</time>
 </a>
     
@@ -80,7 +138,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/24/cjsli5qtq007y3oc21l07zxoh/">数位DP（模板）</a>
+      <a class="article-title" href="/2017/04/24/cjsyojuxc007xlkc2af6qj5e8/">数位DP（模板）</a>
     </h1>
   
 
@@ -99,7 +157,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/04/24/cjsli5qtq007y3oc21l07zxoh/" data-id="cjsli5qtq007y3oc21l07zxoh" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/04/24/cjsyojuxc007xlkc2af6qj5e8/" data-id="cjsyojuxc007xlkc2af6qj5e8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -111,7 +169,7 @@
   
     <article id="post-SDUTOJ-2781-二分练习（二分）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/17/cjsli5qo300573oc20zuvd4i4/" class="article-date">
+    <a href="/2017/04/17/cjsyojutl0053lkc2c52pr8vt/" class="article-date">
   <time datetime="2017-04-17T08:21:20.000Z" itemprop="datePublished">2017-04-17</time>
 </a>
     
@@ -127,7 +185,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/17/cjsli5qo300573oc20zuvd4i4/">SDUTOJ - 2781 二分练习（二分）</a>
+      <a class="article-title" href="/2017/04/17/cjsyojutl0053lkc2c52pr8vt/">SDUTOJ - 2781 二分练习（二分）</a>
     </h1>
   
 
@@ -151,7 +209,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/04/17/cjsli5qo300573oc20zuvd4i4/" data-id="cjsli5qo300573oc20zuvd4i4" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/04/17/cjsyojutl0053lkc2c52pr8vt/" data-id="cjsyojutl0053lkc2c52pr8vt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -163,7 +221,7 @@
   
     <article id="post-POJ3494-Largest-Submatrix-of-All-1’s-（单调栈）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/09/cjsli5qn5004n3oc2cqorfb5i/" class="article-date">
+    <a href="/2017/04/09/cjsyojusu004klkc2gw6xmfoo/" class="article-date">
   <time datetime="2017-04-09T09:45:02.000Z" itemprop="datePublished">2017-04-09</time>
 </a>
     
@@ -179,7 +237,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/09/cjsli5qn5004n3oc2cqorfb5i/">POJ3494 - Largest Submatrix of All 1’s （单调栈）</a>
+      <a class="article-title" href="/2017/04/09/cjsyojusu004klkc2gw6xmfoo/">POJ3494 - Largest Submatrix of All 1’s （单调栈）</a>
     </h1>
   
 
@@ -209,7 +267,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/04/09/cjsli5qn5004n3oc2cqorfb5i/" data-id="cjsli5qn5004n3oc2cqorfb5i" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/04/09/cjsyojusu004klkc2gw6xmfoo/" data-id="cjsyojusu004klkc2gw6xmfoo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -221,7 +279,7 @@
   
     <article id="post-POJ2155-Matrix-（二维树状数组）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/09/cjsli5qly00493oc26api59lg/" class="article-date">
+    <a href="/2017/04/09/cjsyojus00042lkc2nkry2xtx/" class="article-date">
   <time datetime="2017-04-09T09:00:47.000Z" itemprop="datePublished">2017-04-09</time>
 </a>
     
@@ -237,7 +295,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/09/cjsli5qly00493oc26api59lg/">POJ2155 - Matrix （二维树状数组）</a>
+      <a class="article-title" href="/2017/04/09/cjsyojus00042lkc2nkry2xtx/">POJ2155 - Matrix （二维树状数组）</a>
     </h1>
   
 
@@ -270,7 +328,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/04/09/cjsli5qly00493oc26api59lg/" data-id="cjsli5qly00493oc26api59lg" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/04/09/cjsyojus00042lkc2nkry2xtx/" data-id="cjsyojus00042lkc2nkry2xtx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -282,7 +340,7 @@
   
     <article id="post-最长上升子序列（DP-模板）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/09/cjsli5qu700883oc2naen6yrm/" class="article-date">
+    <a href="/2017/04/09/cjsyojuxp0084lkc2a85l3zbu/" class="article-date">
   <time datetime="2017-04-09T08:22:35.000Z" itemprop="datePublished">2017-04-09</time>
 </a>
     
@@ -298,7 +356,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/09/cjsli5qu700883oc2naen6yrm/">最长上升子序列（DP+模板）</a>
+      <a class="article-title" href="/2017/04/09/cjsyojuxp0084lkc2a85l3zbu/">最长上升子序列（DP+模板）</a>
     </h1>
   
 
@@ -317,7 +375,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/04/09/cjsli5qu700883oc2naen6yrm/" data-id="cjsli5qu700883oc2naen6yrm" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/04/09/cjsyojuxp0084lkc2a85l3zbu/" data-id="cjsyojuxp0084lkc2a85l3zbu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -329,7 +387,7 @@
   
     <article id="post-UVA-1606-Amphiphilic-Carbon-Molecules（极角排序-扫描法-计算几何）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/03/cjsli5qqc006b3oc28l4unl9a/" class="article-date">
+    <a href="/2017/04/03/cjsyojuuu0062lkc2872xff8q/" class="article-date">
   <time datetime="2017-04-03T08:27:26.000Z" itemprop="datePublished">2017-04-03</time>
 </a>
     
@@ -345,7 +403,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/03/cjsli5qqc006b3oc28l4unl9a/">UVA - 1606 Amphiphilic Carbon Molecules（极角排序+扫描法+计算几何）</a>
+      <a class="article-title" href="/2017/04/03/cjsyojuuu0062lkc2872xff8q/">UVA - 1606 Amphiphilic Carbon Molecules（极角排序+扫描法+计算几何）</a>
     </h1>
   
 
@@ -369,7 +427,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/04/03/cjsli5qqc006b3oc28l4unl9a/" data-id="cjsli5qqc006b3oc28l4unl9a" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/04/03/cjsyojuuu0062lkc2872xff8q/" data-id="cjsyojuuu0062lkc2872xff8q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -381,7 +439,7 @@
   
     <article id="post-社交网络图中结点的“重要性“计算（Dijkstra-SPFA-Floyd-模板）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/20/cjsli5qv2008k3oc25at8kws5/" class="article-date">
+    <a href="/2017/03/20/cjsyojuy0008elkc2myp5afh5/" class="article-date">
   <time datetime="2017-03-20T07:56:27.000Z" itemprop="datePublished">2017-03-20</time>
 </a>
     
@@ -397,7 +455,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/20/cjsli5qv2008k3oc25at8kws5/">社交网络图中结点的“重要性“计算（Dijkstra + SPFA + Floyd + 模板）</a>
+      <a class="article-title" href="/2017/03/20/cjsyojuy0008elkc2myp5afh5/">社交网络图中结点的“重要性“计算（Dijkstra + SPFA + Floyd + 模板）</a>
     </h1>
   
 
@@ -415,7 +473,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/03/20/cjsli5qv2008k3oc25at8kws5/" data-id="cjsli5qv2008k3oc25at8kws5" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/03/20/cjsyojuy0008elkc2myp5afh5/" data-id="cjsyojuy0008elkc2myp5afh5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -427,7 +485,7 @@
   
     <article id="post-STL在使用算法竞赛中的使用方法-（教程-未完成）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/17/cjsli5qov005m3oc2kj8dddjh/" class="article-date">
+    <a href="/2017/03/17/cjsyojuua005ilkc2eqlt8ae7/" class="article-date">
   <time datetime="2017-03-17T11:34:30.000Z" itemprop="datePublished">2017-03-17</time>
 </a>
     
@@ -443,7 +501,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/17/cjsli5qov005m3oc2kj8dddjh/">STL在使用算法竞赛中的使用方法 （教程+未完成）</a>
+      <a class="article-title" href="/2017/03/17/cjsyojuua005ilkc2eqlt8ae7/">STL在使用算法竞赛中的使用方法 （教程+未完成）</a>
     </h1>
   
 
@@ -489,7 +547,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/03/17/cjsli5qov005m3oc2kj8dddjh/" data-id="cjsli5qov005m3oc2kj8dddjh" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/03/17/cjsyojuua005ilkc2eqlt8ae7/" data-id="cjsyojuua005ilkc2eqlt8ae7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -501,7 +559,7 @@
   
     <article id="post-12558-Egyptian-Fractions-HARD-version-（IDA-剪枝）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/03/16/cjsli5qew00043oc2bm2zvas8/" class="article-date">
+    <a href="/2017/03/16/cjsyojujr0001lkc2x0jvrrlm/" class="article-date">
   <time datetime="2017-03-16T13:55:23.000Z" itemprop="datePublished">2017-03-16</time>
 </a>
     
@@ -517,7 +575,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/16/cjsli5qew00043oc2bm2zvas8/">12558 - Egyptian Fractions (HARD version) （IDA* + 剪枝）</a>
+      <a class="article-title" href="/2017/03/16/cjsyojujr0001lkc2x0jvrrlm/">12558 - Egyptian Fractions (HARD version) （IDA* + 剪枝）</a>
     </h1>
   
 
@@ -538,68 +596,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/03/16/cjsli5qew00043oc2bm2zvas8/" data-id="cjsli5qew00043oc2bm2zvas8" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-690-Pipeline-Scheduling-DFS-状态压缩-剪枝" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/15/cjsli5qf400083oc2lj78p2f1/" class="article-date">
-  <time datetime="2017-03-15T10:07:24.000Z" itemprop="datePublished">2017-03-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/搜索/">搜索</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/15/cjsli5qf400083oc2lj78p2f1/">690 - Pipeline Scheduling (DFS + 状态压缩 + 剪枝)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="题目链接"><a href="#题目链接" class="headerlink" title="题目链接"></a>题目链接</h1><hr>
-<p><a href="https://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;page=show_problem&amp;problem=631" target="_blank" rel="noopener">https://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;page=show_problem&amp;problem=631</a></p>
-<h1 id="题目大意"><a href="#题目大意" class="headerlink" title="题目大意"></a>题目大意</h1><hr>
-<p>有 5 个不同的工作单元，10 个相同的程序，每个程序需要运行 n 个时间段，每个时间段需要一个工作单元工作。现在问至少需要多少时间，才可以执行完全部的程序。</p>
-<h1 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h1><hr>
-<p>大体思路就是暴力模拟，显然可以状态压缩用位运算，然后就是剪枝的问题了。</p>
-<p>最开始想的是最暴力的模拟，从移一位开始试，如果可以移动了就 break 掉，这样找的每一步都是最短的，但总体上不是最优的。</p>
-<p>然后就去删掉了 break ，循环到移动 n 位。</p>
-<p>最后还是超时，又加了如果当前长度加上后面的最少长度大于答案就剪掉，还是超时，不过这里到是用的 IDA* 换了直接 DFS 还是超时。</p>
-<p>于是去找了博客……</p>
-<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><hr>
-<h4 id="以后做题的时候要考虑下，暴力-dfs-时候，每一个状态到下一个状态的路径个数，可不可以优化，感觉这题的思想类似-KMP-先预处理可以走的步长，避免以后很多次的判断。"><a href="#以后做题的时候要考虑下，暴力-dfs-时候，每一个状态到下一个状态的路径个数，可不可以优化，感觉这题的思想类似-KMP-先预处理可以走的步长，避免以后很多次的判断。" class="headerlink" title="以后做题的时候要考虑下，暴力 dfs 时候，每一个状态到下一个状态的路径个数，可不可以优化，感觉这题的思想类似 KMP 先预处理可以走的步长，避免以后很多次的判断。"></a>以后做题的时候要考虑下，暴力 dfs 时候，每一个状态到下一个状态的路径个数，可不可以优化，感觉这题的思想类似 KMP 先预处理可以走的步长，避免以后很多次的判断。</h4><ul>
-<li>有两次剪枝<ul>
-<li>一是开始就初始化一下，仅有两个任务的情况每次可以移动的步长。这样比直接暴力移动省了不少时间。</li>
-<li>二是如果当前还需要运行的程序个数乘最短步长后，如果大于当前的结果，那么剪掉。</li>
-</ul>
-</li>
-<li>每次的状态用一个一位数组储存，每个工作单元用状态压缩一个整数表示。</li>
-<li>每次检测好移动用位运算。<h1 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h1></li>
-</ul>
-<hr>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX = <span class="number">30</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> rawData[<span class="number">6</span>][MAX];</span><br><span class="line"><span class="keyword">int</span> data[MAX], n, ans, jump[MAX], cnt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">judge</span><span class="params">(<span class="keyword">int</span> A[], <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((A[i]&gt;&gt;k)&amp;data[i])</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">codingData</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    ans = n*<span class="number">10</span>, cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(data, <span class="number">0</span>, <span class="keyword">sizeof</span>(data));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%s"</span>, rawData[i]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (rawData[i][j] == <span class="string">'X'</span>) &#123;</span><br><span class="line">                data[i] |= (<span class="number">1</span>&lt;&lt;j);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (judge(data, i))</span><br><span class="line">            jump[cnt++] = i;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">attempt</span><span class="params">(<span class="keyword">int</span> dep, <span class="keyword">int</span> A[], <span class="keyword">int</span> pos)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pos + (<span class="number">10</span> - dep) * jump[<span class="number">0</span>] &gt; ans)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (dep == <span class="number">10</span>) &#123;</span><br><span class="line">        ans = min(pos, ans);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; cnt; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (judge(A, jump[i])) &#123;</span><br><span class="line">            <span class="keyword">int</span> B[MAX] = &#123;&#125;;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; <span class="number">5</span>; j++) &#123;</span><br><span class="line">                B[j] = (A[j]&gt;&gt;jump[i]) | data[j];</span><br><span class="line">            &#125;</span><br><span class="line">            attempt(dep+<span class="number">1</span>, B, pos + jump[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n) &amp;&amp; n) &#123;</span><br><span class="line">        codingData(n);</span><br><span class="line">        attempt(<span class="number">1</span>, data, n);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/03/15/cjsli5qf400083oc2lj78p2f1/" data-id="cjsli5qf400083oc2lj78p2f1" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/03/16/cjsyojujr0001lkc2x0jvrrlm/" data-id="cjsyojujr0001lkc2x0jvrrlm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -639,7 +636,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
     </div>
   </div>
 
@@ -652,23 +649,23 @@
       <ul>
         
           <li>
-            <a href="/2019/02/26/cjsli5qs500773oc2mdgw2p6a/">吉比特实习面试</a>
+            <a href="/2019/03/07/cjsyojuya008mlkc25p7bhv3z/">腾讯 IEG 后台开发面试</a>
           </li>
         
           <li>
-            <a href="/2019/01/15/cjsli5quk008d3oc2kcqw2aez/">概率论笔记</a>
+            <a href="/2019/02/26/cjsyojuwe007blkc28j84ag52/">吉比特实习面试</a>
           </li>
         
           <li>
-            <a href="/2018/11/16/cjsli5qs800793oc2c5bz1tsh/">二维ST表</a>
+            <a href="/2019/01/15/cjsyojuxu0089lkc2um2ehdcz/">概率论笔记</a>
           </li>
         
           <li>
-            <a href="/2018/10/16/cjsli5qo000553oc2advqly91/">SDUTACM十周年题解（Fish出题部分）</a>
+            <a href="/2018/11/16/cjsyojuwb0078lkc22v23vzy5/">二维ST表</a>
           </li>
         
           <li>
-            <a href="/2018/09/25/cjsli5qla003p3oc221qr9bgx/">LCT(模板-待填坑)</a>
+            <a href="/2018/10/16/cjsyojutc004zlkc2kjvk6d3r/">SDUTACM十周年题解（Fish出题部分）</a>
           </li>
         
       </ul>
