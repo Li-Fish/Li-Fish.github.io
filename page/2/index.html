@@ -62,9 +62,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-虚树小结" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/04/cjta019mg00a2hcc2xlfctq3k/" class="article-date">
+  <time datetime="2018-09-03T19:37:52.000Z" itemprop="datePublished">2018-09-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/数据结构/">数据结构</a>►<a class="article-category-link" href="/categories/ACM/数据结构/虚树/">虚树</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/04/cjta019mg00a2hcc2xlfctq3k/">虚树小结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="虚树"><a href="#虚树" class="headerlink" title="虚树"></a>虚树</h1><p>据说虚树的英文是叫 Auxiliary tree，简单的来说是维护树上仅于题目有关的信息，除去掉冗余信息以保证时间复杂度的一种算法。为什么说是虚树呢，是因为他是在原来树的基础上建出的一颗全新的树，需要重新建边或分配点权等信息。</p>
+<p>虚树的题目通常是这样的，给出一颗大小为 n 有边权或点权的树，然后有 q 次询问，每次给出 $k_i$ 个关键点，要求计算关于这 k 个点的问题（通常和 LCA 有关），但是 $\sum k_i$ 又比较小（通常和树的大小同阶）。</p>
+<p>假设你可以 $O(n)$ 的在树上解决单次的询问，那么总时间复杂度是 $O(nq)$ 的，问题的 n 和 q 一般为 $10^5$ 显然这样是不可以过这道题的。这时候就需要用到虚树了，使用虚树我们对于每个询问都可以 $O(k_i)$ 的建出一颗有 $O(k_i)$ 个节点的树，并且可以通过这棵树 $O(k_i)$ 的计算出答案。</p>
+<h1 id="BZOJ-2886"><a href="#BZOJ-2886" class="headerlink" title="BZOJ 2886"></a>BZOJ 2886</h1><p>给出一颗 n 个节点的树，每条边有正边权，有 q 次询问，每个询问包含 $k_i$ 个选中的点，要求选出一些边使得去掉这 k 条边后 1 号节点不与这 k 个点中的任一个连通。</p>
+<p>$ 1 \le n \le 250000,  \sum k_i \le 5 \times10^5$</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>对于每次询问，我们首先考虑 $O(n)$ 的做法，我设 $dp[u]$ 是使得 u 节点及其子树中所有选中的点与 u 的父亲断开的最小花费，我们考虑接下来两种转移；</p>
+<p>如果 u 号节点是选中的点的话，那么肯定要断开 u 号点到父亲的边，并且为了让花费最少 u 的子树中不需要断开其他边了。</p>
+<p>如果 u 号节点不是选中的点，那么如果我们不断开从 u 到其父亲的边的话，那么我们需要保证 u 的子树中所有的选中的点不与 u 连通，那么 $dp[u] = \sum dp[v]$，v 是 u 的所有的儿子。</p>
+<h2 id="虚树优化"><a href="#虚树优化" class="headerlink" title="虚树优化"></a>虚树优化</h2><p>接下来我们考虑这个 DP，对于树上一条没有分叉的链，我们如果要断开这条链的话我们肯定要断开这条链上的边权最小的边。仔细分析的话会发现，对于这个问题的每次询问，其实只和选中的 $k_i$ 个点及他们之间两两的 LCA 有关。</p>
+<p>思考到这一步，并且会虚树的话，这个题已经解决了。虚树可以对某些关键点求出其两两的 LCA，并且有证明给出，k 个点的两两求 LCA，得出的不同的点的数量是 $O(k)$ 的。</p>
+<h1 id="虚树构造"><a href="#虚树构造" class="headerlink" title="虚树构造"></a>虚树构造</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//储存关键的点及其 dfs 序</span></span><br><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; &gt; imp;</span><br><span class="line"><span class="comment">//虚树上的边</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[MAX];</span><br><span class="line"><span class="comment">//构建虚树时用到的栈</span></span><br><span class="line"><span class="keyword">int</span> s[MAX], s_top;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//按照 dfs 序排序</span></span><br><span class="line">    sort(imp.begin(), imp.end());</span><br><span class="line">    <span class="comment">//为了方便处理，我们把树根固定当做关键点</span></span><br><span class="line">    s[s_top = <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//按照 dfs 序遍历每个点</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; imp.size(); i++) &#123;</span><br><span class="line">        <span class="comment">//求出当前节点与栈顶节点的 LCA</span></span><br><span class="line">        <span class="keyword">int</span> v = imp[i].second;</span><br><span class="line">        <span class="keyword">int</span> t = lca(v, s[s_top]);</span><br><span class="line">        <span class="comment">// t 的 dfs 序肯定小于等于栈顶元素的 （因为他是 v 和栈顶元素的 LCA）</span></span><br><span class="line">        <span class="keyword">while</span> (dfn[t] &lt; dfn[s[s_top]]) &#123;</span><br><span class="line">            <span class="comment">//直到栈顶的元素的前一个元素的 dfs 序小于当前的 LCA，停止循环，如果当前的 LCA 不在栈中，那么入栈</span></span><br><span class="line">            <span class="keyword">if</span> (dfn[t] &gt;= dfn[s[s_top - <span class="number">1</span>]]) &#123;</span><br><span class="line">                G[t].push_back(s[s_top]);</span><br><span class="line">                <span class="keyword">if</span> (s[--s_top] != t) s[++s_top] = t;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//进入循环以为着栈顶元素 dfs 小于当前的 LCA，并且我们是按照 dfs 序遍历的，那么栈顶元素的子树肯定已经构建完毕，需要出栈并对当前的 LCA 建边</span></span><br><span class="line">            G[s[s_top - <span class="number">1</span>]].push_back(s[s_top]);</span><br><span class="line">            s_top--;</span><br><span class="line">        &#125;</span><br><span class="line">        s[++s_top] = v;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//最后对栈中的元素依次建边</span></span><br><span class="line">    <span class="keyword">while</span> (s_top--) G[s[s_top]].push_back(s[s_top + <span class="number">1</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="题目代码"><a href="#题目代码" class="headerlink" title="题目代码"></a>题目代码</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX = <span class="number">250000</span> + <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> u, v, w, nxt;</span><br><span class="line">&#125; edge[MAX * <span class="number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> head[MAX], etot;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add_edge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> w)</span> </span>&#123;</span><br><span class="line">    edge[etot].u = u;</span><br><span class="line">    edge[etot].v = v;</span><br><span class="line">    edge[etot].w = w;</span><br><span class="line">    edge[etot].nxt = head[u];</span><br><span class="line">    head[u] = etot++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; &gt; imp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> dfn[MAX], clo;</span><br><span class="line"><span class="keyword">int</span> f[MAX][<span class="number">20</span>], dep[MAX];</span><br><span class="line">ll pre[MAX][<span class="number">20</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa, <span class="keyword">int</span> depth)</span> </span>&#123;</span><br><span class="line">    dfn[u] = ++clo;</span><br><span class="line">    f[u][<span class="number">0</span>] = fa;</span><br><span class="line">    dep[u] = depth;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = head[u]; ~i; i = edge[i].nxt) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = edge[i].v;</span><br><span class="line">        <span class="keyword">if</span> (dfn[v]) <span class="keyword">continue</span>;</span><br><span class="line">        pre[v][<span class="number">0</span>] = edge[i].w;</span><br><span class="line">        dfs(v, u, depth + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lca</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (dep[u] &lt; dep[v]) swap(u, v);</span><br><span class="line">    <span class="keyword">int</span> diff = dep[u] - dep[v];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) <span class="keyword">if</span> (diff &gt;&gt; i &amp; <span class="number">1</span>) u = f[u][i];</span><br><span class="line">    <span class="keyword">if</span> (u == v) <span class="keyword">return</span> u;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">19</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="keyword">if</span> (f[u][i] != f[v][i]) u = f[u][i], v = f[v][i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> f[u][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">get_pre</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (dep[u] &lt; dep[v]) swap(u, v);</span><br><span class="line">    <span class="keyword">int</span> diff = dep[u] - dep[v];</span><br><span class="line">    ll ans = <span class="number">1e18</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++)</span><br><span class="line">        <span class="keyword">if</span> (diff &gt;&gt; i &amp; <span class="number">1</span>) &#123;</span><br><span class="line">            ans = min(ans, pre[u][i]);</span><br><span class="line">            u = f[u][i];</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; <span class="number">20</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">            f[j][i] = f[f[j][i - <span class="number">1</span>]][i - <span class="number">1</span>];</span><br><span class="line">            pre[j][i] = min(pre[f[j][i - <span class="number">1</span>]][i - <span class="number">1</span>], pre[j][i - <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> ojbk[MAX];</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[MAX];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; occur;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> s[MAX], s_top;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    sort(imp.begin(), imp.end());</span><br><span class="line"></span><br><span class="line">    s[s_top = <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    occur.push_back(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; imp.size(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = imp[i].second;</span><br><span class="line">        <span class="keyword">int</span> t = lca(v, s[s_top]);</span><br><span class="line">        occur.push_back(v);</span><br><span class="line">        occur.push_back(t);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (dfn[t] &lt; dfn[s[s_top]]) &#123;</span><br><span class="line">            <span class="keyword">if</span> (dfn[t] &gt;= dfn[s[s_top - <span class="number">1</span>]]) &#123;</span><br><span class="line">                G[t].push_back(s[s_top]);</span><br><span class="line">                <span class="keyword">if</span> (s[--s_top] != t) s[++s_top] = t;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            G[s[s_top - <span class="number">1</span>]].push_back(s[s_top]);</span><br><span class="line">            s_top--;</span><br><span class="line">        &#125;</span><br><span class="line">        s[++s_top] = v;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (s_top--) G[s[s_top]].push_back(s[s_top + <span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ll dp[MAX];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u, ll pre)</span> </span>&#123;</span><br><span class="line">    dp[u] = pre;</span><br><span class="line">    ll sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G[u].size(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = G[u][i];</span><br><span class="line">        dfs(v, get_pre(u, v));</span><br><span class="line">        sum += dp[v];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!ojbk[u]) dp[u] = min(dp[u], sum);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">magic</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    build();</span><br><span class="line">    dfs(<span class="number">1</span>, <span class="number">1e18</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; occur.size(); i++) &#123;</span><br><span class="line">        G[occur[i]].clear();</span><br><span class="line">        ojbk[occur[i]] = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    occur.clear();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(pre, <span class="number">0x3f</span>, <span class="keyword">sizeof</span>(pre));</span><br><span class="line">    <span class="built_in">memset</span>(head, <span class="number">-1</span>, <span class="keyword">sizeof</span>(head));</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> u, v, w;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>, &amp;u, &amp;v, &amp;w);</span><br><span class="line">        add_edge(u, v, w);</span><br><span class="line">        add_edge(v, u, w);</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(<span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">int</span> m;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;m);</span><br><span class="line">    <span class="keyword">while</span> (m--) &#123;</span><br><span class="line">        imp.clear();</span><br><span class="line">        <span class="keyword">int</span> k;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;k);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= k; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> t;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">            ojbk[t] = <span class="literal">true</span>;</span><br><span class="line">            imp.push_back(make_pair(dfn[t], t));</span><br><span class="line">        &#125;</span><br><span class="line">        magic();</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, dp[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2018/09/04/cjta019mg00a2hcc2xlfctq3k/" data-id="cjta019mg00a2hcc2xlfctq3k" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2018邀请赛总结（陕西）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/05/23/cjsyojukl0008lkc28aqowj7q/" class="article-date">
+    <a href="/2018/05/23/cjta0197v0008hcc2zzh1ungn/" class="article-date">
   <time datetime="2018-05-23T12:12:51.000Z" itemprop="datePublished">2018-05-23</time>
 </a>
     
@@ -80,7 +132,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/23/cjsyojukl0008lkc28aqowj7q/">2018邀请赛总结（陕西）</a>
+      <a class="article-title" href="/2018/05/23/cjta0197v0008hcc2zzh1ungn/">2018邀请赛总结（陕西）</a>
     </h1>
   
 
@@ -107,7 +159,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/05/23/cjsyojukl0008lkc28aqowj7q/" data-id="cjsyojukl0008lkc28aqowj7q" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/05/23/cjta0197v0008hcc2zzh1ungn/" data-id="cjta0197v0008hcc2zzh1ungn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -119,7 +171,7 @@
   
     <article id="post-树分治小结" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/05/16/cjsyojuxs0087lkc21rk8knn1/" class="article-date">
+    <a href="/2018/05/16/cjta019lb009bhcc2p4rto6x9/" class="article-date">
   <time datetime="2018-05-16T15:04:46.000Z" itemprop="datePublished">2018-05-16</time>
 </a>
     
@@ -135,7 +187,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/16/cjsyojuxs0087lkc21rk8knn1/">树分治小结</a>
+      <a class="article-title" href="/2018/05/16/cjta019lb009bhcc2p4rto6x9/">树分治小结</a>
     </h1>
   
 
@@ -155,7 +207,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/05/16/cjsyojuxs0087lkc21rk8knn1/" data-id="cjsyojuxs0087lkc21rk8knn1" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/05/16/cjta019lb009bhcc2p4rto6x9/" data-id="cjta019lb009bhcc2p4rto6x9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -167,7 +219,7 @@
   
     <article id="post-浅谈应试教育对大学生身体素质的影响（体育作业）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/05/16/cjsyojuxy008clkc2teow4m04/" class="article-date">
+    <a href="/2018/05/16/cjta019lk009ghcc2rnqtk9yu/" class="article-date">
   <time datetime="2018-05-16T13:16:25.000Z" itemprop="datePublished">2018-05-16</time>
 </a>
     
@@ -183,7 +235,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/16/cjsyojuxy008clkc2teow4m04/">浅谈应试教育对大学生身体素质的影响（体育作业）</a>
+      <a class="article-title" href="/2018/05/16/cjta019lk009ghcc2rnqtk9yu/">浅谈应试教育对大学生身体素质的影响（体育作业）</a>
     </h1>
   
 
@@ -200,7 +252,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/05/16/cjsyojuxy008clkc2teow4m04/" data-id="cjsyojuxy008clkc2teow4m04" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/05/16/cjta019lk009ghcc2rnqtk9yu/" data-id="cjta019lk009ghcc2rnqtk9yu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -212,7 +264,7 @@
   
     <article id="post-2017级《程序设计基础（B）II》期末机考题解（Fish出题部分）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/05/12/cjsyojuk70004lkc26mj8oxdp/" class="article-date">
+    <a href="/2018/05/12/cjta0197o0004hcc2ec6x8h6x/" class="article-date">
   <time datetime="2018-05-12T10:39:06.000Z" itemprop="datePublished">2018-05-12</time>
 </a>
     
@@ -228,7 +280,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/12/cjsyojuk70004lkc26mj8oxdp/">2017级《程序设计基础（B）II》期末机考题解（Fish出题部分）</a>
+      <a class="article-title" href="/2018/05/12/cjta0197o0004hcc2ec6x8h6x/">2017级《程序设计基础（B）II》期末机考题解（Fish出题部分）</a>
     </h1>
   
 
@@ -245,7 +297,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/05/12/cjsyojuk70004lkc26mj8oxdp/" data-id="cjsyojuk70004lkc26mj8oxdp" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/05/12/cjta0197o0004hcc2ec6x8h6x/" data-id="cjta0197o0004hcc2ec6x8h6x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -257,7 +309,7 @@
   
     <article id="post-第九届ACM山东省赛总结" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/05/07/cjsyojv4200fplkc2zz21ih0z/" class="article-date">
+    <a href="/2018/05/07/cjta019po00euhcc2ufuzvpdu/" class="article-date">
   <time datetime="2018-05-07T08:19:52.000Z" itemprop="datePublished">2018-05-07</time>
 </a>
     
@@ -273,7 +325,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/07/cjsyojv4200fplkc2zz21ih0z/">第九届ACM山东省赛总结</a>
+      <a class="article-title" href="/2018/05/07/cjta019po00euhcc2ufuzvpdu/">第九届ACM山东省赛总结</a>
     </h1>
   
 
@@ -317,7 +369,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/05/07/cjsyojv4200fplkc2zz21ih0z/" data-id="cjsyojv4200fplkc2zz21ih0z" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/05/07/cjta019po00euhcc2ufuzvpdu/" data-id="cjta019po00euhcc2ufuzvpdu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -329,7 +381,7 @@
   
     <article id="post-后缀数组小结" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/05/03/cjsyojuwq007ilkc23h6j59h3/" class="article-date">
+    <a href="/2018/05/03/cjta019k9008nhcc2nr29xrgy/" class="article-date">
   <time datetime="2018-05-03T15:34:36.000Z" itemprop="datePublished">2018-05-03</time>
 </a>
     
@@ -345,7 +397,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/03/cjsyojuwq007ilkc23h6j59h3/">后缀数组小结</a>
+      <a class="article-title" href="/2018/05/03/cjta019k9008nhcc2nr29xrgy/">后缀数组小结</a>
     </h1>
   
 
@@ -366,7 +418,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/05/03/cjsyojuwq007ilkc23h6j59h3/" data-id="cjsyojuwq007ilkc23h6j59h3" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/05/03/cjta019k9008nhcc2nr29xrgy/" data-id="cjta019k9008nhcc2nr29xrgy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -378,7 +430,7 @@
   
     <article id="post-AC自动机（模板）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/05/03/cjsyojulr000olkc2vb4dwt7x/" class="article-date">
+    <a href="/2018/05/03/cjta0198k000nhcc2tjjbjyfj/" class="article-date">
   <time datetime="2018-05-03T11:48:33.000Z" itemprop="datePublished">2018-05-03</time>
 </a>
     
@@ -394,7 +446,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/03/cjsyojulr000olkc2vb4dwt7x/">AC自动机（模板）</a>
+      <a class="article-title" href="/2018/05/03/cjta0198k000nhcc2tjjbjyfj/">AC自动机（模板）</a>
     </h1>
   
 
@@ -412,7 +464,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/05/03/cjsyojulr000olkc2vb4dwt7x/" data-id="cjsyojulr000olkc2vb4dwt7x" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/05/03/cjta0198k000nhcc2tjjbjyfj/" data-id="cjta0198k000nhcc2tjjbjyfj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -424,7 +476,7 @@
   
     <article id="post-2018年寒假集训" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/03/12/cjsyojv3j00filkc20mpyoxdr/" class="article-date">
+    <a href="/2018/03/12/cjta019mp00a7hcc2ki4mnsgt/" class="article-date">
   <time datetime="2018-03-12T09:14:12.000Z" itemprop="datePublished">2018-03-12</time>
 </a>
     
@@ -440,7 +492,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/12/cjsyojv3j00filkc20mpyoxdr/">2018年寒假集训</a>
+      <a class="article-title" href="/2018/03/12/cjta019mp00a7hcc2ki4mnsgt/">2018年寒假集训</a>
     </h1>
   
 
@@ -478,7 +530,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/03/12/cjsyojv3j00filkc20mpyoxdr/" data-id="cjsyojv3j00filkc20mpyoxdr" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/03/12/cjta019mp00a7hcc2ki4mnsgt/" data-id="cjta019mp00a7hcc2ki4mnsgt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -490,7 +542,7 @@
   
     <article id="post-基础计算几何小结" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/02/02/cjsyojuwt007klkc2k8c1rdxe/" class="article-date">
+    <a href="/2018/02/02/cjta019kl008xhcc27uchio56/" class="article-date">
   <time datetime="2018-02-02T01:40:26.000Z" itemprop="datePublished">2018-02-02</time>
 </a>
     
@@ -506,7 +558,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/02/cjsyojuwt007klkc2k8c1rdxe/">基础计算几何小结</a>
+      <a class="article-title" href="/2018/02/02/cjta019kl008xhcc27uchio56/">基础计算几何小结</a>
     </h1>
   
 
@@ -524,66 +576,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/02/02/cjsyojuwt007klkc2k8c1rdxe/" data-id="cjsyojuwt007klkc2k8c1rdxe" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-差分约束系统小结" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/24/cjsyojux3007slkc27fby64x6/" class="article-date">
-  <time datetime="2018-01-24T00:51:24.000Z" itemprop="datePublished">2018-01-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/图论/">图论</a>►<a class="article-category-link" href="/categories/ACM/图论/差分约束/">差分约束</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/24/cjsyojux3007slkc27fby64x6/">差分约束系统小结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>首先差分约束系统是求解关于一组变量的特殊不等式组的方法，不等式组通常是以下形式：</p>
-<p>$x_1 - x_5 \le -1$</p>
-<p>$x_3 - x_4 \ge 3$</p>
-<p>$x_2 - x_4 &lt; 3$</p>
-<p>$x1 - x2 = 9$</p>
-<p>这里我们定义标准型为 $a_i - b_j \le c_k$ 这里 $c_k$ 为一个常量，a 和 b 是要求的变量。</p>
-<p>上面的 </p>
-<p>$x_2 - x_4 &lt; 3 \sim x_2 - x_4 \le 2$</p>
-<p>$x1 - x2 = 9 \sim x_1 - x_2 \le 9 \And x_2 - x_1 \le -9$</p>
-<p>都可以将上述等式化为标准型。</p>
-<h1 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h1><p>现在的问题是怎么求解上述的不等式组。</p>
-<p>我们首先看一下图论里面的单源最短路，假设 $dist[u]$ 为 u 到源点的距离。</p>
-<p>那么如果有边$(u,v, w)$，从 u 到 v 并且距离为 w，那么我们可以把这条边当做一个约束条件，即对于最终答案的 $dist$ 数组，显然有 $dist[v] - dist[u] \le w$，然后我们将所有的边都转化为约束条件，那么最短路问题就可以转化为上面的差分约束系统，同样的差分约束系统系统也可以通过最短路来求解。</p>
-<p>对于所有的 $a_i - b_j \le c_k$ 从 $b_j$ 向 $a_i$ 建一条费用为 $c_k$ 的边，然后跑最短路就是满足约束的答案了，如果有负环的话代表无解。</p>
-<p>这里为了保证图连通，有时候需要建一个超级源点向所有点连一条费用为 0 的边。</p>
-<p>需要注意的一点是，<strong>根据原题目写出约束条件的时候一定要保证不缺不漏</strong>，并且有的条件需要特判。</p>
-<h1 id="题集"><a href="#题集" class="headerlink" title="题集"></a>题集</h1><p>相信大家都做过 POJ 的奶牛的那个经典差分约束系统的题，这里只推荐两个题目（都有坑点）：</p>
-<p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=6252" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=6252</a></p>
-<p><a href="https://vjudge.net/problem/UVALive-4885" target="_blank" rel="noopener">https://vjudge.net/problem/UVALive-4885</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/01/24/cjsyojux3007slkc27fby64x6/" data-id="cjsyojux3007slkc27fby64x6" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/02/02/cjta019kl008xhcc27uchio56/" data-id="cjta019kl008xhcc27uchio56" class="article-share-link">Share</a>
       
       
     </footer>
@@ -636,23 +629,23 @@
       <ul>
         
           <li>
-            <a href="/2019/03/07/cjsyojuya008mlkc25p7bhv3z/">腾讯 IEG 后台开发面试</a>
+            <a href="/2019/03/15/cjta019jo0088hcc220a0y8nw/">依图研发工程师面试经历</a>
           </li>
         
           <li>
-            <a href="/2019/02/26/cjsyojuwe007blkc28j84ag52/">吉比特实习面试</a>
+            <a href="/2019/03/07/cjta019pq00evhcc2eb0a1766/">腾讯 IEG 后台开发面试</a>
           </li>
         
           <li>
-            <a href="/2019/01/15/cjsyojuxu0089lkc2um2ehdcz/">概率论笔记</a>
+            <a href="/2019/02/26/cjta019k2008ihcc2q82uz987/">吉比特实习面试</a>
           </li>
         
           <li>
-            <a href="/2018/11/16/cjsyojuwb0078lkc22v23vzy5/">二维ST表</a>
+            <a href="/2019/01/15/cjta019lg009ehcc2kpqd9yzk/">概率论笔记</a>
           </li>
         
           <li>
-            <a href="/2018/10/16/cjsyojutc004zlkc2kjvk6d3r/">SDUTACM十周年题解（Fish出题部分）</a>
+            <a href="/2018/11/16/cjta019jv008dhcc25btb5l0m/">二维ST表</a>
           </li>
         
       </ul>

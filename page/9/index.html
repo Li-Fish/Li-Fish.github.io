@@ -62,9 +62,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-LightOJ1370-Bi-shoe-and-Phi-shoe（欧拉函数-打表）" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/20/cjta019f50058hcc2yltkoprm/" class="article-date">
+  <time datetime="2017-07-20T08:51:12.000Z" itemprop="datePublished">2017-07-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/数学/">数学</a>►<a class="article-category-link" href="/categories/ACM/数学/数论/">数论</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/20/cjta019f50058hcc2yltkoprm/">LightOJ1370 - Bi-shoe and Phi-shoe（欧拉函数+打表）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="题目链接："><a href="#题目链接：" class="headerlink" title="题目链接："></a>题目链接：</h1><p><a href="https://vjudge.net/problem/LightOJ-1370" target="_blank" rel="noopener">https://vjudge.net/problem/LightOJ-1370</a></p>
+<hr>
+<h1 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h1><p>给出 $N$ 个数$a_1,a_2\dots a_n$，求对每一个 $a_i$ 找出最小的 $k_i$ 使得 $\phi(k_i) \ge a_i$，输出 $\sum_1^n k_i$ 。</p>
+<hr>
+<h1 id="解题过程："><a href="#解题过程：" class="headerlink" title="解题过程："></a>解题过程：</h1><p>因为是数论的题，显然题目是要用欧拉函数，于是特意去翻了一下紫书的欧拉函数。想假期在家里做的，然后咸鱼了，想在来学校补得，也算是目前数论里面唯一一个自己做出的题了…</p>
+<hr>
+<h1 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h1><p>首先打表求出欧拉函数的值，用紫书上类似素数筛的方式，可以$O(n\log \log n)$的时间内求出。</p>
+<p>然后需要解决的问题是，假设对于 2 这个数，那么用欧拉函数值为 $2$ 的 $k$ 并不一定是最优的，可能有一个 $m &lt; k$ 但是 $\phi(m) &gt; \phi(k)$。<br>这里一个解决方式是，找出每一个$a_i$的$k_i$打一张表，从1开始枚举$k$，先枚举到的k一定比后枚举到的优。</p>
+<hr>
+<h1 id="AC代码："><a href="#AC代码：" class="headerlink" title="AC代码："></a>AC代码：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX = <span class="number">1123456</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> phi[MAX];</span><br><span class="line"><span class="keyword">int</span> cost[MAX];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//对欧拉函数打表</span></span><br><span class="line">    phi[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= MAX; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (phi[i]) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt;= MAX; j+= i) &#123;</span><br><span class="line">            <span class="keyword">if</span> (!phi[j]) phi[j] = j;</span><br><span class="line">            phi[j] = phi[j] / i * (i<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//枚举每一个的花费k</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= MAX; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> x = phi[i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = x; j &gt;= <span class="number">1</span>; j--) &#123;</span><br><span class="line">            <span class="comment">//如果当前为空，那么他的花费为i</span></span><br><span class="line">            <span class="comment">//否则之前已经有更优的解，直接break</span></span><br><span class="line">            <span class="keyword">if</span> (cost[j]) <span class="keyword">break</span>;</span><br><span class="line">            cost[j] = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="comment">//    freopen("out", "w", stdout);</span></span><br><span class="line">    init();</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> cases = <span class="number">1</span>; cases &lt;= T; cases++) &#123;</span><br><span class="line">        <span class="keyword">int</span> n;</span><br><span class="line">        LL ans = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">        <span class="keyword">while</span> (n--) &#123;</span><br><span class="line">            <span class="keyword">int</span> t;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;t);</span><br><span class="line">            ans += cost[t];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Case %d: %lld Xukha\n"</span>, cases, ans);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2017/07/20/cjta019f50058hcc2yltkoprm/" data-id="cjta019f50058hcc2yltkoprm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-POJ1015-Jury-Compromise（DP-计算顺序）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/07/02/cjsyojurq003xlkc2mledqjum/" class="article-date">
+    <a href="/2017/07/02/cjta019f8005ahcc236ucqnhm/" class="article-date">
   <time datetime="2017-07-02T02:39:08.000Z" itemprop="datePublished">2017-07-02</time>
 </a>
     
@@ -80,7 +129,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/02/cjsyojurq003xlkc2mledqjum/">POJ1015 - Jury Compromise（DP+计算顺序）</a>
+      <a class="article-title" href="/2017/07/02/cjta019f8005ahcc236ucqnhm/">POJ1015 - Jury Compromise（DP+计算顺序）</a>
     </h1>
   
 
@@ -106,7 +155,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/07/02/cjsyojurq003xlkc2mledqjum/" data-id="cjsyojurq003xlkc2mledqjum" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/07/02/cjta019f8005ahcc236ucqnhm/" data-id="cjta019f8005ahcc236ucqnhm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -118,7 +167,7 @@
   
     <article id="post-HDU1024-Max-Sum-Plus-Plus（DP-降维优化）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/30/cjsyojuno001qlkc2i93co69m/" class="article-date">
+    <a href="/2017/06/30/cjta0199u001phcc2rt0580t7/" class="article-date">
   <time datetime="2017-06-30T07:18:11.000Z" itemprop="datePublished">2017-06-30</time>
 </a>
     
@@ -134,7 +183,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/30/cjsyojuno001qlkc2i93co69m/">HDU1024 - Max Sum Plus Plus（DP+降维优化）</a>
+      <a class="article-title" href="/2017/06/30/cjta0199u001phcc2rt0580t7/">HDU1024 - Max Sum Plus Plus（DP+降维优化）</a>
     </h1>
   
 
@@ -163,7 +212,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/30/cjsyojuno001qlkc2i93co69m/" data-id="cjsyojuno001qlkc2i93co69m" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/30/cjta0199u001phcc2rt0580t7/" data-id="cjta0199u001phcc2rt0580t7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -175,7 +224,7 @@
   
     <article id="post-HDU2196-Computer（树的直径-DP）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/28/cjsyojuo1001ylkc28yb30q4b/" class="article-date">
+    <a href="/2017/06/28/cjta019cn003ehcc26us2rzku/" class="article-date">
   <time datetime="2017-06-28T12:41:14.000Z" itemprop="datePublished">2017-06-28</time>
 </a>
     
@@ -191,7 +240,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/28/cjsyojuo1001ylkc28yb30q4b/">HDU2196 - Computer（树的直径+DP）</a>
+      <a class="article-title" href="/2017/06/28/cjta019cn003ehcc26us2rzku/">HDU2196 - Computer（树的直径+DP）</a>
     </h1>
   
 
@@ -215,7 +264,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/28/cjsyojuo1001ylkc28yb30q4b/" data-id="cjsyojuo1001ylkc28yb30q4b" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/28/cjta019cn003ehcc26us2rzku/" data-id="cjta019cn003ehcc26us2rzku" class="article-share-link">Share</a>
       
       
     </footer>
@@ -227,7 +276,7 @@
   
     <article id="post-UVA11235-Frequent-values（游程编码-线段树）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/28/cjsyojuv7006clkc2v4n7z4z0/" class="article-date">
+    <a href="/2017/06/28/cjta019id007ghcc2jugtlr3q/" class="article-date">
   <time datetime="2017-06-28T08:56:32.000Z" itemprop="datePublished">2017-06-28</time>
 </a>
     
@@ -243,7 +292,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/28/cjsyojuv7006clkc2v4n7z4z0/">UVA11235 - Frequent values（游程编码+线段树）</a>
+      <a class="article-title" href="/2017/06/28/cjta019id007ghcc2jugtlr3q/">UVA11235 - Frequent values（游程编码+线段树）</a>
     </h1>
   
 
@@ -264,7 +313,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/28/cjsyojuv7006clkc2v4n7z4z0/" data-id="cjsyojuv7006clkc2v4n7z4z0" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/28/cjta019id007ghcc2jugtlr3q/" data-id="cjta019id007ghcc2jugtlr3q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -276,7 +325,7 @@
   
     <article id="post-CodeForces743D-Chloe-and-pleasant-prizes（树型DP）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/27/cjsyojum3000wlkc2tyr664pm/" class="article-date">
+    <a href="/2017/06/27/cjta019990016hcc24bk0fd29/" class="article-date">
   <time datetime="2017-06-27T09:10:50.000Z" itemprop="datePublished">2017-06-27</time>
 </a>
     
@@ -292,7 +341,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/27/cjsyojum3000wlkc2tyr664pm/">CodeForces743D - Chloe and pleasant prizes（树型DP）</a>
+      <a class="article-title" href="/2017/06/27/cjta019990016hcc24bk0fd29/">CodeForces743D - Chloe and pleasant prizes（树型DP）</a>
     </h1>
   
 
@@ -313,7 +362,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/27/cjsyojum3000wlkc2tyr664pm/" data-id="cjsyojum3000wlkc2tyr664pm" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/27/cjta019990016hcc24bk0fd29/" data-id="cjta019990016hcc24bk0fd29" class="article-share-link">Share</a>
       
       
     </footer>
@@ -325,7 +374,7 @@
   
     <article id="post-CodeForces734E-Anton-and-Tree（缩点-树的直径）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/27/cjsyojumy001clkc2bgxqr6fs/" class="article-date">
+    <a href="/2017/06/27/cjta019920011hcc2tt2z6aee/" class="article-date">
   <time datetime="2017-06-27T02:17:47.000Z" itemprop="datePublished">2017-06-27</time>
 </a>
     
@@ -341,7 +390,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/27/cjsyojumy001clkc2bgxqr6fs/">CodeForces734E - Anton and Tree（缩点+树的直径）</a>
+      <a class="article-title" href="/2017/06/27/cjta019920011hcc2tt2z6aee/">CodeForces734E - Anton and Tree（缩点+树的直径）</a>
     </h1>
   
 
@@ -365,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/27/cjsyojumy001clkc2bgxqr6fs/" data-id="cjsyojumy001clkc2bgxqr6fs" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/27/cjta019920011hcc2tt2z6aee/" data-id="cjta019920011hcc2tt2z6aee" class="article-share-link">Share</a>
       
       
     </footer>
@@ -377,7 +426,7 @@
   
     <article id="post-HackerRank-pairs-again（暴力-预处理）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/26/cjsyojuq60039lkc21oojv7jv/" class="article-date">
+    <a href="/2017/06/26/cjta019eh004phcc2t2js810i/" class="article-date">
   <time datetime="2017-06-26T03:13:15.000Z" itemprop="datePublished">2017-06-26</time>
 </a>
     
@@ -393,7 +442,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/26/cjsyojuq60039lkc21oojv7jv/">HackerRank - pairs-again（暴力+预处理）</a>
+      <a class="article-title" href="/2017/06/26/cjta019eh004phcc2t2js810i/">HackerRank - pairs-again（暴力+预处理）</a>
     </h1>
   
 
@@ -415,7 +464,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/26/cjsyojuq60039lkc21oojv7jv/" data-id="cjsyojuq60039lkc21oojv7jv" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/26/cjta019eh004phcc2t2js810i/" data-id="cjta019eh004phcc2t2js810i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -427,7 +476,7 @@
   
     <article id="post-ZOJ3385-Hanami-Party-（贪心）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/25/cjsyojuvr006tlkc2x4rs7npt/" class="article-date">
+    <a href="/2017/06/25/cjta019j90080hcc2ejsrj66q/" class="article-date">
   <time datetime="2017-06-25T12:48:24.000Z" itemprop="datePublished">2017-06-25</time>
 </a>
     
@@ -443,7 +492,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/25/cjsyojuvr006tlkc2x4rs7npt/">ZOJ3385 - Hanami Party （贪心）</a>
+      <a class="article-title" href="/2017/06/25/cjta019j90080hcc2ejsrj66q/">ZOJ3385 - Hanami Party （贪心）</a>
     </h1>
   
 
@@ -469,7 +518,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/25/cjsyojuvr006tlkc2x4rs7npt/" data-id="cjsyojuvr006tlkc2x4rs7npt" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/25/cjta019j90080hcc2ejsrj66q/" data-id="cjta019j90080hcc2ejsrj66q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -481,7 +530,7 @@
   
     <article id="post-HDU5527-Too-Rich（贪心）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/25/cjsyojupa002rlkc2jslzfg2s/" class="article-date">
+    <a href="/2017/06/25/cjta019ec004lhcc22elnhomj/" class="article-date">
   <time datetime="2017-06-25T10:56:29.000Z" itemprop="datePublished">2017-06-25</time>
 </a>
     
@@ -497,7 +546,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/25/cjsyojupa002rlkc2jslzfg2s/">HDU5527 - Too Rich（贪心）</a>
+      <a class="article-title" href="/2017/06/25/cjta019ec004lhcc22elnhomj/">HDU5527 - Too Rich（贪心）</a>
     </h1>
   
 
@@ -521,63 +570,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/25/cjsyojupa002rlkc2jslzfg2s/" data-id="cjsyojupa002rlkc2jslzfg2s" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-CodeChef-MOU2H-Mountain-Holidays-2-（DP）" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/06/25/cjsyojun2001elkc22l0ddax6/" class="article-date">
-  <time datetime="2017-06-25T03:09:59.000Z" itemprop="datePublished">2017-06-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/DP/">DP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/25/cjsyojun2001elkc22l0ddax6/">CodeChef MOU2H - Mountain Holidays 2 （DP）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="题目链接："><a href="#题目链接：" class="headerlink" title="题目链接："></a>题目链接：</h1><p><a href="https://www.codechef.com/problems/MOU2H" target="_blank" rel="noopener">https://www.codechef.com/problems/MOU2H</a></p>
-<hr>
-<h1 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h1><p>理解题意后就是求一个序列中有多少个不同的子序列。</p>
-<hr>
-<h1 id="解题过程："><a href="#解题过程：" class="headerlink" title="解题过程："></a>解题过程：</h1><p>刚开始看错了题意，样例过不去，后来去翻了博客，才看懂题意，看懂题意后就好做了，就是一个简单的动态规划。</p>
-<hr>
-<h1 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h1><p>因为要求不同子序列的个数。</p>
-<p>定义状态$dp[i]$为前[i]个数中，不同子序列的个数。那么对于dp[i]可以由已下方式转移而来，记$pre[A[i]]$为A$[i]$这个数字上次出现的下标，如果未出现为$-1$。</p>
-<p>定义$dp[0]$为$1$代表一个空串。</p>
-<p>那么dp[i]可由以下状态转移而来：</p>
-<p>$$<br>dp[i] =<br>\begin{cases}<br>dp[i-1]\times 2 , &amp;pre[A[i]] = -1 \<br>dp[i-1] \times 2 - dp[pre[A[i]]-1], &amp;pre[A[i]] \neq -1<br>\end{cases}<br>$$</p>
-<p>如果前i-1个数的不同子串个数为N，那么加上第i个数之后，对于前i个不同的子串加上第i个数后都构成了一个新的串，那么对于前i个数的不同子串为，前i-1的不同子串个数+新构成的子串个数。</p>
-<p>不过如果第i个数曾经出现过的话，需要去重处理，如果3这个数字，在$5$和$9$这个位置都出现过的话，那么前$4$个数的子串后面加上第$5$个数和加上第$9$个数，构成的子串相同，这里需要减去最近出现的前一个位置的不同子串个数。<br>这里需要仔细理解下，$dp[i]$代表的是前$i$个元素构成的不同子串的个数，不是以元素$i$结尾的最大子串个数。</p>
-<p>这里介绍一个骚操作，数组的下标可以为负数，对于下面代码。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> *p = a+<span class="number">1</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; p[<span class="number">-1</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure></p>
-<p>输出的结果为<code>1</code></p>
-<hr>
-<h1 id="AC代码："><a href="#AC代码：" class="headerlink" title="AC代码："></a>AC代码：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX = <span class="number">1123456</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = MAX&lt;&lt;<span class="number">2</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MOD = <span class="number">1000000009</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> H[MAX];</span><br><span class="line"><span class="keyword">int</span> reserve[MAX*<span class="number">10</span>], *pre = reserve+INF;</span><br><span class="line"><span class="keyword">int</span> dp[MAX];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="keyword">int</span> n;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, H+i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            H[i] = H[i+<span class="number">1</span>] - H[i];</span><br><span class="line">            pre[H[i]] = <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            dp[i] = (dp[i<span class="number">-1</span>]&lt;&lt;<span class="number">1</span>)%MOD;</span><br><span class="line">            <span class="keyword">if</span> (pre[H[i]] != <span class="number">-1</span>) &#123;</span><br><span class="line">                dp[i] = (dp[i] - dp[pre[H[i]]<span class="number">-1</span>] + MOD)%MOD;</span><br><span class="line">            &#125;</span><br><span class="line">            pre[H[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, (dp[n<span class="number">-1</span>]<span class="number">-1</span>+MOD)%MOD);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/25/cjsyojun2001elkc22l0ddax6/" data-id="cjsyojun2001elkc22l0ddax6" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/25/cjta019ec004lhcc22elnhomj/" data-id="cjta019ec004lhcc22elnhomj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -630,23 +623,23 @@
       <ul>
         
           <li>
-            <a href="/2019/03/07/cjsyojuya008mlkc25p7bhv3z/">腾讯 IEG 后台开发面试</a>
+            <a href="/2019/03/15/cjta019jo0088hcc220a0y8nw/">依图研发工程师面试经历</a>
           </li>
         
           <li>
-            <a href="/2019/02/26/cjsyojuwe007blkc28j84ag52/">吉比特实习面试</a>
+            <a href="/2019/03/07/cjta019pq00evhcc2eb0a1766/">腾讯 IEG 后台开发面试</a>
           </li>
         
           <li>
-            <a href="/2019/01/15/cjsyojuxu0089lkc2um2ehdcz/">概率论笔记</a>
+            <a href="/2019/02/26/cjta019k2008ihcc2q82uz987/">吉比特实习面试</a>
           </li>
         
           <li>
-            <a href="/2018/11/16/cjsyojuwb0078lkc22v23vzy5/">二维ST表</a>
+            <a href="/2019/01/15/cjta019lg009ehcc2kpqd9yzk/">概率论笔记</a>
           </li>
         
           <li>
-            <a href="/2018/10/16/cjsyojutc004zlkc2kjvk6d3r/">SDUTACM十周年题解（Fish出题部分）</a>
+            <a href="/2018/11/16/cjta019jv008dhcc25btb5l0m/">二维ST表</a>
           </li>
         
       </ul>

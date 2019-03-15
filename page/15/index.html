@@ -62,9 +62,85 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-UVA10129-Play-on-Words（欧拉道路）" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/15/cjta019i3007ahcc2nxhd2k9z/" class="article-date">
+  <time datetime="2016-12-15T08:32:06.000Z" itemprop="datePublished">2016-12-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/图论/">图论</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/15/cjta019i3007ahcc2nxhd2k9z/">UVA10129-Play on Words（欧拉道路）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="题目链接："><a href="#题目链接：" class="headerlink" title="题目链接："></a>题目链接：</h1><p><a href="https://uva.onlinejudge.org/index.php?option=com_onlinejudge&amp;Itemid=8&amp;page=show_problem&amp;problem=1070" target="_blank" rel="noopener">UVA10129-Play on Words</a></p>
+<hr>
+<h1 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h1><p>给出一些单词，如果一个单词的首部字母和另一个单词的尾部字母相同，则可以首尾连接，每个单词只能使用一次，判断这些字母是否可以全部连接成一个串。</p>
+<hr>
+<h1 id="解题过程："><a href="#解题过程：" class="headerlink" title="解题过程："></a>解题过程：</h1><ul>
+<li>刚开始没弄清有向图和无向图欧拉路的定义，以为只判断边就可以了，于是简单写了一个只判读边的。</li>
+<li><p>显然是错误的，自己试了几组数据就不对。<br><a href="http://acm.sdut.edu.cn/onlinejudge2/index.php/Home/Index/problemdetail/pid/3683.html" target="_blank" rel="noopener">我这样想可能是被这个题带偏了节奏（误</a></p>
+</li>
+<li><p>然后仔细看了下书上的定义，还要保证图必须是连同的才可以，于是写了下，一发AC。</p>
+</li>
+<li></li>
+</ul>
+<hr>
+<h1 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h1><ul>
+<li><strong>首先明确欧拉路的充要条件：</strong></li>
+<li>对于无向图，最多只有两个点的度为1，则一定存在欧拉回路。</li>
+<li>对于有向图，最多只能有两个点的入度不等于出度，而且一个是入度恰好比出度大1，另一个是出度比入度大1。</li>
+<li>以上两个图都要保证<strong>底图</strong>（忽略边的方向后得到的图）是连通的。</li>
+<li>如果一个图不存在<strong>奇点</strong>（度数为奇数的点）则构成欧拉回路，否则为欧拉路。</li>
+</ul>
+<hr>
+<ul>
+<li>题目是有向图，把每个字母当做点，用两个数组统计每个点入度和出度，并判断。</li>
+<li>用dfs的方法把图遍历一遍，看是否每个点都到达过，是的话则是连通的图。</li>
+<li>两个判断条件与运算即是结果。</li>
+<li></li>
+</ul>
+<hr>
+<h1 id="AC代码："><a href="#AC代码：" class="headerlink" title="AC代码："></a>AC代码：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> head[<span class="number">26</span>], tail[<span class="number">26</span>], data[<span class="number">26</span>][<span class="number">26</span>], mark[<span class="number">26</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    mark[k] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (data[k][i])</span><br><span class="line">        &#123;</span><br><span class="line">            data[k][i] = <span class="number">0</span>;</span><br><span class="line">            data[i][k] = <span class="number">0</span>;</span><br><span class="line">            dfs(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">judge</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (mark[i] != <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            k = i;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(k);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">        <span class="keyword">if</span> (mark[i])</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; T;</span><br><span class="line">    <span class="keyword">while</span> (T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">memset</span>(head, <span class="number">0</span>, <span class="keyword">sizeof</span>(head));</span><br><span class="line">        <span class="built_in">memset</span>(tail, <span class="number">0</span>, <span class="keyword">sizeof</span>(tail));</span><br><span class="line">        <span class="built_in">memset</span>(data, <span class="number">0</span>, <span class="keyword">sizeof</span>(data));</span><br><span class="line">        <span class="built_in">memset</span>(mark, <span class="number">0</span>, <span class="keyword">sizeof</span>(mark));</span><br><span class="line">        <span class="keyword">int</span> n, flag = <span class="number">1</span>;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; n;</span><br><span class="line">        <span class="built_in">string</span> str;</span><br><span class="line">        <span class="keyword">while</span> (n--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; str;</span><br><span class="line">            head[str[<span class="number">0</span>]-<span class="string">'a'</span>]++;</span><br><span class="line">            tail[str[str.size()<span class="number">-1</span>]-<span class="string">'a'</span>]++;</span><br><span class="line"></span><br><span class="line">            data[str[<span class="number">0</span>]-<span class="string">'a'</span>][str[str.size()<span class="number">-1</span>]-<span class="string">'a'</span>] = <span class="number">1</span>;</span><br><span class="line">            data[str[str.size()<span class="number">-1</span>]-<span class="string">'a'</span>][str[<span class="number">0</span>]-<span class="string">'a'</span>] = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            mark[str[<span class="number">0</span>]-<span class="string">'a'</span>] = <span class="number">1</span>;</span><br><span class="line">            mark[str[str.size()<span class="number">-1</span>]-<span class="string">'a'</span>] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">0</span>, b = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (head[i]-tail[i] == <span class="number">1</span>)</span><br><span class="line">                a++;</span><br><span class="line">            <span class="keyword">if</span> (tail[i]-head[i] == <span class="number">1</span>)</span><br><span class="line">                b++;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">abs</span>(head[i]-tail[i]) &gt; <span class="number">1</span>)</span><br><span class="line">                flag = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag &amp;&amp; a == b &amp;&amp; a &lt;= <span class="number">1</span> &amp;&amp; judge())</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"Ordering is possible."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"The door cannot be opened."</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="扩展应用："><a href="#扩展应用：" class="headerlink" title="扩展应用："></a>扩展应用：</h1><p>按书上的说法欧拉回路的来源好像就是为了解决一笔画问题，于是写了一个有意思的程序，给定一个含有欧拉路的图，求如何打印欧拉路。</p>
+<hr>
+<h1 id="功能用法："><a href="#功能用法：" class="headerlink" title="功能用法："></a>功能用法：</h1><p>首先打开一个游戏<br><img src="http://img.blog.csdn.net/20161215170447246?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQUNNX0Zpc2g=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>然后分析出有几条边和点。<br><img src="http://img.blog.csdn.net/20161215170542887?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQUNNX0Zpc2g=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>输入数据，即可得出结果。<br><img src="http://img.blog.csdn.net/20161215170612992?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvQUNNX0Zpc2g=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<hr>
+<h1 id="源代码："><a href="#源代码：" class="headerlink" title="源代码："></a>源代码：</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;stack&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">const int MAX = 1123;</span><br><span class="line"></span><br><span class="line">int m, n;</span><br><span class="line">int data[MAX][MAX];</span><br><span class="line">stack&lt;int&gt; ans;</span><br><span class="line"></span><br><span class="line">void dfs(int pos)</span><br><span class="line">&#123;</span><br><span class="line">    for (int i = 1; i &lt;= n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if (data[pos][i])</span><br><span class="line">        &#123;</span><br><span class="line">            data[pos][i] = 0;</span><br><span class="line">            data[i][pos] = 0;</span><br><span class="line">            dfs(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ans.push(pos);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void put()</span><br><span class="line">&#123;</span><br><span class="line">    while (!ans.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; &quot;-&gt;&quot; &lt;&lt; ans.top();</span><br><span class="line">        ans.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    while (cin &gt;&gt; n &gt;&gt; m)</span><br><span class="line">    &#123;</span><br><span class="line">        memset(data, 0, sizeof(data));</span><br><span class="line">        int a, b;</span><br><span class="line">        for (int i = 0; i &lt; m; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">            data[a][b] = 1;</span><br><span class="line">            data[b][a] = 1;</span><br><span class="line">        &#125;</span><br><span class="line">        dfs(1);</span><br><span class="line">        put();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2016/12/15/cjta019i3007ahcc2nxhd2k9z/" data-id="cjta019i3007ahcc2nxhd2k9z" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2048（游戏）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/12/05/cjsyojv3m00fjlkc2kkh3ul7u/" class="article-date">
+    <a href="/2016/12/05/cjta019mu00achcc23aqyb5lq/" class="article-date">
   <time datetime="2016-12-05T15:26:26.000Z" itemprop="datePublished">2016-12-05</time>
 </a>
     
@@ -80,7 +156,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/05/cjsyojv3m00fjlkc2kkh3ul7u/">2048（游戏）</a>
+      <a class="article-title" href="/2016/12/05/cjta019mu00achcc23aqyb5lq/">2048（游戏）</a>
     </h1>
   
 
@@ -105,7 +181,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2016/12/05/cjsyojv3m00fjlkc2kkh3ul7u/" data-id="cjsyojv3m00fjlkc2kkh3ul7u" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2016/12/05/cjta019mu00achcc23aqyb5lq/" data-id="cjta019mu00achcc23aqyb5lq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -117,7 +193,7 @@
   
     <article id="post-自动走迷宫（DFS）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/12/05/cjsyojuyd008olkc27im6uu94/" class="article-date">
+    <a href="/2016/12/05/cjta019m6009vhcc2eh2moxbr/" class="article-date">
   <time datetime="2016-12-05T15:12:23.000Z" itemprop="datePublished">2016-12-05</time>
 </a>
     
@@ -133,7 +209,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/05/cjsyojuyd008olkc27im6uu94/">自动走迷宫（DFS）</a>
+      <a class="article-title" href="/2016/12/05/cjta019m6009vhcc2eh2moxbr/">自动走迷宫（DFS）</a>
     </h1>
   
 
@@ -160,7 +236,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2016/12/05/cjsyojuyd008olkc27im6uu94/" data-id="cjsyojuyd008olkc27im6uu94" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2016/12/05/cjta019m6009vhcc2eh2moxbr/" data-id="cjta019m6009vhcc2eh2moxbr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -172,7 +248,7 @@
   
     <article id="post-数独问题（工具）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/12/05/cjsyojuxg007zlkc2zoody45l/" class="article-date">
+    <a href="/2016/12/05/cjta019l50097hcc21m53fyct/" class="article-date">
   <time datetime="2016-12-05T14:58:34.000Z" itemprop="datePublished">2016-12-05</time>
 </a>
     
@@ -188,7 +264,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/05/cjsyojuxg007zlkc2zoody45l/">数独问题（工具）</a>
+      <a class="article-title" href="/2016/12/05/cjta019l50097hcc21m53fyct/">数独问题（工具）</a>
     </h1>
   
 
@@ -213,7 +289,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2016/12/05/cjsyojuxg007zlkc2zoody45l/" data-id="cjsyojuxg007zlkc2zoody45l" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2016/12/05/cjta019l50097hcc21m53fyct/" data-id="cjta019l50097hcc21m53fyct" class="article-share-link">Share</a>
       
       
     </footer>
@@ -225,7 +301,7 @@
   
     <article id="post-HDOJ1176-免费馅饼-（DP）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/12/05/cjsyojunb001jlkc2n343tkm1/" class="article-date">
+    <a href="/2016/12/05/cjta0199r001nhcc21ygelyah/" class="article-date">
   <time datetime="2016-12-05T14:05:33.000Z" itemprop="datePublished">2016-12-05</time>
 </a>
     
@@ -241,7 +317,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/05/cjsyojunb001jlkc2n343tkm1/">HDOJ1176. 免费馅饼.（DP）</a>
+      <a class="article-title" href="/2016/12/05/cjta0199r001nhcc21ygelyah/">HDOJ1176. 免费馅饼.（DP）</a>
     </h1>
   
 
@@ -275,7 +351,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2016/12/05/cjsyojunb001jlkc2n343tkm1/" data-id="cjsyojunb001jlkc2n343tkm1" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2016/12/05/cjta0199r001nhcc21ygelyah/" data-id="cjta0199r001nhcc21ygelyah" class="article-share-link">Share</a>
       
       
     </footer>
@@ -287,7 +363,7 @@
   
     <article id="post-CodeForces-255C-Almost-Arithmetical-Progression-DP" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/12/05/cjsyojulu000qlkc2j8fv0of0/" class="article-date">
+    <a href="/2016/12/05/cjta0198t000thcc2mplu9jtu/" class="article-date">
   <time datetime="2016-12-05T09:50:28.000Z" itemprop="datePublished">2016-12-05</time>
 </a>
     
@@ -303,7 +379,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/05/cjsyojulu000qlkc2j8fv0of0/">CodeForces 255C. Almost Arithmetical Progression (DP)</a>
+      <a class="article-title" href="/2016/12/05/cjta0198t000thcc2mplu9jtu/">CodeForces 255C. Almost Arithmetical Progression (DP)</a>
     </h1>
   
 
@@ -336,7 +412,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2016/12/05/cjsyojulu000qlkc2j8fv0of0/" data-id="cjsyojulu000qlkc2j8fv0of0" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2016/12/05/cjta0198t000thcc2mplu9jtu/" data-id="cjta0198t000thcc2mplu9jtu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -348,7 +424,7 @@
   
     <article id="post-SDUTOJ-LCS问题-DP" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/12/05/cjsyojutp0056lkc20b6jkae8/" class="article-date">
+    <a href="/2016/12/05/cjta019gw006hhcc2dyb3u3vr/" class="article-date">
   <time datetime="2016-12-05T09:50:22.000Z" itemprop="datePublished">2016-12-05</time>
 </a>
     
@@ -364,7 +440,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/05/cjsyojutp0056lkc20b6jkae8/">SDUTOJ. LCS问题.(DP)</a>
+      <a class="article-title" href="/2016/12/05/cjta019gw006hhcc2dyb3u3vr/">SDUTOJ. LCS问题.(DP)</a>
     </h1>
   
 
@@ -397,7 +473,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2016/12/05/cjsyojutp0056lkc20b6jkae8/" data-id="cjsyojutp0056lkc20b6jkae8" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2016/12/05/cjta019gw006hhcc2dyb3u3vr/" data-id="cjta019gw006hhcc2dyb3u3vr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -450,23 +526,23 @@
       <ul>
         
           <li>
-            <a href="/2019/03/07/cjsyojuya008mlkc25p7bhv3z/">腾讯 IEG 后台开发面试</a>
+            <a href="/2019/03/15/cjta019jo0088hcc220a0y8nw/">依图研发工程师面试经历</a>
           </li>
         
           <li>
-            <a href="/2019/02/26/cjsyojuwe007blkc28j84ag52/">吉比特实习面试</a>
+            <a href="/2019/03/07/cjta019pq00evhcc2eb0a1766/">腾讯 IEG 后台开发面试</a>
           </li>
         
           <li>
-            <a href="/2019/01/15/cjsyojuxu0089lkc2um2ehdcz/">概率论笔记</a>
+            <a href="/2019/02/26/cjta019k2008ihcc2q82uz987/">吉比特实习面试</a>
           </li>
         
           <li>
-            <a href="/2018/11/16/cjsyojuwb0078lkc22v23vzy5/">二维ST表</a>
+            <a href="/2019/01/15/cjta019lg009ehcc2kpqd9yzk/">概率论笔记</a>
           </li>
         
           <li>
-            <a href="/2018/10/16/cjsyojutc004zlkc2kjvk6d3r/">SDUTACM十周年题解（Fish出题部分）</a>
+            <a href="/2018/11/16/cjta019jv008dhcc25btb5l0m/">二维ST表</a>
           </li>
         
       </ul>

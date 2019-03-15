@@ -62,9 +62,57 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-CodeForce727E-Games-on-a-CD（字符串双Hash模板）" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/28/cjta0198o000qhcc2df62r8oj/" class="article-date">
+  <time datetime="2017-11-28T03:09:40.000Z" itemprop="datePublished">2017-11-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/字符串/">字符串</a>►<a class="article-category-link" href="/categories/ACM/字符串/字符串Hash/">字符串Hash</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/28/cjta0198o000qhcc2df62r8oj/">CodeForce727E - Games on a CD（字符串双hash模板）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="题目链接："><a href="#题目链接：" class="headerlink" title="题目链接："></a>题目链接：</h1><p><a href="http://codeforces.com/problemset/problem/727/E" target="_blank" rel="noopener">http://codeforces.com/problemset/problem/727/E</a></p>
+<h1 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h1><p>给出一个长度为 $N \times k$  的字符串，可以将其看成一个环首尾相接。问这个字符串是否可以由下面给出的  g 个字符串组成，保证字符串不同并且<strong>长度均为 k</strong>，每个字符串只能用一次。</p>
+<p>$1\le N, k \le 10^5$    $n \cdot k, g \cdot k \le 2 \times 10^6$</p>
+<h1 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h1><p>这题只要会字符串 Hash 就会做了，首先把原串复制一遍放到结尾。因为每个串的长度都为 k 所以从 0 到 k 枚举起点，然后不断的跳到后面 k 个位置，判断 g 个字符串是否匹配上这一段子串并且没有被使用，如果找到一组解就输出答案。</p>
+<p>复杂度$O(N\log n)$这里把 Hash 后的 pair 映射成整数，多了一个 log。</p>
+<h1 id="AC代码："><a href="#AC代码：" class="headerlink" title="AC代码："></a>AC代码：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX = <span class="number">200000</span> + <span class="number">100</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//--------------------双哈希---------------------------------------</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MOD[] = &#123;<span class="number">1000000007</span>, <span class="number">1000000009</span>&#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> P = <span class="number">10000017</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;ll&gt; hashValue[<span class="number">2</span>][MAX];</span><br><span class="line"><span class="built_in">string</span> str[MAX];</span><br><span class="line">ll powNum[<span class="number">2</span>][MAX];</span><br><span class="line"></span><br><span class="line"><span class="comment">//对一个字符串进行 hash 并保留前缀和</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">2</span>; k++) &#123;</span><br><span class="line">        hashValue[k][n].clear();</span><br><span class="line">        hashValue[k][n].push_back(<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= str[n].size(); i++) &#123;</span><br><span class="line">            hashValue[k][n].push_back((hashValue[k][n][i - <span class="number">1</span>] * P + str[n][i - <span class="number">1</span>]) % MOD[k]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//获得某个字符串的任一子串的 hash 值</span></span><br><span class="line"><span class="keyword">inline</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; getHash(<span class="keyword">int</span> n, <span class="keyword">int</span> l = <span class="number">0</span>, <span class="keyword">int</span> r = <span class="number">-1</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (r == <span class="number">-1</span>) r = str[n].size() - <span class="number">1</span>;</span><br><span class="line">    l++, r++;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">2</span>; k++) &#123;</span><br><span class="line">        ans.push_back((<span class="keyword">int</span>) (((hashValue[k][n][r] - hashValue[k][n][l - <span class="number">1</span>] * powNum[k][r - l + <span class="number">1</span>]) % MOD[k] + MOD[k]) %</span><br><span class="line">                             MOD[k]));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> make_pair(ans[<span class="number">0</span>], ans[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化幂，计算过程中使用</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init_pow</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">2</span>; k++) &#123;</span><br><span class="line">        powNum[k][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; MAX; i++) &#123;</span><br><span class="line">            powNum[k][i] = powNum[k][i - <span class="number">1</span>] * P % MOD[k];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//将 hash 得到的 pair 映射成整数</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; store;</span><br><span class="line"><span class="built_in">map</span>&lt;pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt; hashName;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">getID</span><span class="params">(pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; n, <span class="keyword">int</span> index = <span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (hashName.count(n)) <span class="keyword">return</span> hashName[n];</span><br><span class="line">    store.push_back(index);</span><br><span class="line">    <span class="keyword">return</span> hashName[n] = store.size() - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//--------------------双哈希------------------------------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> ok[MAX];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    init_pow();</span><br><span class="line"></span><br><span class="line">    ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> n, k, g;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; str[<span class="number">0</span>];</span><br><span class="line">    str[<span class="number">0</span>] = str[<span class="number">0</span>] + str[<span class="number">0</span>];</span><br><span class="line">    init(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; g;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= g; i++) &#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; str[i];</span><br><span class="line">        init(i);</span><br><span class="line">        getID(getHash(i), i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//枚举起点</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> st = <span class="number">0</span>; st &lt; k; st++) &#123;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">        <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">        <span class="comment">//计算从起点到终点中，是否可以有 g 个字符串组成</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = st; i &lt; st + str[<span class="number">0</span>].size() / <span class="number">2</span>; i += k) &#123;</span><br><span class="line">            pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; v = getHash(<span class="number">0</span>, i + <span class="number">1</span>, i + k);</span><br><span class="line">            <span class="keyword">if</span> (!hashName.count(v)) &#123;</span><br><span class="line">                flag = <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">int</span> idx = getID(v);</span><br><span class="line">            <span class="keyword">if</span> (ok[idx]) &#123;</span><br><span class="line">                flag = <span class="literal">false</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            ans.push_back(idx);</span><br><span class="line">            ok[idx] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ans.size(); i++) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%d "</span>, store[ans[i]]);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ans.size(); i++) &#123;</span><br><span class="line">            ok[ans[i]] = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"NO\n"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="解题过程："><a href="#解题过程：" class="headerlink" title="解题过程："></a>解题过程：</h1><p>Hash 过程的代码完全参照<a href="https://www.bilibili.com/video/av7230433/?from=search&amp;seid=6735421237600758359" target="_blank" rel="noopener">卿学姐的视频</a>写的，非常感谢！</p>
+<p><a href="http://pan.baidu.com/s/1c27PEF2" target="_blank" rel="noopener">PPT链接</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2017/11/28/cjta0198o000qhcc2df62r8oj/" data-id="cjta0198o000qhcc2df62r8oj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-线性基小结" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/11/27/cjsyojuy5008jlkc236s0njow/" class="article-date">
+    <a href="/2017/11/27/cjta019m4009thcc21618ij7a/" class="article-date">
   <time datetime="2017-11-27T02:45:00.000Z" itemprop="datePublished">2017-11-27</time>
 </a>
     
@@ -80,7 +128,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/27/cjsyojuy5008jlkc236s0njow/">线性基小结</a>
+      <a class="article-title" href="/2017/11/27/cjta019m4009thcc21618ij7a/">线性基小结</a>
     </h1>
   
 
@@ -105,7 +153,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/11/27/cjsyojuy5008jlkc236s0njow/" data-id="cjsyojuy5008jlkc236s0njow" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/11/27/cjta019m4009thcc21618ij7a/" data-id="cjta019m4009thcc21618ij7a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -117,7 +165,7 @@
   
     <article id="post-K-D树小结" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/11/20/cjsyojv4w00fwlkc2zzad2wdk/" class="article-date">
+    <a href="/2017/11/20/cjta019q400f1hcc2gadjjtnf/" class="article-date">
   <time datetime="2017-11-20T11:05:08.000Z" itemprop="datePublished">2017-11-20</time>
 </a>
     
@@ -133,7 +181,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/20/cjsyojv4w00fwlkc2zzad2wdk/">K-D树小结</a>
+      <a class="article-title" href="/2017/11/20/cjta019q400f1hcc2gadjjtnf/">K-D树小结</a>
     </h1>
   
 
@@ -186,7 +234,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/11/20/cjsyojv4w00fwlkc2zzad2wdk/" data-id="cjsyojv4w00fwlkc2zzad2wdk" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/11/20/cjta019q400f1hcc2gadjjtnf/" data-id="cjta019q400f1hcc2gadjjtnf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -198,7 +246,7 @@
   
     <article id="post-SDUTOJ4079-Cirno-のさんすう教室-模拟" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/11/20/cjsyojutz005dlkc2wvykwkyl/" class="article-date">
+    <a href="/2017/11/20/cjta019h4006nhcc2csfaq8dx/" class="article-date">
   <time datetime="2017-11-20T04:32:20.000Z" itemprop="datePublished">2017-11-20</time>
 </a>
     
@@ -214,7 +262,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/20/cjsyojutz005dlkc2wvykwkyl/">SDUTOJ4079 - Cirno のさんすう教室(模拟)</a>
+      <a class="article-title" href="/2017/11/20/cjta019h4006nhcc2csfaq8dx/">SDUTOJ4079 - Cirno のさんすう教室(模拟)</a>
     </h1>
   
 
@@ -238,7 +286,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/11/20/cjsyojutz005dlkc2wvykwkyl/" data-id="cjsyojutz005dlkc2wvykwkyl" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/11/20/cjta019h4006nhcc2csfaq8dx/" data-id="cjta019h4006nhcc2csfaq8dx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -250,7 +298,7 @@
   
     <article id="post-SDUTOJ4071-绿博的帽子（前缀和）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/11/20/cjsyojutv005blkc2sdc8od40/" class="article-date">
+    <a href="/2017/11/20/cjta019gz006jhcc2dfi9v8lw/" class="article-date">
   <time datetime="2017-11-20T04:21:22.000Z" itemprop="datePublished">2017-11-20</time>
 </a>
     
@@ -266,7 +314,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/20/cjsyojutv005blkc2sdc8od40/">SDUTOJ4071 - 绿博的帽子（前缀和）</a>
+      <a class="article-title" href="/2017/11/20/cjta019gz006jhcc2dfi9v8lw/">SDUTOJ4071 - 绿博的帽子（前缀和）</a>
     </h1>
   
 
@@ -315,7 +363,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/11/20/cjsyojutv005blkc2sdc8od40/" data-id="cjsyojutv005blkc2sdc8od40" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/11/20/cjta019gz006jhcc2dfi9v8lw/" data-id="cjta019gz006jhcc2dfi9v8lw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -327,7 +375,7 @@
   
     <article id="post-ICPC青岛站总结" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/11/09/cjsyojuqd003blkc2u7l5zlhz/" class="article-date">
+    <a href="/2017/11/09/cjta019ep004uhcc2kxxqbfg7/" class="article-date">
   <time datetime="2017-11-09T06:38:32.000Z" itemprop="datePublished">2017-11-09</time>
 </a>
     
@@ -343,7 +391,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/09/cjsyojuqd003blkc2u7l5zlhz/">ICPC青岛站总结</a>
+      <a class="article-title" href="/2017/11/09/cjta019ep004uhcc2kxxqbfg7/">ICPC青岛站总结</a>
     </h1>
   
 
@@ -360,7 +408,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/11/09/cjsyojuqd003blkc2u7l5zlhz/" data-id="cjsyojuqd003blkc2u7l5zlhz" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/11/09/cjta019ep004uhcc2kxxqbfg7/" data-id="cjta019ep004uhcc2kxxqbfg7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -372,7 +420,7 @@
   
     <article id="post-51nod1378-夹克老爷的愤怒（树型DP-贪心）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/10/31/cjsyojuko000alkc2tu8tg7ej/" class="article-date">
+    <a href="/2017/10/31/cjta01980000ahcc2zxxsxj8y/" class="article-date">
   <time datetime="2017-10-31T12:51:52.000Z" itemprop="datePublished">2017-10-31</time>
 </a>
     
@@ -388,7 +436,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/31/cjsyojuko000alkc2tu8tg7ej/">51nod1378 - 夹克老爷的愤怒（树型DP+贪心）</a>
+      <a class="article-title" href="/2017/10/31/cjta01980000ahcc2zxxsxj8y/">51nod1378 - 夹克老爷的愤怒（树型DP+贪心）</a>
     </h1>
   
 
@@ -412,7 +460,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/10/31/cjsyojuko000alkc2tu8tg7ej/" data-id="cjsyojuko000alkc2tu8tg7ej" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/10/31/cjta01980000ahcc2zxxsxj8y/" data-id="cjta01980000ahcc2zxxsxj8y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -424,7 +472,7 @@
   
     <article id="post-HDU4819-Mosaic（二维线段树-单点更新区间查询-模板）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/10/27/cjsyojuph002wlkc2m5qcrxg5/" class="article-date">
+    <a href="/2017/10/27/cjta019e9004ihcc2qxf9jime/" class="article-date">
   <time datetime="2017-10-27T10:11:19.000Z" itemprop="datePublished">2017-10-27</time>
 </a>
     
@@ -440,7 +488,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/27/cjsyojuph002wlkc2m5qcrxg5/">HDU4819 - Mosaic（二维线段树-单点更新区间查询 + 模板）</a>
+      <a class="article-title" href="/2017/10/27/cjta019e9004ihcc2qxf9jime/">HDU4819 - Mosaic（二维线段树-单点更新区间查询 + 模板）</a>
     </h1>
   
 
@@ -459,7 +507,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/10/27/cjsyojuph002wlkc2m5qcrxg5/" data-id="cjsyojuph002wlkc2m5qcrxg5" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/10/27/cjta019e9004ihcc2qxf9jime/" data-id="cjta019e9004ihcc2qxf9jime" class="article-share-link">Share</a>
       
       
     </footer>
@@ -471,7 +519,7 @@
   
     <article id="post-CCPC2017哈理工比赛总结" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/10/24/cjsyojul8000elkc2lbhwwshz/" class="article-date">
+    <a href="/2017/10/24/cjta0198b000ghcc2w6r0x71x/" class="article-date">
   <time datetime="2017-10-24T12:54:18.000Z" itemprop="datePublished">2017-10-24</time>
 </a>
     
@@ -487,7 +535,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/24/cjsyojul8000elkc2lbhwwshz/">CCPC2017哈理工比赛总结</a>
+      <a class="article-title" href="/2017/10/24/cjta0198b000ghcc2w6r0x71x/">CCPC2017哈理工比赛总结</a>
     </h1>
   
 
@@ -512,7 +560,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/10/24/cjsyojul8000elkc2lbhwwshz/" data-id="cjsyojul8000elkc2lbhwwshz" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/10/24/cjta0198b000ghcc2w6r0x71x/" data-id="cjta0198b000ghcc2w6r0x71x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -524,7 +572,7 @@
   
     <article id="post-2-SAT问题（模板）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/10/18/cjsyojuja0000lkc276jzc06y/" class="article-date">
+    <a href="/2017/10/18/cjta019740000hcc2khpqo1br/" class="article-date">
   <time datetime="2017-10-18T01:32:46.000Z" itemprop="datePublished">2017-10-18</time>
 </a>
     
@@ -540,7 +588,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/18/cjsyojuja0000lkc276jzc06y/">2-SAT问题（模板）</a>
+      <a class="article-title" href="/2017/10/18/cjta019740000hcc2khpqo1br/">2-SAT问题（模板）</a>
     </h1>
   
 
@@ -595,66 +643,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/10/18/cjsyojuja0000lkc276jzc06y/" data-id="cjsyojuja0000lkc276jzc06y" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-URAL1183-Brackets-Sequence（区间DP）" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/10/16/cjsyojuui005qlkc2ecna4eys/" class="article-date">
-  <time datetime="2017-10-16T01:01:19.000Z" itemprop="datePublished">2017-10-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/DP/">DP</a>►<a class="article-category-link" href="/categories/ACM/DP/区间DP/">区间DP</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/16/cjsyojuui005qlkc2ecna4eys/">URAL1183 - Brackets Sequence（区间DP）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="题目链接："><a href="#题目链接：" class="headerlink" title="题目链接："></a>题目链接：</h1><p><a href="http://acm.timus.ru/problem.aspx?space=1&amp;num=1183" target="_blank" rel="noopener">http://acm.timus.ru/problem.aspx?space=1&amp;num=1183</a></p>
-<h1 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h1><p><a href="http://blog.csdn.net/jiange_zh/article/details/49994207" target="_blank" rel="noopener">参考博客</a></p>
-<blockquote>
-<p>定义正规的括号序列如下: </p>
-<ol>
-<li>空序列是一个正规的括号序列 </li>
-<li>如果S是一个正规的括号序列, 那么(S) 和[S] 也都是正规的括号序列。 </li>
-<li>如果A和B是正规的括号序列, 那么AB也是一个正规的括号序列。 </li>
-</ol>
-<p>现给定一个括号序列A（只包含小括号和中括号，可能为空序列），求一个正规括号序列B，使得A包含于B，而且B的长度是满足条件的序列中最小的。</p>
-</blockquote>
-<h1 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h1><p>设 $dp[i][j]$ 为使得 [i, j] 这段区间括号匹配所需要的最小花费，那么根据题意，$dp[i][j]$可由两种方式转移而来：</p>
-<ul>
-<li>如果 i 与 j 可以匹配的话$dp[i][j] = dp[i + 1][j - 1]$</li>
-<li>不关 i 与 j 是否匹配 $dp[i][k] = dp[i][k] + dp[k + 1][j]$</li>
-</ul>
-<p>最后递归的打印答案，转移的时候标记一下，当前是否分为两个子序列。</p>
-<h1 id="AC代码："><a href="#AC代码：" class="headerlink" title="AC代码："></a>AC代码：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> s[<span class="number">1123</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">112</span>][<span class="number">112</span>];</span><br><span class="line"><span class="keyword">int</span> mark[<span class="number">112</span>][<span class="number">112</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l &gt; r) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[l] == <span class="string">'('</span> || s[l] == <span class="string">')'</span>) <span class="built_in">cout</span> &lt;&lt; <span class="string">"()"</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"[]"</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (mark[l][r] == <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s[l] == <span class="string">'('</span>) &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"("</span>;</span><br><span class="line">            print(l + <span class="number">1</span>, r - <span class="number">1</span>);</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">")"</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"["</span>;</span><br><span class="line">            print(l + <span class="number">1</span>, r - <span class="number">1</span>);</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="string">"]"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        print(l, mark[l][r]);</span><br><span class="line">        print(mark[l][r] + <span class="number">1</span>, r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    gets(s + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">int</span> n = <span class="built_in">strlen</span>(s + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">if</span> (!n) &#123;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memset</span>(dp, <span class="number">0</span>, <span class="keyword">sizeof</span>(dp));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) dp[i][i] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> l = <span class="number">2</span>; l &lt;= n; l++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n - l + <span class="number">1</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> j = i + l - <span class="number">1</span>;</span><br><span class="line">            dp[i][j] = INF;</span><br><span class="line">            <span class="keyword">if</span> (s[i] == <span class="string">'('</span> &amp;&amp; s[j] == <span class="string">')'</span> || s[i] == <span class="string">'['</span> &amp;&amp; s[j] == <span class="string">']'</span>) &#123;</span><br><span class="line">                dp[i][j] = min(dp[i][j], dp[i + <span class="number">1</span>][j - <span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">            mark[i][j] = <span class="number">-1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt; j; k++) &#123;</span><br><span class="line">                <span class="keyword">if</span> (dp[i][k] + dp[k + <span class="number">1</span>][j] &lt; dp[i][j]) &#123;</span><br><span class="line">                    dp[i][j] = dp[i][k] + dp[k + <span class="number">1</span>][j];</span><br><span class="line">                    mark[i][j] = k;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    print(<span class="number">1</span>, n);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="解题过程："><a href="#解题过程：" class="headerlink" title="解题过程："></a>解题过程：</h1><p>这题卡了好久ORZ，之前了解过一点区间DP，结果还是不会做。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/10/16/cjsyojuui005qlkc2ecna4eys/" data-id="cjsyojuui005qlkc2ecna4eys" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/10/18/cjta019740000hcc2khpqo1br/" data-id="cjta019740000hcc2khpqo1br" class="article-share-link">Share</a>
       
       
     </footer>
@@ -707,23 +696,23 @@
       <ul>
         
           <li>
-            <a href="/2019/03/07/cjsyojuya008mlkc25p7bhv3z/">腾讯 IEG 后台开发面试</a>
+            <a href="/2019/03/15/cjta019jo0088hcc220a0y8nw/">依图研发工程师面试经历</a>
           </li>
         
           <li>
-            <a href="/2019/02/26/cjsyojuwe007blkc28j84ag52/">吉比特实习面试</a>
+            <a href="/2019/03/07/cjta019pq00evhcc2eb0a1766/">腾讯 IEG 后台开发面试</a>
           </li>
         
           <li>
-            <a href="/2019/01/15/cjsyojuxu0089lkc2um2ehdcz/">概率论笔记</a>
+            <a href="/2019/02/26/cjta019k2008ihcc2q82uz987/">吉比特实习面试</a>
           </li>
         
           <li>
-            <a href="/2018/11/16/cjsyojuwb0078lkc22v23vzy5/">二维ST表</a>
+            <a href="/2019/01/15/cjta019lg009ehcc2kpqd9yzk/">概率论笔记</a>
           </li>
         
           <li>
-            <a href="/2018/10/16/cjsyojutc004zlkc2kjvk6d3r/">SDUTACM十周年题解（Fish出题部分）</a>
+            <a href="/2018/11/16/cjta019jv008dhcc25btb5l0m/">二维ST表</a>
           </li>
         
       </ul>

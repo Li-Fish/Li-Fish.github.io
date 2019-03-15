@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>第九届ACM山东省赛总结 | Fish&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="简易题解：A题意就不说了，只考虑第一个字符串和第二个字符串的每种字母有多少个，然后贪心的考虑怎么变化，比如后面需求两个 A，那么先考虑依次前面有没有 Z 、Y、X 来转化。不过这题也可以写最小费用流，KM 二分图最佳完美匹配，毕竟只有 26 × 2 个点。 Bn × n 的棋盘，每个格子上有一个非负的值，0 表示不可选，其他值可选，需要选择若干个格子，并且所选的格子不能同行或同列，在保证选的格子尽">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第九届ACM山东省赛总结">
+<meta property="og:url" content="https://li-fish.github.io/2018/05/07/cjta019po00euhcc2ufuzvpdu/index.html">
+<meta property="og:site_name" content="Fish&#39;s Blog">
+<meta property="og:description" content="简易题解：A题意就不说了，只考虑第一个字符串和第二个字符串的每种字母有多少个，然后贪心的考虑怎么变化，比如后面需求两个 A，那么先考虑依次前面有没有 Z 、Y、X 来转化。不过这题也可以写最小费用流，KM 二分图最佳完美匹配，毕竟只有 26 × 2 个点。 Bn × n 的棋盘，每个格子上有一个非负的值，0 表示不可选，其他值可选，需要选择若干个格子，并且所选的格子不能同行或同列，在保证选的格子尽">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-07T09:30:19.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第九届ACM山东省赛总结">
+<meta name="twitter:description" content="简易题解：A题意就不说了，只考虑第一个字符串和第二个字符串的每种字母有多少个，然后贪心的考虑怎么变化，比如后面需求两个 A，那么先考虑依次前面有没有 Z 、Y、X 来转化。不过这题也可以写最小费用流，KM 二分图最佳完美匹配，毕竟只有 26 × 2 个点。 Bn × n 的棋盘，每个格子上有一个非负的值，0 表示不可选，其他值可选，需要选择若干个格子，并且所选的格子不能同行或同列，在保证选的格子尽">
+  
+    <link rel="alternate" href="/atom.xml" title="Fish&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Fish&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://li-fish.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-第九届ACM山东省赛总结" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/07/cjta019po00euhcc2ufuzvpdu/" class="article-date">
+  <time datetime="2018-05-07T08:19:52.000Z" itemprop="datePublished">2018-05-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/历程/">历程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      第九届ACM山东省赛总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="简易题解："><a href="#简易题解：" class="headerlink" title="简易题解："></a>简易题解：</h1><h2 id="A"><a href="#A" class="headerlink" title="A"></a>A</h2><p>题意就不说了，只考虑第一个字符串和第二个字符串的每种字母有多少个，然后贪心的考虑怎么变化，比如后面需求两个 A，那么先考虑依次前面有没有 Z 、Y、X 来转化。不过这题也可以写最小费用流，KM 二分图最佳完美匹配，毕竟只有 26 × 2 个点。</p>
+<h2 id="B"><a href="#B" class="headerlink" title="B"></a>B</h2><p>n × n 的棋盘，每个格子上有一个非负的值，0 表示不可选，其他值可选，需要选择若干个格子，并且所选的格子不能同行或同列，在保证选的格子尽量多的情况下使得选的权值最小的格子尽量的大。</p>
+<p>如果只考虑让选的格子尽量的大的话，那么这就是一个二分图的模板题，假设棋盘最多选 M 个格子，这里选择的最小的格子尽量大，那么二分答案，考虑删除小于答案的格子剩下的格子能否选够 M 个。</p>
+<p>据说出题人卡了网络流的写法…不知道匈牙利能不能过，我不放心复杂度写的 HK。</p>
+<h1 id="C"><a href="#C" class="headerlink" title="C"></a>C</h1><p>给出一个 N 个节点的无向图，初始没有边，让你连边使得图连通，节点编号 1 到 N，建一条 i 号节点到 j 号节点的边的花费是 (i + j)，那么显然答案就是从 1 开始对每个节点建 n - 1 条边。</p>
+<h2 id="D"><a href="#D" class="headerlink" title="D"></a>D</h2><p>给出一颗树，每条边有容量和权值，叶子可以走到根节点，然后路径上的权值和乘走的流量就是对答案的贡献，问答案的最大值。</p>
+<p>考虑每个叶子到根的权值和，递减排序。依次选取权值和最大的叶子，让他尽可能的走。这样计算出来就是最大的答案，这个贪心很显然就能想到是正确的。</p>
+<p>这里需要用到树链剖分维护一条链的信息，选取一个叶子的时候，首先看他到根节点这条链上容量的最小值为多少，然后让他走完这些流量，最后让这条链删去这些流量。</p>
+<h2 id="E"><a href="#E" class="headerlink" title="E"></a>E</h2><p>给出 1 到 N 的数的一个排列，一个 Good 数的定义为前面至少有一个小于他的数，要求删掉一个数，使得剩下的 Good 数尽量的多，多解输出最小解。</p>
+<p>这里我用单调栈维护了，其实只需要维护最小值和次小值就可以了。</p>
+<p>对于每个数，我们考虑删除他之后会少几个 Good 数，我们维护一个单调栈和出栈元素的最小值，到 i + 1 位置时，我们首先让栈里大于 i + 1 位置的数出栈，如果队列里的元素只有一个并且出栈的元素没有小于 i + 1 位置的，那么必须由栈里的这个来成为小于 i + 1 位置的数，删掉栈里这个数之后失去的 Good 数的数量加一，然后 i + 1 位置的数入栈。</p>
+<p>最后删掉最没有贡献的数就可以了，并考虑这个数是不是 Good 数。</p>
+<h2 id="F"><a href="#F" class="headerlink" title="F"></a>F</h2><p>容斥定理，考虑区间之间交的情况，首先加上全部区间长度相乘，然后减去第一个和第二个相等，第二个和第三个相等…然后加上第一个和第二个并且第三个相等…</p>
+<p>可以手写一下，对拍验证…最后我也不知道有没有写对</p>
+<h2 id="G"><a href="#G" class="headerlink" title="G"></a>G</h2><p>A 和 B 进行 Nim 博弈，B 开局可以移除至多 D 堆，问 B 有多少种移除堆的方案能过胜利。</p>
+<p>这里数据范围很小，至多 1000 堆，每堆大小至多 1000，D 至多 10 堆。</p>
+<p>显然如果 B 要赢必须要保证所有堆的异或和为 0 。</p>
+<p>依次从左到右考虑每堆选不选，设 $dp[i][j][k]$ 的值为考虑完第 i 堆，前 i 堆的异或和为 j，移了 D 堆的方案数。</p>
+<p>那么 $\sum_{i=0}^ddp[n][0][i]$就是最终答案，转移如下</p>
+<p>$dp[i][j][k] = dp[i - 1][j][k] + dp[i - 1][j \oplus h_{i-1}][d-1]$</p>
+<p>如果 k 等于 0 的话仅考虑 $dp[i - 1][j][k] $ 的转移。</p>
+<h1 id="热身赛："><a href="#热身赛：" class="headerlink" title="热身赛："></a>热身赛：</h1><p>当时榜炸掉了…然后完全没有跟榜，做题是按难度递减做的，先写了一发最难的 A 题，正解是区间 DP，然后以为是签到题，写了个假算法就交上去了。然后看了下 B 题是训练赛的原题，二维偏序或者主席树、线段树合并都可以写，于是上去就写了，然后拿了 A 区的第一个 B 题的气球（毒瘤开题）。然后做的 C，大概是我出的大一上学期期末考试题的变式 ？D 题我没看，队友说可以写就写完 A 了，应该是一个特别水的签到题。</p>
+<p>最后 A 题也是完全没思路，我完全没往区间 DP 上想，其实这个热身赛的榜的前几名已经和正式赛的榜差不多了…</p>
+<p>然后发现山大和中石油的强队有点多，起初我们还是以为山大和中石油只有一两个比我们强的，运气好还能捧个杯？（雾）结果比我们强和实力相当的大概有六七个，就有点绝望了，不过还好实力差距还不是很大。</p>
+<h1 id="正式赛："><a href="#正式赛：" class="headerlink" title="正式赛："></a>正式赛：</h1><p>首先先看的 C，标准的签到题，让队友敲的，结果 WA 了两次才 A，可以说是开局非常爆炸了，于是导致我后面交题也不怎么看罚时了（不知道算不算什么破釜沉舟背水一战），想着只能靠题数取胜了。</p>
+<p>然后看的 B，理解错了题意，正确的题意是符合贪心性质的，可以写贪心，我大概是做了个 Hard Version，写了个最小费用流，非常熟练的抄完自己总结的板子，保存边的数量的变量没初始化 RE 了一发，然后由于不考虑罚时，于是改完就立刻交了一发就 A 了。</p>
+<p>在我写 B 的时候队友就已经在看 F 题了（数据出错的那个题），等我写完他告诉了我一下容斥的做法，我觉得没什么问题就开始敲了，不过写的过程中感觉非常难写…看到榜单上 6 分钟就 AC 的，怀疑自己的做法是不是不对…然后让队友写了个对拍自己去重新想了一下思路，发现还是得写容斥，于是回来继续写，写完后又对拍了几组数据改了改就交了，然后肯定是 A 的，最后也不知道这个题有没有写对 ORZ</p>
+<p>这时候另一个队友一直在读题，我敲完一道题基本上就可以接着看下一道题了，这时候一个队友在想 E 题，我去写 G 题，然后一眼看过去就是 NIM 博弈加 DP 记录方案数，不过这里数据越界改了好几次才过，不过改完一次就交一次不在乎罚时，所幸改的还算快。</p>
+<p>在我改 G 题的时候让队友敲了下 E 题，NlogN 的复杂度 TLE 了，感觉必须得线性的算法才能过，这时候封榜还有半个小时，榜上已经有六题的了，于是决定让队友去其他的题了（B 和 D），然后我考虑这个题的答案限制条件比较少，应该用不到队友敲得逆序数之类的，于是正好我们都想到单调队列，于是先写了个单调队列，然后测了下样例对了，要交的时候还是不放心，因为如果这个 WA 的话我不能确定是算法错了还是代码细节错了，于是让队友出了下样例果然错了，后来多考虑了一个条件就 OK 了，然后提交 AC。</p>
+<p>这时候队友说 B 题有思路了，不过是图论题还是让我敲，我一直感觉 1e8 的时间复杂度过不去，于是先让队友把板子抄上，然后自己想了下细节怎么处理，感觉没问题之后就开始上手做了，写完 debug 了 20 多分钟，队友板子抄错了两个地方，改完过了另一个队友出的特别强的样例（反转他说是比较强），提交就 AC 了。</p>
+<p>这时候比赛结束还有四十分钟，榜上已经有七题的队伍了，加上我们罚时比较高，夺冠要在这 40 分钟 A 两题感觉希望不太大了，有点失望…队友在我写 B 题的时候已经想了下大概的 D 题做法，我问了他一下，感觉加上树链剖分就可以写了，于是拿过来之前直接整理的树链剖分板子就超了起来，心情比较差加上又特别累了，中间电脑还重启耽误了十多分钟，最后还有十分钟结束才写完，总共 200 多行代码，我当时就和队友说，这么长的代码要是不出点 Bug 什么的我都不信，结果运行没编译错误，然后输入样例结果却都是 0 … 非常紧急的改完之后还剩五分钟了，最终居然过了样例，当时 PC ^ 2 显示结束还有三分钟立刻就交了，之后就赶紧看代码还有没有错误。然后看着看着队友说有评测结果了，看了一下返回了一个 Yes，可以说是非常开心了。</p>
+<h1 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h1><p>这场比赛打起来还算是非常开心的，F 题出错了也没有耽误我们太长的时间，题目基本上都是看到了就有大概的思路和做法了，只有 E 和 F 想的时间长一点。整体发挥还算是不错，不过细节失误算是比较多，比如没初始化，数组越界，感觉就是 200 行代码居然没有细节错误，但是写的非常短很有自信的代码错了两三处，感觉非常奇怪…</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2018/05/07/cjta019po00euhcc2ufuzvpdu/" data-id="cjta019po00euhcc2ufuzvpdu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/12/cjta0197o0004hcc2ec6x8h6x/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2017级《程序设计基础（B）II》期末机考题解（Fish出题部分）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/03/cjta019k9008nhcc2nr29xrgy/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">后缀数组小结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/">DP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/区间DP/">区间DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/数位DP/">数位DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/斜率优化/">斜率优化</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/树型DP/">树型DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/状压DP/">状压DP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/二分/">二分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/二进制/">二进制</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/命题/">命题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/">图论</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/2-SAT/">2-SAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/匹配/">匹配</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/差分约束/">差分约束</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/最短路/">最短路</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/网络流/">网络流</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/连通性/">连通性</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/">字符串</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/AC自动机/">AC自动机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/后缀数组/">后缀数组</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/回文树/">回文树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/字符串Hash/">字符串Hash</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/搜索/">搜索</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/搜索/BFS/">BFS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/">数学</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/数论/">数论</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/矩阵快速幂/">矩阵快速幂</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/线性基/">线性基</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/高斯消元/">高斯消元</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/">数据结构</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/K-D树/">K-D树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/LCT/">LCT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/ST表/">ST表</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/Splay/">Splay</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/主席树/">主席树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/并查集/">并查集</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/栈/">栈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/树/">树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/树链剖分/">树链剖分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/线段树/">线段树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/虚树/">虚树</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/模拟/">模拟</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/知识小结/">知识小结</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/计算几何/">计算几何</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/贪心/">贪心</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/CS课程/">CS课程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/历程/">历程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/命题/">命题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/想法/">想法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂物/">杂物</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/游戏/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/爬虫-数据处理/">爬虫&数据处理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/Java/">Java</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网页设计/">网页设计</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/网页设计/Web服务器/">Web服务器</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/音乐/">音乐</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/音乐/乐理/">乐理</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/15/cjta019jo0088hcc220a0y8nw/">依图研发工程师面试经历</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/07/cjta019pq00evhcc2eb0a1766/">腾讯 IEG 后台开发面试</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/26/cjta019k2008ihcc2q82uz987/">吉比特实习面试</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/15/cjta019lg009ehcc2kpqd9yzk/">概率论笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/16/cjta019jv008dhcc25btb5l0m/">二维ST表</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Fish<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+				<!-- MathJax -->
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+				showProcessingMessages: false,
+				tex2jax: {
+					inlineMath: [["$", "$"], ["\\\\(", "\\\\)"]],
+					processEscapes:true
+				},
+				menuSettings: {
+					zoom: "Hover"
+    			}
+			});
+		</script>
+		<script src="//cdn.bootcss.com/mathjax/2.6.0/MathJax.js?config=TeX-AMS_HTML"></script>
+				
+  </div>
+</body>
+</html>

@@ -62,9 +62,115 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-常见错误清单（长期更新）" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/22/cjta019ki008uhcc2y5owpn9x/" class="article-date">
+  <time datetime="2017-05-22T09:22:24.000Z" itemprop="datePublished">2017-05-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/知识小结/">知识小结</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/22/cjta019ki008uhcc2y5owpn9x/">常见错误清单（长期更新）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><p>素数筛打表的时候默认为1为素数</p>
+</li>
+<li><p>DP转移过程中记录路径的情况，如果是从后向前算的，可能路径会被更新掉</p>
+</li>
+<li><p>每组数据初始化的时候，注意把建的边清掉一下</p>
+</li>
+<li><p>对一堆数字进行取LCM的时候，可能会爆int</p>
+</li>
+<li><p>结构体注意初始化问题，不要以为默认会被初始化为0，最好手写构造函数</p>
+</li>
+<li><p>～是按位取反，只需要把一位取反的时候不要用</p>
+</li>
+<li><p>线段树区间更新时updata忘记加lazy标记</p>
+</li>
+<li><p>输出结果的时候，有时直接输出结构体本地不会错，交上RE，注意下要输出结构体的属性</p>
+</li>
+<li><p>容斥原理判断某范围内模一些数为0的数的个数的时候，要求这些数之间不能一个数是另一个的倍数，比如2, 3, 4, 5，那么应该舍弃掉4，只取2</p>
+</li>
+<li><p>SPFA用栈替换成队列后，要注意出栈的顺序，要在加入新元素前把旧的出栈，加入新元素后取消出栈元素的标记</p>
+</li>
+<li><p>BFS某些情况应该在入队的时候标记，如果在出队的时候标记，有可能会出现一些不可描述的情况导致MLE</p>
+</li>
+<li><p>数据太大爆int</p>
+</li>
+<li><p>计算过程中爆int</p>
+</li>
+<li><p>取模姿势不对爆int</p>
+</li>
+<li><p>vis，book等标记数组没初始化</p>
+</li>
+<li><p>bfs队列没有pop</p>
+</li>
+<li><p>类似走迷宫那样的题，下一步要走的地方计算错误(比如ty 本应该是y+dirc[i][0]，结果写成x+dirc[i][0])</p>
+</li>
+<li><p>浮点数精度误差，要加eps</p>
+</li>
+<li><p>数组过大每次都要memset初始化，导致超时</p>
+</li>
+<li><p>Case： 和数组之间有个空格，导致pe</p>
+</li>
+<li><p>直接拿输入的数据当下标，因为有负数re</p>
+</li>
+<li><p>DP过程累加爆int</p>
+</li>
+<li><p>题目卡SPFA换Dijstra AC</p>
+</li>
+<li><p>题目卡Vector，用前向星AC</p>
+</li>
+<li><p>DP输出路径时，尽量要从末状态从后往前推，这样容易处理字典序</p>
+</li>
+<li><p>解方程中，可能爆 int ，比如二元一次方程中的 B 来自输入的两个数据相乘，然后又用到了 B * B 结果 1000 的数据就会爆 int</p>
+</li>
+<li><p>位运算一定要括起来，某些位运算操作优先级比等于号还低</p>
+</li>
+<li><p>计算一组数据需要取膜时，记得手动初始化的也要取膜，比如斐波那契数列，f(1) = f(0) = 1 时， 如果模数为 1 那么应该初始化为 0 才对，保险写法为 f(1) = f(0) = 1 % mod</p>
+</li>
+<li><p>代码WA的时候要多检查下比较长的公式是否错误</p>
+</li>
+<li><p>对于 long long a = b <em> b </em> b 这样的式子要注意 b 是否为 long long 类型，如果不是运算过程中为 int 类型，检查下是否爆 int</p>
+</li>
+<li><p>注意数据范围， 2^31 是爆 int 的</p>
+</li>
+<li><p>用矩阵存图的时候，注意重边，如果有重边看情况更新</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2017/05/22/cjta019ki008uhcc2y5owpn9x/" data-id="cjta019ki008uhcc2y5owpn9x" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-POJ2135-Farm-Tour（最小费用流-模板-SPFA-Dijstra）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/22/cjsyojury0040lkc2v9vzw9z7/" class="article-date">
+    <a href="/2017/05/22/cjta019fd005ehcc28rfary3j/" class="article-date">
   <time datetime="2017-05-22T06:58:41.000Z" itemprop="datePublished">2017-05-22</time>
 </a>
     
@@ -80,7 +186,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/22/cjsyojury0040lkc2v9vzw9z7/">POJ2135 - Farm Tour（最小费用流 + 模板 + SPFA + Dijstra）</a>
+      <a class="article-title" href="/2017/05/22/cjta019fd005ehcc28rfary3j/">POJ2135 - Farm Tour（最小费用流 + 模板 + SPFA + Dijstra）</a>
     </h1>
   
 
@@ -102,7 +208,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/05/22/cjsyojury0040lkc2v9vzw9z7/" data-id="cjsyojury0040lkc2v9vzw9z7" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/05/22/cjta019fd005ehcc28rfary3j/" data-id="cjta019fd005ehcc28rfary3j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -114,7 +220,7 @@
   
     <article id="post-HDU4725-The-Shortest-Path-in-Nya-Graph-（Dijstra-建图）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/22/cjsyojup6002plkc20pq62u82/" class="article-date">
+    <a href="/2017/05/22/cjta019dw0049hcc23cb65iij/" class="article-date">
   <time datetime="2017-05-22T03:01:02.000Z" itemprop="datePublished">2017-05-22</time>
 </a>
     
@@ -130,7 +236,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/22/cjsyojup6002plkc20pq62u82/">HDU4725 - The Shortest Path in Nya Graph （Dijstra + 建图）</a>
+      <a class="article-title" href="/2017/05/22/cjta019dw0049hcc23cb65iij/">HDU4725 - The Shortest Path in Nya Graph （Dijstra + 建图）</a>
     </h1>
   
 
@@ -153,7 +259,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/05/22/cjsyojup6002plkc20pq62u82/" data-id="cjsyojup6002plkc20pq62u82" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/05/22/cjta019dw0049hcc23cb65iij/" data-id="cjta019dw0049hcc23cb65iij" class="article-share-link">Share</a>
       
       
     </footer>
@@ -165,7 +271,7 @@
   
     <article id="post-HDU5550-Game-room-（DP）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/21/cjsyojuq00036lkc2fsqg9it3/" class="article-date">
+    <a href="/2017/05/21/cjta019dy004bhcc289n6sxe6/" class="article-date">
   <time datetime="2017-05-21T06:42:00.000Z" itemprop="datePublished">2017-05-21</time>
 </a>
     
@@ -181,7 +287,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/21/cjsyojuq00036lkc2fsqg9it3/">HDU5550 - Game room （DP）</a>
+      <a class="article-title" href="/2017/05/21/cjta019dy004bhcc289n6sxe6/">HDU5550 - Game room （DP）</a>
     </h1>
   
 
@@ -205,7 +311,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/05/21/cjsyojuq00036lkc2fsqg9it3/" data-id="cjsyojuq00036lkc2fsqg9it3" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/05/21/cjta019dy004bhcc289n6sxe6/" data-id="cjta019dy004bhcc289n6sxe6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -217,7 +323,7 @@
   
     <article id="post-HDUOJ3549-Flow-Problem（网络流-最大流最小割-模板）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/19/cjsyojupw0034lkc20alt5f25/" class="article-date">
+    <a href="/2017/05/19/cjta019ef004nhcc25n8nlv84/" class="article-date">
   <time datetime="2017-05-19T01:43:24.000Z" itemprop="datePublished">2017-05-19</time>
 </a>
     
@@ -233,7 +339,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/19/cjsyojupw0034lkc20alt5f25/">HDUOJ3549 - Flow Problem（网络流+最大流最小割+模板）</a>
+      <a class="article-title" href="/2017/05/19/cjta019ef004nhcc25n8nlv84/">HDUOJ3549 - Flow Problem（网络流+最大流最小割+模板）</a>
     </h1>
   
 
@@ -253,7 +359,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/05/19/cjsyojupw0034lkc20alt5f25/" data-id="cjsyojupw0034lkc20alt5f25" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/05/19/cjta019ef004nhcc25n8nlv84/" data-id="cjta019ef004nhcc25n8nlv84" class="article-share-link">Share</a>
       
       
     </footer>
@@ -265,7 +371,7 @@
   
     <article id="post-POJ2411-Mondriaan-s-Dream-（状压DP-轮廓线DP）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/18/cjsyojusb004alkc2g77rbpzp/" class="article-date">
+    <a href="/2017/05/18/cjta019fi005ihcc2s4rfeu9i/" class="article-date">
   <time datetime="2017-05-18T11:31:41.000Z" itemprop="datePublished">2017-05-18</time>
 </a>
     
@@ -281,7 +387,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/18/cjsyojusb004alkc2g77rbpzp/">POJ2411 - Mondriaan&#39;s Dream （状压DP+轮廓线DP）</a>
+      <a class="article-title" href="/2017/05/18/cjta019fi005ihcc2s4rfeu9i/">POJ2411 - Mondriaan&#39;s Dream （状压DP+轮廓线DP）</a>
     </h1>
   
 
@@ -308,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/05/18/cjsyojusb004alkc2g77rbpzp/" data-id="cjsyojusb004alkc2g77rbpzp" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/05/18/cjta019fi005ihcc2s4rfeu9i/" data-id="cjta019fi005ihcc2s4rfeu9i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -320,7 +426,7 @@
   
     <article id="post-POJ3169-Layout-（差分约束）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/15/cjsyojusf004clkc2rf6ve974/" class="article-date">
+    <a href="/2017/05/15/cjta019fy005thcc26strljr9/" class="article-date">
   <time datetime="2017-05-15T03:12:44.000Z" itemprop="datePublished">2017-05-15</time>
 </a>
     
@@ -336,7 +442,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/15/cjsyojusf004clkc2rf6ve974/">POJ3169 - Layout （差分约束）</a>
+      <a class="article-title" href="/2017/05/15/cjta019fy005thcc26strljr9/">POJ3169 - Layout （差分约束）</a>
     </h1>
   
 
@@ -363,7 +469,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/05/15/cjsyojusf004clkc2rf6ve974/" data-id="cjsyojusf004clkc2rf6ve974" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/05/15/cjta019fy005thcc26strljr9/" data-id="cjta019fy005thcc26strljr9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -375,7 +481,7 @@
   
     <article id="post-POJ1182-食物链（带权并查集）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/13/cjsyojus60047lkc2edm9ebfk/" class="article-date">
+    <a href="/2017/05/13/cjta019fk005khcc2lw43oza6/" class="article-date">
   <time datetime="2017-05-13T02:25:41.000Z" itemprop="datePublished">2017-05-13</time>
 </a>
     
@@ -391,7 +497,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/13/cjsyojus60047lkc2edm9ebfk/">POJ1182 - 食物链（带权并查集）</a>
+      <a class="article-title" href="/2017/05/13/cjta019fk005khcc2lw43oza6/">POJ1182 - 食物链（带权并查集）</a>
     </h1>
   
 
@@ -416,7 +522,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/05/13/cjsyojus60047lkc2edm9ebfk/" data-id="cjsyojus60047lkc2edm9ebfk" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/05/13/cjta019fk005khcc2lw43oza6/" data-id="cjta019fk005khcc2lw43oza6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -428,7 +534,7 @@
   
     <article id="post-ZOJ3777-Problem-Arrangement（状压DP）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/12/cjsyojuvx006ylkc226qojs25/" class="article-date">
+    <a href="/2017/05/12/cjta019jd0082hcc26cu9bugq/" class="article-date">
   <time datetime="2017-05-12T13:53:47.000Z" itemprop="datePublished">2017-05-12</time>
 </a>
     
@@ -444,7 +550,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/12/cjsyojuvx006ylkc226qojs25/">ZOJ3777 - Problem Arrangement（状压DP）</a>
+      <a class="article-title" href="/2017/05/12/cjta019jd0082hcc26cu9bugq/">ZOJ3777 - Problem Arrangement（状压DP）</a>
     </h1>
   
 
@@ -469,7 +575,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/05/12/cjsyojuvx006ylkc226qojs25/" data-id="cjsyojuvx006ylkc226qojs25" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/05/12/cjta019jd0082hcc26cu9bugq/" data-id="cjta019jd0082hcc26cu9bugq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -481,7 +587,7 @@
   
     <article id="post-第八届acm山东省赛总结" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/09/cjsyojuy3008hlkc2oaqu3wyu/" class="article-date">
+    <a href="/2017/05/09/cjta019lx009ohcc2p44i5obn/" class="article-date">
   <time datetime="2017-05-09T13:02:43.000Z" itemprop="datePublished">2017-05-09</time>
 </a>
     
@@ -497,7 +603,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/09/cjsyojuy3008hlkc2oaqu3wyu/">第八届acm山东省赛总结</a>
+      <a class="article-title" href="/2017/05/09/cjta019lx009ohcc2p44i5obn/">第八届acm山东省赛总结</a>
     </h1>
   
 
@@ -519,60 +625,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/05/09/cjsyojuy3008hlkc2oaqu3wyu/" data-id="cjsyojuy3008hlkc2oaqu3wyu" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-FZU-2112-Tickets-（欧拉回路-联通块判断）" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/05/04/cjsyojun7001hlkc2yya7wdb6/" class="article-date">
-  <time datetime="2017-05-04T09:38:11.000Z" itemprop="datePublished">2017-05-04</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/图论/">图论</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/04/cjsyojun7001hlkc2yya7wdb6/">FZU - 2112 Tickets （欧拉回路+联通块判断）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="题目链接："><a href="#题目链接：" class="headerlink" title="题目链接："></a>题目链接：</h1><p><a href="https://cn.vjudge.net/problem/FZU-2112" target="_blank" rel="noopener">https://cn.vjudge.net/problem/FZU-2112</a></p>
-<hr>
-<h1 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h1><p>给定一个图的N个边，求添加最少的边使这个图形成欧拉路。不必所有的点都联通，只需要把已给出的边形成欧拉路。</p>
-<hr>
-<h1 id="解题过程："><a href="#解题过程：" class="headerlink" title="解题过程："></a>解题过程：</h1><p>之前好像做过一次做过题，然后又看到了，当时也忘记在哪看到了，不知道A了没有，反正记得看题解没理解……</p>
-<p>这道题刚开始理解错了，还以为是求哈密顿图，这个是真的不会。回来又看了一遍题意才发现是之前做过的欧拉路。</p>
-<p>然后又仔细想了下，可算是想通了。</p>
-<hr>
-<h1 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h1><p>首先BFS一遍记录下联通块个数， 每个联通块奇点的个数。</p>
-<p>要构成欧拉路，就要把这些联通块之前用一条边连起来。<br>假设N个联通块，那么需要N-1个边把他们连接起来。</p>
-<p>然后对于每一个联通块，如果奇点个数大于2，那么每多了个奇点，需要花费一条边连起来这两个奇点。</p>
-<p>可以证明，对于任意一个无向图，他奇点的个数一定是偶数个。对于每无向边那么一定会给两个点增加一个度，所以奇点的个数一定是偶数个的。</p>
-<hr>
-<h1 id="AC代码："><a href="#AC代码：" class="headerlink" title="AC代码："></a>AC代码：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX = <span class="number">112345</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="keyword">int</span> vis[MAX];</span><br><span class="line"><span class="keyword">int</span> book[MAX];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; edge[MAX];</span><br><span class="line"></span><br><span class="line"><span class="comment">//Dfs判断联通块个数和统计奇点的个数</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span>&amp; odd)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (edge[u].size()%<span class="number">2</span>)</span><br><span class="line">        odd++;</span><br><span class="line">    vis[u] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; edge[u].size(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = edge[u][i];</span><br><span class="line">        <span class="keyword">if</span> (!vis[v])</span><br><span class="line">            dfs(v, odd);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (vis[i] || !book[i])</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">int</span> odd = <span class="number">0</span>;</span><br><span class="line">        dfs(i, odd);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//每个联通块的奇点如果大于2那么应该给做过联通块添加边消去奇点</span></span><br><span class="line">        cnt += odd &gt; <span class="number">2</span> ? (odd<span class="number">-2</span>)/<span class="number">2</span>:<span class="number">0</span>; </span><br><span class="line">        cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, cnt<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</span><br><span class="line">        <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">        <span class="built_in">memset</span>(book, <span class="number">0</span>, <span class="keyword">sizeof</span>(book));</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            edge[i].clear();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> u, v;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;u, &amp;v);</span><br><span class="line">            book[u] = book[v] = <span class="number">1</span>;</span><br><span class="line">            edge[u].push_back(v);</span><br><span class="line">            edge[v].push_back(u);</span><br><span class="line">        &#125;</span><br><span class="line">        solve();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/05/04/cjsyojun7001hlkc2yya7wdb6/" data-id="cjsyojun7001hlkc2yya7wdb6" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/05/09/cjta019lx009ohcc2p44i5obn/" data-id="cjta019lx009ohcc2p44i5obn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -625,23 +678,23 @@
       <ul>
         
           <li>
-            <a href="/2019/03/07/cjsyojuya008mlkc25p7bhv3z/">腾讯 IEG 后台开发面试</a>
+            <a href="/2019/03/15/cjta019jo0088hcc220a0y8nw/">依图研发工程师面试经历</a>
           </li>
         
           <li>
-            <a href="/2019/02/26/cjsyojuwe007blkc28j84ag52/">吉比特实习面试</a>
+            <a href="/2019/03/07/cjta019pq00evhcc2eb0a1766/">腾讯 IEG 后台开发面试</a>
           </li>
         
           <li>
-            <a href="/2019/01/15/cjsyojuxu0089lkc2um2ehdcz/">概率论笔记</a>
+            <a href="/2019/02/26/cjta019k2008ihcc2q82uz987/">吉比特实习面试</a>
           </li>
         
           <li>
-            <a href="/2018/11/16/cjsyojuwb0078lkc22v23vzy5/">二维ST表</a>
+            <a href="/2019/01/15/cjta019lg009ehcc2kpqd9yzk/">概率论笔记</a>
           </li>
         
           <li>
-            <a href="/2018/10/16/cjsyojutc004zlkc2kjvk6d3r/">SDUTACM十周年题解（Fish出题部分）</a>
+            <a href="/2018/11/16/cjta019jv008dhcc25btb5l0m/">二维ST表</a>
           </li>
         
       </ul>

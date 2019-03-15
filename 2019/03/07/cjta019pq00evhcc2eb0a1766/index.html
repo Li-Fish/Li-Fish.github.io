@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>腾讯 IEG 后台开发面试 | Fish&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一面其实前一天就接到了电话，问了一下 ACM 获奖情况，对游戏开发的了解，最后问了一个 interesting 的问题，「王者荣耀怎么实现同步」，因为之前了解过同步机制并且实现过一个状态同步，于是稍微讲了一下，然后当晚在外面吃饭于是说明天下午面试了。 面试官刚开始就直接说了，我这几年几乎都在打 ACM-ICPC 比赛，于是先面数据结构和算法了。  STL 容器使用过吗，deque 了解吗，他支持在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="腾讯 IEG 后台开发面试">
+<meta property="og:url" content="https://li-fish.github.io/2019/03/07/cjta019pq00evhcc2eb0a1766/index.html">
+<meta property="og:site_name" content="Fish&#39;s Blog">
+<meta property="og:description" content="一面其实前一天就接到了电话，问了一下 ACM 获奖情况，对游戏开发的了解，最后问了一个 interesting 的问题，「王者荣耀怎么实现同步」，因为之前了解过同步机制并且实现过一个状态同步，于是稍微讲了一下，然后当晚在外面吃饭于是说明天下午面试了。 面试官刚开始就直接说了，我这几年几乎都在打 ACM-ICPC 比赛，于是先面数据结构和算法了。  STL 容器使用过吗，deque 了解吗，他支持在">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-12T13:43:57.567Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="腾讯 IEG 后台开发面试">
+<meta name="twitter:description" content="一面其实前一天就接到了电话，问了一下 ACM 获奖情况，对游戏开发的了解，最后问了一个 interesting 的问题，「王者荣耀怎么实现同步」，因为之前了解过同步机制并且实现过一个状态同步，于是稍微讲了一下，然后当晚在外面吃饭于是说明天下午面试了。 面试官刚开始就直接说了，我这几年几乎都在打 ACM-ICPC 比赛，于是先面数据结构和算法了。  STL 容器使用过吗，deque 了解吗，他支持在">
+  
+    <link rel="alternate" href="/atom.xml" title="Fish&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Fish&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://li-fish.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-腾讯-IEG-后台开发面试" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/07/cjta019pq00evhcc2eb0a1766/" class="article-date">
+  <time datetime="2019-03-07T13:04:22.000Z" itemprop="datePublished">2019-03-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/历程/">历程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      腾讯 IEG 后台开发面试
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一面"><a href="#一面" class="headerlink" title="一面"></a>一面</h1><p>其实前一天就接到了电话，问了一下 ACM 获奖情况，对游戏开发的了解，最后问了一个 interesting 的问题，「王者荣耀怎么实现同步」，因为之前了解过同步机制并且实现过一个状态同步，于是稍微讲了一下，然后当晚在外面吃饭于是说明天下午面试了。</p>
+<p>面试官刚开始就直接说了，我这几年几乎都在打 ACM-ICPC 比赛，于是先面数据结构和算法了。</p>
+<ul>
+<li><p>STL 容器使用过吗，deque 了解吗，他支持在首位插入删除和随机访问，你考虑过怎么实现吗？</p>
+<p>我在竞赛中实现过，开一个特别大的数组，并且使用指针指向数组的中央，一个首指针一个尾指针，并且通过首指针加一个偏移量实现随机访问。</p>
+</li>
+<li><p>当储存空间不够时怎么办？</p>
+<p>使用类似于 vector 的方式进行扩容。</p>
+</li>
+<li><p>如果按你这种方式，如果一直插入到首部，后面的好多空间没有用到，有优化方式吗？</p>
+<p>写一个循环队列，例如当首指针达到边界时，让他移到尾部，这样就可以利用全部的存储空间。</p>
+</li>
+<li><p>考虑游戏服务器的高并发场景，假设这个容器我 push 了许多元素之后又 pop 了许多元素，怎么回收空闲的内存？</p>
+<p>因为直接申请一整块内存的话，不容易直接回收部分内存，可以考虑牺牲一部分效率，使用一种块状链表的结构去实现 deque。</p>
+</li>
+<li><p>那你考虑过可以不使用链表这种结构去实现这个功能吗？</p>
+<p>emmm 接下来的问题没有答上来。</p>
+</li>
+<li><p>考虑有一个定时器，他到达某个时刻的时候会执行某个 callback，假设我现在需要一个容器去储存这些定时器，并且一直要查询有没有定时器需要执行，你会使用什么样的数据结构？</p>
+<p>可以用一个小根堆，并且把时间当作 key 来排序，那么堆顶的元素就是时刻最早的，每次可以 $O(1)$ 的查询堆顶。或者使用二叉平衡树也可以实现这个功能，查询是 $O(\log n)$的。</p>
+</li>
+<li><p>讲一下堆和二叉平衡树的删除操作吧，假设我有一个指向堆 or 平衡二叉树的指针，怎么高效的删除这个节点？</p>
+<p>emmm，因为比赛很少遇到这种情况，我只好和面试官讲了下 Splay 这种数据结构…感觉回答的不是很好。</p>
+</li>
+<li><p>sort 了解过吗，你们比赛中怎么使用 sort，关于他的 &lt; 语义或者比较函数有什么要求吗？</p>
+<p>基本上就用 std::sort 了，如果要求稳定排序的话把下标当作第二关键字用就好咯。关于比较函数的要求，数学上是要求定义一个严格的弱序关系，我当时说的是两个条件，可传递，并且非对称，a &lt; b and b &lt; c then a &lt; c, a &lt; b 和 b &lt; a  有且只有一个条件成立。</p>
+</li>
+<li><p>map 使用过吗，unordered_map 和 map 有什么区别？</p>
+<p>map 使用红黑树来实现的，我只了解过各种接口的复杂度，不清楚内部实现。unorder_map 使用哈希表来实现。</p>
+</li>
+<li><p>你可以自己实现一个 unordered_map 吗，讲一下怎么实现？</p>
+<p>最简单的一种实现就是开一个桶，然后用桶的大小对 hash 后的 value 取模，然后放入桶里面。</p>
+</li>
+<li><p>如果有 hash 碰撞怎么解决？</p>
+<p>开一张链表。</p>
+</li>
+<li><p>如果 hash 碰撞太高了怎么优化？</p>
+<p>可以从两方面入手，一个是 hash 函数本身的优化要做好。另外一点面试官提示了我一下，其实就是鸽巢定理，10 个抽屉放 11 个球，那么至少有一个抽屉有两个及以上的球。当我放入 100 个元素到 大小为 10 的 hash 表中，那么是很容易 hash 碰撞的。这时候我考虑了用之前的方法，对桶进行扩容，这里继续沿用 vector 的方式就 ok 了。</p>
+</li>
+<li><p>你了解过多线程吗，怎么实现一个线程安全的 hash 表？</p>
+<p>我了解过互斥锁，可以考虑给每个元素加一个互斥锁。</p>
+</li>
+<li><p>那我插入时，需要修改一个链表的结构，发生了冲突怎么办？</p>
+<p>给每个链表加一个互斥锁…</p>
+</li>
+<li><p>那我插入的时候，hash 表需要扩容怎么办？</p>
+<p>增加一个变量，用来标志当前是否正在扩容，如果扩容就让所有的插入查询操作阻塞。</p>
+</li>
+<li><p>这样扩容会阻塞掉所有的访问，有更好的做法吗？</p>
+<p>可以将扩容的锁放到每个链表上，然后这样扩容时只阻塞掉正在移动的元素。</p>
+</li>
+<li><p>好的接下来做一个编程题吧，逆转一个字符串？</p>
+<p>水题…</p>
+</li>
+<li><p>逆转单词？ hello world -&gt; world hello</p>
+<p>水题，面试官要看如何分割字符串，于是简单的写了一下，被吐槽代码不规范了 orz。</p>
+</li>
+<li><p>加权随机数？给定一个权重表 [2, 1, 3, 5, 4]，编写一个输入函数 rand_select(weight[])，返回一个 1 - len(weight) 的整数，这个数是随机的，并且保证出现 0, 1, 2 ,3 ,4 , 5 的概率之比为 2, 1, 3, 5, 4。</p>
+<p>写了两个做法，思路都是把权重当作一个区间，然后根据权重区间长度不同，random 从总区间长度中选一个数，落到那个区间中，就把那个区间的编号当作随机的答案。</p>
+</li>
+<li><p>你有什么问题问我吗？</p>
+<ul>
+<li>假设我能实习的话，我能学到什么内容，在后台开发岗位的话？</li>
+<li>我的表现怎么样，有什么不足的地方？</li>
+<li>有什么开源项目推荐吗，或者好数推荐？</li>
+</ul>
+</li>
+</ul>
+<h1 id="二面"><a href="#二面" class="headerlink" title="二面"></a>二面</h1><p>感觉二面回答的不是很 OK，感觉凉凉的，但是官网上没给挂。</p>
+<p>整体面试官问的问题比一面的多，并且贴近底层和基础，节奏也比较快，最后自己被问的有点懵，后面也没问面试官什么问题就结束了。</p>
+<ul>
+<li><p>vector 怎么实现？</p>
+<p>动态申请内存，然后倍增扩容。</p>
+</li>
+<li><p>考虑过怎么收缩空间吗？</p>
+<p>提供一个接口函数，重新分配一块恰好的空间。</p>
+</li>
+<li><p>如何使用这个 vector 储存不同大小的数据？</p>
+<p>vector 不直接储存数据，储存指针。</p>
+</li>
+<li><p>怎么用你实现的 vector 实现一个 queue ?</p>
+<p>queue 不用随机访问，我感觉使用链表来实现比较好，使用两个首尾指针。</p>
+</li>
+<li><p>sort 算法了解过吗，std::sort 怎么实现的？</p>
+<p>因为 quick sort 是平均复杂度比较好，最差情况能退化到 $O(n^2)​$，具体 STL 源码我没有看过，了解过他使用多种排序结合的方式，比如对于大区间使用什么排序，小区间怎么排序，并且进行随机化，避免最差情况。</p>
+</li>
+<li><p>C++ 了解吗，我在两个文件中定义了两个完全相同的函数有没有错？</p>
+<p>编译不会报错，当链接的时候会发生 redefine 错误。</p>
+</li>
+<li><p>怎么避免这个错误？</p>
+<p>使用命名空间或者 static 关键字。</p>
+</li>
+<li><p>模板了解过吗？</p>
+<p>了解过，但没怎么写过代码（然后面试官不继续问了…其实我想让他问一些的）。</p>
+</li>
+<li><p>extern 关键字了解过吗？</p>
+<p>可以引用其他文件的变量，具体没怎么用过，竞赛一直写的单文件。（然后面试官不问 C++ 了 orz）</p>
+</li>
+<li><p>操作系统熟悉吗？</p>
+<p>熟悉，最近刚看完 CSAPP 感觉收获很多。</p>
+</li>
+<li><p>解释一下程序如何执行的吧，从命令行输入可执行文件开始。</p>
+<p>首先操作系统分配好程序运行的上下文环境，例如虚拟内存、页表、CPU 寄存器、堆栈等，将文件映射到内存中，然后处理器找到程序的入口地址，并且运行，通常刚开始执行第一行代码时发生缺页中断，然后 CPU 将硬盘中数据载入主存中。</p>
+</li>
+<li><p>可执行文件格式了解过吗？</p>
+<p>了解过 Unix 系统的 ELF 文件格式，影响比较深的有可重定向目标文件和可执行目标文件，通常编译后生成可重定向目标文件，链接后生成可执行文件。这两类文件大同小异，内部通常分为许多个段，主要有符号表，程序代码，全局变量等。对于可重定向目标文件，还会有一些需要重定向的变量、代码段。</p>
+</li>
+<li><p>解释一下链接过程吧？</p>
+<p>我认为链接过程就是将许多可重定向文件或静态库文件合并成一个可执行文件的过程，会把各个文件的代码、全局变量等数据段合并到一起。链接过程中会依次扫描每个文件，并且为引用但为定义的代码定位地址。</p>
+</li>
+<li><p>下面问你一个开放性问题，考虑有 100 个 10 万人的服务器，如何维护一个实时的全服排名？</p>
+<p>首先肯定要考虑并行，不能单线程处理所有服务器的访问的。这样我们根据排名划分成不同的数据段，用不同的服务器来维护，并且设置一个容易并行的代理服务器转发请求到下级储存数据的服务器。考虑到并发的话可以继续让服务器分级，直到划分为一个可以接受的程度。</p>
+</li>
+<li><p>假设有一个人反复改变自己的排名，考虑如何优化？</p>
+<p>这个好难啊…（然后面试官直接不问了…感觉应该随便说一下比较好的）</p>
+</li>
+<li><p>下面问个算法题，给 1000 万个手机号排序？</p>
+<p>直接基数排序吧，手机号 11 位的话时间复杂度就是 $O(11 \times 1000)$ 咯。或者插入到字典树中，然后遍历一遍也 ok。</p>
+</li>
+<li><p>好的我没有其他问题问你了，那….</p>
+<p>直接被问的自闭了，这里抢答了，“那，再见”。然后面试官就说了下再见就结束了。（感觉他可能是要说 “那你有什么问题问我吗”）</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2019/03/07/cjta019pq00evhcc2eb0a1766/" data-id="cjta019pq00evhcc2eb0a1766" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/03/15/cjta019jo0088hcc220a0y8nw/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          依图研发工程师面试经历
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/02/26/cjta019k2008ihcc2q82uz987/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">吉比特实习面试</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/">DP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/区间DP/">区间DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/数位DP/">数位DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/斜率优化/">斜率优化</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/树型DP/">树型DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/状压DP/">状压DP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/二分/">二分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/二进制/">二进制</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/命题/">命题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/">图论</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/2-SAT/">2-SAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/匹配/">匹配</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/差分约束/">差分约束</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/最短路/">最短路</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/网络流/">网络流</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/连通性/">连通性</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/">字符串</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/AC自动机/">AC自动机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/后缀数组/">后缀数组</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/回文树/">回文树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/字符串Hash/">字符串Hash</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/搜索/">搜索</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/搜索/BFS/">BFS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/">数学</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/数论/">数论</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/矩阵快速幂/">矩阵快速幂</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/线性基/">线性基</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/高斯消元/">高斯消元</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/">数据结构</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/K-D树/">K-D树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/LCT/">LCT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/ST表/">ST表</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/Splay/">Splay</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/主席树/">主席树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/并查集/">并查集</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/栈/">栈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/树/">树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/树链剖分/">树链剖分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/线段树/">线段树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/虚树/">虚树</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/模拟/">模拟</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/知识小结/">知识小结</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/计算几何/">计算几何</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/贪心/">贪心</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/CS课程/">CS课程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/历程/">历程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/命题/">命题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/想法/">想法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂物/">杂物</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/游戏/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/爬虫-数据处理/">爬虫&数据处理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/Java/">Java</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网页设计/">网页设计</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/网页设计/Web服务器/">Web服务器</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/音乐/">音乐</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/音乐/乐理/">乐理</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/15/cjta019jo0088hcc220a0y8nw/">依图研发工程师面试经历</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/07/cjta019pq00evhcc2eb0a1766/">腾讯 IEG 后台开发面试</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/26/cjta019k2008ihcc2q82uz987/">吉比特实习面试</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/15/cjta019lg009ehcc2kpqd9yzk/">概率论笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/16/cjta019jv008dhcc25btb5l0m/">二维ST表</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Fish<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+				<!-- MathJax -->
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+				showProcessingMessages: false,
+				tex2jax: {
+					inlineMath: [["$", "$"], ["\\\\(", "\\\\)"]],
+					processEscapes:true
+				},
+				menuSettings: {
+					zoom: "Hover"
+    			}
+			});
+		</script>
+		<script src="//cdn.bootcss.com/mathjax/2.6.0/MathJax.js?config=TeX-AMS_HTML"></script>
+				
+  </div>
+</body>
+</html>

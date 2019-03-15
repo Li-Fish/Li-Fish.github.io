@@ -62,9 +62,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-CodeForces740D-Alyona-and-a-tree-二分-树上差分" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/16/cjta019950013hcc2arzdbysq/" class="article-date">
+  <time datetime="2017-08-16T14:11:26.000Z" itemprop="datePublished">2017-08-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/二分/">二分</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/16/cjta019950013hcc2arzdbysq/">CodeForces740D - Alyona and a tree (二分+树上差分)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="题目链接："><a href="#题目链接：" class="headerlink" title="题目链接："></a>题目链接：</h1><p><a href="http://codeforces.com/problemset/problem/740/D" target="_blank" rel="noopener">http://codeforces.com/problemset/problem/740/D</a></p>
+<hr>
+<h1 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h1><p>给出一颗有根树，每个点有点权$a_i$，每个边有边权，定义$dist(u, v)$为 u 到 v 的边权和，如果有两个节点符合，v 是 u 的子节点并且 $dist(u, v) \le a_v$那么称 v 为 u 控制的节点。</p>
+<p>题目要求输出每个点控制的节点有多少个。</p>
+<hr>
+<h1 id="解题过程："><a href="#解题过程：" class="headerlink" title="解题过程："></a>解题过程：</h1><p>大体思路没错，推出来如果固定 v 的话，那么从 v 往上会有一段连续的祖先都可以控制 v，让他们控制的节点都加一就可以了，然后找这一段连续的祖先可以用二分去找。但是不知道该怎么让这一对祖先同时加一，于是想起来之前刚学的树链剖分，感觉 CF div2 的 D 题不至于上树剖…</p>
+<p>然后去翻了下博客，发现了居然还有树上差分这种东西！问了学长 + 翻了 standing 上的代码算是理解了。</p>
+<hr>
+<h1 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h1><p>首先我们设 $dep[u] $ 为根节点到节点 u 的权值和，对于原式 $dist(u, v) \le a_v$ 可化为 $dep[v] - a_v \le dep[u]$ ，这样我们在递归到 v 的时候，维护一个序列以深度的顺序记录 v 的所有祖先的 $dep$ 值，然后这个值肯定是递增的。</p>
+<p>这样对于每个节点 v 用二分在序列里找到满足上式最小的$dep[u]$，那么序列中 u 后面的节点都满足上式，让这些节点控制的节点数全加一即可。</p>
+<p>对于加一这个操作，我们让第一个祖先节点的父亲减一，当前节点的父亲加一，然后你会会发现，现在每个节点的所有子节点和他自身的和就是答案了。</p>
+<hr>
+<h1 id="AC代码："><a href="#AC代码：" class="headerlink" title="AC代码："></a>AC代码：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> LL;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX = <span class="number">212345</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, idx[MAX], pcnt;</span><br><span class="line"><span class="comment">//pre记录当前节点所有父亲节点的dep，并且是递增的</span></span><br><span class="line"><span class="comment">//idx记录pre数组里每个位置对应的下标</span></span><br><span class="line"><span class="comment">//d记录当前节点+1/-1操作了多少次</span></span><br><span class="line"><span class="comment">//ans记录答案</span></span><br><span class="line">LL a[MAX], w[MAX], pre[MAX], d[MAX], ans[MAX];</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[MAX];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//找出第一个符合的祖先</span></span><br><span class="line">    <span class="keyword">int</span> id = lower_bound(pre, pre + pcnt + <span class="number">1</span>, pre[pcnt] - a[u]) - pre;</span><br><span class="line">    <span class="comment">//进行+1/-1操作</span></span><br><span class="line">    d[idx[id - <span class="number">1</span>]]--;</span><br><span class="line">    d[idx[pcnt - <span class="number">1</span>]]++;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G[u].size(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = G[u][i];</span><br><span class="line">        <span class="comment">//更新pre数组</span></span><br><span class="line">        pre[pcnt + <span class="number">1</span>] = pre[pcnt] + w[v];</span><br><span class="line">        idx[pcnt + <span class="number">1</span>] = v;</span><br><span class="line">        pcnt++;</span><br><span class="line">        dfs(v);</span><br><span class="line">        pcnt--;</span><br><span class="line">        <span class="comment">//累加每个儿子的权值和</span></span><br><span class="line">        ans[u] += ans[v];</span><br><span class="line">    &#125;</span><br><span class="line">    ans[u] += d[u];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;a[i]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> v = <span class="number">2</span>; v &lt;= n; v++) &#123;</span><br><span class="line">        <span class="keyword">int</span> u;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%lld"</span>, &amp;u, &amp;w[v]);</span><br><span class="line">        G[u].push_back(v);</span><br><span class="line">    &#125;</span><br><span class="line">    idx[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    dfs(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) <span class="built_in">printf</span>(<span class="string">"%lld "</span>, ans[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2017/08/16/cjta019950013hcc2arzdbysq/" data-id="cjta019950013hcc2arzdbysq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-POJ3694-Network（强连通-LCA）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/08/11/cjsyojusw004mlkc2rf046dbq/" class="article-date">
+    <a href="/2017/08/11/cjta019g4005xhcc2ljjao82e/" class="article-date">
   <time datetime="2017-08-11T03:05:45.000Z" itemprop="datePublished">2017-08-11</time>
 </a>
     
@@ -80,7 +132,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/11/cjsyojusw004mlkc2rf046dbq/">POJ3694 - Network（强连通+LCA）</a>
+      <a class="article-title" href="/2017/08/11/cjta019g4005xhcc2ljjao82e/">POJ3694 - Network（强连通+LCA）</a>
     </h1>
   
 
@@ -104,7 +156,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/08/11/cjsyojusw004mlkc2rf046dbq/" data-id="cjsyojusw004mlkc2rf046dbq" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/08/11/cjta019g4005xhcc2ljjao82e/" data-id="cjta019g4005xhcc2ljjao82e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -116,7 +168,7 @@
   
     <article id="post-HDU3966-Aragorn-s-Story（树链剖分-模板）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/08/09/cjsyojuop002flkc21bstontw/" class="article-date">
+    <a href="/2017/08/09/cjta019da003shcc2up06xrfd/" class="article-date">
   <time datetime="2017-08-09T11:17:36.000Z" itemprop="datePublished">2017-08-09</time>
 </a>
     
@@ -132,7 +184,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/09/cjsyojuop002flkc21bstontw/">HDU3966 - Aragorn&#39;s Story（树链剖分+模板）</a>
+      <a class="article-title" href="/2017/08/09/cjta019da003shcc2up06xrfd/">HDU3966 - Aragorn&#39;s Story（树链剖分+模板）</a>
     </h1>
   
 
@@ -158,7 +210,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/08/09/cjsyojuop002flkc21bstontw/" data-id="cjsyojuop002flkc21bstontw" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/08/09/cjta019da003shcc2up06xrfd/" data-id="cjta019da003shcc2up06xrfd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -170,7 +222,7 @@
   
     <article id="post-HDU4289-Control（最大流最小割）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/08/08/cjsyojuoy002klkc2lqd4h29v/" class="article-date">
+    <a href="/2017/08/08/cjta019dq0045hcc2pu44lbi3/" class="article-date">
   <time datetime="2017-08-08T02:56:44.000Z" itemprop="datePublished">2017-08-08</time>
 </a>
     
@@ -186,7 +238,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/08/cjsyojuoy002klkc2lqd4h29v/">HDU4289 - Control（最大流最小割）</a>
+      <a class="article-title" href="/2017/08/08/cjta019dq0045hcc2pu44lbi3/">HDU4289 - Control（最大流最小割）</a>
     </h1>
   
 
@@ -207,7 +259,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/08/08/cjsyojuoy002klkc2lqd4h29v/" data-id="cjsyojuoy002klkc2lqd4h29v" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/08/08/cjta019dq0045hcc2pu44lbi3/" data-id="cjta019dq0045hcc2pu44lbi3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -219,7 +271,7 @@
   
     <article id="post-HDU4288-Coder（线段树）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/08/08/cjsyojupe002ulkc26dz241o2/" class="article-date">
+    <a href="/2017/08/08/cjta019dn0042hcc21e60cr44/" class="article-date">
   <time datetime="2017-08-08T02:43:50.000Z" itemprop="datePublished">2017-08-08</time>
 </a>
     
@@ -235,7 +287,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/08/cjsyojupe002ulkc26dz241o2/">HDU4288 - Coder（线段树）</a>
+      <a class="article-title" href="/2017/08/08/cjta019dn0042hcc21e60cr44/">HDU4288 - Coder（线段树）</a>
     </h1>
   
 
@@ -263,7 +315,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/08/08/cjsyojupe002ulkc26dz241o2/" data-id="cjsyojupe002ulkc26dz241o2" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/08/08/cjta019dn0042hcc21e60cr44/" data-id="cjta019dn0042hcc21e60cr44" class="article-share-link">Share</a>
       
       
     </footer>
@@ -275,7 +327,7 @@
   
     <article id="post-HDU6070-Dirt-Ratio（线段树-二分答案）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/08/04/cjsyojupr0031lkc2avh3ixfu/" class="article-date">
+    <a href="/2017/08/04/cjta019e5004ghcc2hh3rhbyg/" class="article-date">
   <time datetime="2017-08-04T01:53:27.000Z" itemprop="datePublished">2017-08-04</time>
 </a>
     
@@ -291,7 +343,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/04/cjsyojupr0031lkc2avh3ixfu/">HDU6070 - Dirt Ratio（线段树+二分答案）</a>
+      <a class="article-title" href="/2017/08/04/cjta019e5004ghcc2hh3rhbyg/">HDU6070 - Dirt Ratio（线段树+二分答案）</a>
     </h1>
   
 
@@ -317,7 +369,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/08/04/cjsyojupr0031lkc2avh3ixfu/" data-id="cjsyojupr0031lkc2avh3ixfu" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/08/04/cjta019e5004ghcc2hh3rhbyg/" data-id="cjta019e5004ghcc2hh3rhbyg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -329,7 +381,7 @@
   
     <article id="post-HDU2242-考研路茫茫——空调教室（边双连通-树型DP）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/08/03/cjsyojuo40020lkc24rgip52b/" class="article-date">
+    <a href="/2017/08/03/cjta019cv003hhcc2n3y4n64q/" class="article-date">
   <time datetime="2017-08-03T02:38:56.000Z" itemprop="datePublished">2017-08-03</time>
 </a>
     
@@ -345,7 +397,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/03/cjsyojuo40020lkc24rgip52b/">HDU2242 - 考研路茫茫——空调教室（边双连通+树型DP）</a>
+      <a class="article-title" href="/2017/08/03/cjta019cv003hhcc2n3y4n64q/">HDU2242 - 考研路茫茫——空调教室（边双连通+树型DP）</a>
     </h1>
   
 
@@ -367,7 +419,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/08/03/cjsyojuo40020lkc24rgip52b/" data-id="cjsyojuo40020lkc24rgip52b" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/08/03/cjta019cv003hhcc2n3y4n64q/" data-id="cjta019cv003hhcc2n3y4n64q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -379,7 +431,7 @@
   
     <article id="post-HDU3639-Hawk-and-Chicken（强连通-缩点）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/08/03/cjsyojuoe0028lkc2t3mtqdjo/" class="article-date">
+    <a href="/2017/08/03/cjta019d1003mhcc2u1hexpma/" class="article-date">
   <time datetime="2017-08-03T00:49:59.000Z" itemprop="datePublished">2017-08-03</time>
 </a>
     
@@ -395,7 +447,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/03/cjsyojuoe0028lkc2t3mtqdjo/">HDU3639 - Hawk-and-Chicken（强连通+缩点）</a>
+      <a class="article-title" href="/2017/08/03/cjta019d1003mhcc2u1hexpma/">HDU3639 - Hawk-and-Chicken（强连通+缩点）</a>
     </h1>
   
 
@@ -416,7 +468,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/08/03/cjsyojuoe0028lkc2t3mtqdjo/" data-id="cjsyojuoe0028lkc2t3mtqdjo" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/08/03/cjta019d1003mhcc2u1hexpma/" data-id="cjta019d1003mhcc2u1hexpma" class="article-share-link">Share</a>
       
       
     </footer>
@@ -428,7 +480,7 @@
   
     <article id="post-HDU3861-The-King’s-Problem（强连通-缩点-匈牙利）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/08/02/cjsyojuom002dlkc2fqqnwi4r/" class="article-date">
+    <a href="/2017/08/02/cjta019dh003xhcc2arlh5kfi/" class="article-date">
   <time datetime="2017-08-02T13:28:16.000Z" itemprop="datePublished">2017-08-02</time>
 </a>
     
@@ -444,7 +496,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/02/cjsyojuom002dlkc2fqqnwi4r/">HDU3861 - The King’s Problem（强连通+缩点+匈牙利）</a>
+      <a class="article-title" href="/2017/08/02/cjta019dh003xhcc2arlh5kfi/">HDU3861 - The King’s Problem（强连通+缩点+匈牙利）</a>
     </h1>
   
 
@@ -474,7 +526,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/08/02/cjsyojuom002dlkc2fqqnwi4r/" data-id="cjsyojuom002dlkc2fqqnwi4r" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/08/02/cjta019dh003xhcc2arlh5kfi/" data-id="cjta019dh003xhcc2arlh5kfi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -486,7 +538,7 @@
   
     <article id="post-HDU1827-Summer-Holiday-强连通-缩点" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/08/02/cjsyojunw001vlkc2rixni2nv/" class="article-date">
+    <a href="/2017/08/02/cjta019cp003fhcc2qogcoe8j/" class="article-date">
   <time datetime="2017-08-02T13:03:17.000Z" itemprop="datePublished">2017-08-02</time>
 </a>
     
@@ -502,7 +554,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/02/cjsyojunw001vlkc2rixni2nv/">HDU1827 - Summer Holiday(强连通+缩点)</a>
+      <a class="article-title" href="/2017/08/02/cjta019cp003fhcc2qogcoe8j/">HDU1827 - Summer Holiday(强连通+缩点)</a>
     </h1>
   
 
@@ -523,55 +575,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/08/02/cjsyojunw001vlkc2rixni2nv/" data-id="cjsyojunw001vlkc2rixni2nv" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-HDU1269-迷宫城堡-强连通" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/02/cjsyojunk001olkc2ks4mv3wc/" class="article-date">
-  <time datetime="2017-08-02T12:51:21.000Z" itemprop="datePublished">2017-08-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/图论/">图论</a>►<a class="article-category-link" href="/categories/ACM/图论/连通性/">连通性</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/08/02/cjsyojunk001olkc2ks4mv3wc/">HDU1269 - 迷宫城堡(强连通)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="题目链接："><a href="#题目链接：" class="headerlink" title="题目链接："></a>题目链接：</h1><p><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1269" target="_blank" rel="noopener">http://acm.hdu.edu.cn/showproblem.php?pid=1269</a></p>
-<hr>
-<h1 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h1><p>给出一个有向图，判断是否为一个强连通的图。</p>
-<hr>
-<h1 id="解题过程："><a href="#解题过程：" class="headerlink" title="解题过程："></a>解题过程：</h1><p>看完了lrj的白书后去刷的题，裸的板子题，当tarjan练手。</p>
-<hr>
-<h1 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h1><p>对原图进行强连通分量分解，判断强连通分量的数量是否为1。</p>
-<hr>
-<h1 id="AC代码："><a href="#AC代码：" class="headerlink" title="AC代码："></a>AC代码：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX = <span class="number">10000</span>+<span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; edge[MAX];</span><br><span class="line"></span><br><span class="line"><span class="comment">//pre表示访问的时间，low是当前节点及其儿子节点能回到的最早的祖先，mark是所在强连通分量的编号</span></span><br><span class="line"><span class="comment">//剩下两个变量是用来计数</span></span><br><span class="line"><span class="keyword">int</span> pre[MAX], low[MAX], mark[MAX], dfs_clock, scc_cnt;</span><br><span class="line"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; S;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    pre[u] = low[u] = ++dfs_clock;</span><br><span class="line">    S.push(u);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; edge[u].size(); i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = edge[u][i];</span><br><span class="line">        <span class="keyword">if</span> (!pre[v]) &#123;</span><br><span class="line">            dfs(v);</span><br><span class="line">            <span class="comment">//用当前节点的儿子节点更新low数组</span></span><br><span class="line">            low[u] = min(low[u], low[v]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (!mark[v]) &#123;</span><br><span class="line">            <span class="comment">//用当前节点能回到的祖先节点更新low数组</span></span><br><span class="line">            low[u] = min(low[u], pre[v]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//如果当前节点及其儿子节点都不能返回到更早的祖先节点，那么当前节点就是一个强连通分量的第一次访问到的节点</span></span><br><span class="line">    <span class="keyword">if</span> (low[u] == pre[u]) &#123;</span><br><span class="line">        scc_cnt++;</span><br><span class="line">        <span class="keyword">int</span> x;</span><br><span class="line">        <span class="comment">//将当前节点的儿子节点出栈</span></span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            x = S.top(); S.pop();</span><br><span class="line">            mark[x] = scc_cnt;</span><br><span class="line">        &#125; <span class="keyword">while</span> (x != u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">find_scc</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    dfs_clock = scc_cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(mark, <span class="number">0</span>, <span class="keyword">sizeof</span>(mark));</span><br><span class="line">    <span class="built_in">memset</span>(pre, <span class="number">0</span>, <span class="keyword">sizeof</span>(pre));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!pre[i]) dfs(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m) &amp;&amp; (n + m)) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) edge[i].clear();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> u, v;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;u, &amp;v);</span><br><span class="line">            edge[u].push_back(v);</span><br><span class="line">        &#125;</span><br><span class="line">        find_scc(n);</span><br><span class="line">        <span class="keyword">if</span> (scc_cnt != <span class="number">1</span>) <span class="built_in">printf</span>(<span class="string">"No\n"</span>);</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"Yes\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/08/02/cjsyojunk001olkc2ks4mv3wc/" data-id="cjsyojunk001olkc2ks4mv3wc" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/08/02/cjta019cp003fhcc2qogcoe8j/" data-id="cjta019cp003fhcc2qogcoe8j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -624,23 +628,23 @@
       <ul>
         
           <li>
-            <a href="/2019/03/07/cjsyojuya008mlkc25p7bhv3z/">腾讯 IEG 后台开发面试</a>
+            <a href="/2019/03/15/cjta019jo0088hcc220a0y8nw/">依图研发工程师面试经历</a>
           </li>
         
           <li>
-            <a href="/2019/02/26/cjsyojuwe007blkc28j84ag52/">吉比特实习面试</a>
+            <a href="/2019/03/07/cjta019pq00evhcc2eb0a1766/">腾讯 IEG 后台开发面试</a>
           </li>
         
           <li>
-            <a href="/2019/01/15/cjsyojuxu0089lkc2um2ehdcz/">概率论笔记</a>
+            <a href="/2019/02/26/cjta019k2008ihcc2q82uz987/">吉比特实习面试</a>
           </li>
         
           <li>
-            <a href="/2018/11/16/cjsyojuwb0078lkc22v23vzy5/">二维ST表</a>
+            <a href="/2019/01/15/cjta019lg009ehcc2kpqd9yzk/">概率论笔记</a>
           </li>
         
           <li>
-            <a href="/2018/10/16/cjsyojutc004zlkc2kjvk6d3r/">SDUTACM十周年题解（Fish出题部分）</a>
+            <a href="/2018/11/16/cjta019jv008dhcc25btb5l0m/">二维ST表</a>
           </li>
         
       </ul>

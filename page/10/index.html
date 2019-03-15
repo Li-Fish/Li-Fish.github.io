@@ -62,9 +62,65 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-CodeChef-MOU2H-Mountain-Holidays-2-（DP）" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/06/25/cjta0198y000yhcc21092u738/" class="article-date">
+  <time datetime="2017-06-25T03:09:59.000Z" itemprop="datePublished">2017-06-25</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/DP/">DP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/25/cjta0198y000yhcc21092u738/">CodeChef MOU2H - Mountain Holidays 2 （DP）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="题目链接："><a href="#题目链接：" class="headerlink" title="题目链接："></a>题目链接：</h1><p><a href="https://www.codechef.com/problems/MOU2H" target="_blank" rel="noopener">https://www.codechef.com/problems/MOU2H</a></p>
+<hr>
+<h1 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h1><p>理解题意后就是求一个序列中有多少个不同的子序列。</p>
+<hr>
+<h1 id="解题过程："><a href="#解题过程：" class="headerlink" title="解题过程："></a>解题过程：</h1><p>刚开始看错了题意，样例过不去，后来去翻了博客，才看懂题意，看懂题意后就好做了，就是一个简单的动态规划。</p>
+<hr>
+<h1 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h1><p>因为要求不同子序列的个数。</p>
+<p>定义状态$dp[i]$为前[i]个数中，不同子序列的个数。那么对于dp[i]可以由已下方式转移而来，记$pre[A[i]]$为A$[i]$这个数字上次出现的下标，如果未出现为$-1$。</p>
+<p>定义$dp[0]$为$1$代表一个空串。</p>
+<p>那么dp[i]可由以下状态转移而来：</p>
+<p>$$<br>dp[i] =<br>\begin{cases}<br>dp[i-1]\times 2 , &amp;pre[A[i]] = -1 \<br>dp[i-1] \times 2 - dp[pre[A[i]]-1], &amp;pre[A[i]] \neq -1<br>\end{cases}<br>$$</p>
+<p>如果前i-1个数的不同子串个数为N，那么加上第i个数之后，对于前i个不同的子串加上第i个数后都构成了一个新的串，那么对于前i个数的不同子串为，前i-1的不同子串个数+新构成的子串个数。</p>
+<p>不过如果第i个数曾经出现过的话，需要去重处理，如果3这个数字，在$5$和$9$这个位置都出现过的话，那么前$4$个数的子串后面加上第$5$个数和加上第$9$个数，构成的子串相同，这里需要减去最近出现的前一个位置的不同子串个数。<br>这里需要仔细理解下，$dp[i]$代表的是前$i$个元素构成的不同子串的个数，不是以元素$i$结尾的最大子串个数。</p>
+<p>这里介绍一个骚操作，数组的下标可以为负数，对于下面代码。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a[<span class="number">3</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> *p = a+<span class="number">1</span>;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; p[<span class="number">-1</span>] &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure></p>
+<p>输出的结果为<code>1</code></p>
+<hr>
+<h1 id="AC代码："><a href="#AC代码：" class="headerlink" title="AC代码："></a>AC代码：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX = <span class="number">1123456</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = MAX&lt;&lt;<span class="number">2</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MOD = <span class="number">1000000009</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> H[MAX];</span><br><span class="line"><span class="keyword">int</span> reserve[MAX*<span class="number">10</span>], *pre = reserve+INF;</span><br><span class="line"><span class="keyword">int</span> dp[MAX];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="keyword">int</span> n;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, H+i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            H[i] = H[i+<span class="number">1</span>] - H[i];</span><br><span class="line">            pre[H[i]] = <span class="number">-1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; i++) &#123;</span><br><span class="line">            dp[i] = (dp[i<span class="number">-1</span>]&lt;&lt;<span class="number">1</span>)%MOD;</span><br><span class="line">            <span class="keyword">if</span> (pre[H[i]] != <span class="number">-1</span>) &#123;</span><br><span class="line">                dp[i] = (dp[i] - dp[pre[H[i]]<span class="number">-1</span>] + MOD)%MOD;</span><br><span class="line">            &#125;</span><br><span class="line">            pre[H[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, (dp[n<span class="number">-1</span>]<span class="number">-1</span>+MOD)%MOD);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2017/06/25/cjta0198y000yhcc21092u738/" data-id="cjta0198y000yhcc21092u738" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-HDU4027-Can-you-answer-these-queries-（线段树）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/21/cjsyojuou002ilkc2c2wp1qv0/" class="article-date">
+    <a href="/2017/06/21/cjta019dl0040hcc2a9wvn6vy/" class="article-date">
   <time datetime="2017-06-21T07:57:00.000Z" itemprop="datePublished">2017-06-21</time>
 </a>
     
@@ -80,7 +136,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/21/cjsyojuou002ilkc2c2wp1qv0/">HDU4027 - Can you answer these queries? （线段树）</a>
+      <a class="article-title" href="/2017/06/21/cjta019dl0040hcc2a9wvn6vy/">HDU4027 - Can you answer these queries? （线段树）</a>
     </h1>
   
 
@@ -107,7 +163,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/21/cjsyojuou002ilkc2c2wp1qv0/" data-id="cjsyojuou002ilkc2c2wp1qv0" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/21/cjta019dl0040hcc2a9wvn6vy/" data-id="cjta019dl0040hcc2a9wvn6vy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -119,7 +175,7 @@
   
     <article id="post-HDU1394-Minimum-Inversion-Number（线段树）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/21/cjsyojuns001tlkc2fkqxdbz8/" class="article-date">
+    <a href="/2017/06/21/cjta019cs003ghcc2qlf85h5v/" class="article-date">
   <time datetime="2017-06-21T06:49:36.000Z" itemprop="datePublished">2017-06-21</time>
 </a>
     
@@ -135,7 +191,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/21/cjsyojuns001tlkc2fkqxdbz8/">HDU1394 - Minimum Inversion Number（线段树）</a>
+      <a class="article-title" href="/2017/06/21/cjta019cs003ghcc2qlf85h5v/">HDU1394 - Minimum Inversion Number（线段树）</a>
     </h1>
   
 
@@ -158,7 +214,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/21/cjsyojuns001tlkc2fkqxdbz8/" data-id="cjsyojuns001tlkc2fkqxdbz8" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/21/cjta019cs003ghcc2qlf85h5v/" data-id="cjta019cs003ghcc2qlf85h5v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -170,7 +226,7 @@
   
     <article id="post-线段树小结" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/19/cjsyojuyg008rlkc2pix4s30w/" class="article-date">
+    <a href="/2017/06/19/cjta019m0009qhcc21tp8bh0g/" class="article-date">
   <time datetime="2017-06-19T04:46:32.000Z" itemprop="datePublished">2017-06-19</time>
 </a>
     
@@ -186,7 +242,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/19/cjsyojuyg008rlkc2pix4s30w/">线段树小结</a>
+      <a class="article-title" href="/2017/06/19/cjta019m0009qhcc21tp8bh0g/">线段树小结</a>
     </h1>
   
 
@@ -234,7 +290,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/19/cjsyojuyg008rlkc2pix4s30w/" data-id="cjsyojuyg008rlkc2pix4s30w" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/19/cjta019m0009qhcc21tp8bh0g/" data-id="cjta019m0009qhcc21tp8bh0g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -246,7 +302,7 @@
   
     <article id="post-匹配、覆盖、独立集、二分图与网络流" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/14/cjsyojuwg007dlkc2letnedhf/" class="article-date">
+    <a href="/2017/06/14/cjta019k5008lhcc2rmbxol68/" class="article-date">
   <time datetime="2017-06-14T09:08:03.000Z" itemprop="datePublished">2017-06-14</time>
 </a>
     
@@ -262,7 +318,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/14/cjsyojuwg007dlkc2letnedhf/">匹配、覆盖、独立集、二分图与网络流</a>
+      <a class="article-title" href="/2017/06/14/cjta019k5008lhcc2rmbxol68/">匹配、覆盖、独立集、二分图与网络流</a>
     </h1>
   
 
@@ -296,7 +352,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/14/cjsyojuwg007dlkc2letnedhf/" data-id="cjsyojuwg007dlkc2letnedhf" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/14/cjta019k5008lhcc2rmbxol68/" data-id="cjta019k5008lhcc2rmbxol68" class="article-share-link">Share</a>
       
       
     </footer>
@@ -308,7 +364,7 @@
   
     <article id="post-ZOJ3781-Paint-the-Grid-Reloaded（缩点-最短路）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/13/cjsyojuw30071lkc2d911nf7b/" class="article-date">
+    <a href="/2017/06/13/cjta019j6007yhcc28nl4xua1/" class="article-date">
   <time datetime="2017-06-13T03:36:05.000Z" itemprop="datePublished">2017-06-13</time>
 </a>
     
@@ -324,7 +380,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/13/cjsyojuw30071lkc2d911nf7b/">ZOJ3781 - Paint the Grid Reloaded（缩点+最短路）</a>
+      <a class="article-title" href="/2017/06/13/cjta019j6007yhcc28nl4xua1/">ZOJ3781 - Paint the Grid Reloaded（缩点+最短路）</a>
     </h1>
   
 
@@ -348,7 +404,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/13/cjsyojuw30071lkc2d911nf7b/" data-id="cjsyojuw30071lkc2d911nf7b" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/13/cjta019j6007yhcc28nl4xua1/" data-id="cjta019j6007yhcc28nl4xua1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -360,7 +416,7 @@
   
     <article id="post-POJ3259-Wormholes（连通图判断负环）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/13/cjsyojusn004flkc2zq1fy2k7/" class="article-date">
+    <a href="/2017/06/13/cjta019fw005rhcc2mrbb2zmv/" class="article-date">
   <time datetime="2017-06-13T03:10:29.000Z" itemprop="datePublished">2017-06-13</time>
 </a>
     
@@ -376,7 +432,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/13/cjsyojusn004flkc2zq1fy2k7/">POJ3259 - Wormholes（连通图判断负环）</a>
+      <a class="article-title" href="/2017/06/13/cjta019fw005rhcc2mrbb2zmv/">POJ3259 - Wormholes（连通图判断负环）</a>
     </h1>
   
 
@@ -399,7 +455,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/13/cjsyojusn004flkc2zq1fy2k7/" data-id="cjsyojusn004flkc2zq1fy2k7" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/13/cjta019fw005rhcc2mrbb2zmv/" data-id="cjta019fw005rhcc2mrbb2zmv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -411,7 +467,7 @@
   
     <article id="post-UVA12511-Virus（DP-最长公共上升子序列）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/11/cjsyojuuw0064lkc2e220cd25/" class="article-date">
+    <a href="/2017/06/11/cjta019ig007ihcc2vxk75u3j/" class="article-date">
   <time datetime="2017-06-11T13:22:11.000Z" itemprop="datePublished">2017-06-11</time>
 </a>
     
@@ -427,7 +483,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/11/cjsyojuuw0064lkc2e220cd25/">UVA12511 - Virus（DP+最长公共上升子序列）</a>
+      <a class="article-title" href="/2017/06/11/cjta019ig007ihcc2vxk75u3j/">UVA12511 - Virus（DP+最长公共上升子序列）</a>
     </h1>
   
 
@@ -454,7 +510,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/11/cjsyojuuw0064lkc2e220cd25/" data-id="cjsyojuuw0064lkc2e220cd25" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/11/cjta019ig007ihcc2vxk75u3j/" data-id="cjta019ig007ihcc2vxk75u3j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -466,7 +522,7 @@
   
     <article id="post-使用OpenMP实现并行归并排序（Report）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/06/05/cjsyojuwk007flkc2bc6kek0n/" class="article-date">
+    <a href="/2017/06/05/cjta019jr008bhcc2fgnidcdf/" class="article-date">
   <time datetime="2017-06-05T08:41:18.000Z" itemprop="datePublished">2017-06-05</time>
 </a>
     
@@ -482,7 +538,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/05/cjsyojuwk007flkc2bc6kek0n/">使用OpenMP实现并行归并排序（Report）</a>
+      <a class="article-title" href="/2017/06/05/cjta019jr008bhcc2fgnidcdf/">使用OpenMP实现并行归并排序（Report）</a>
     </h1>
   
 
@@ -615,7 +671,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/06/05/cjsyojuwk007flkc2bc6kek0n/" data-id="cjsyojuwk007flkc2bc6kek0n" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/06/05/cjta019jr008bhcc2fgnidcdf/" data-id="cjta019jr008bhcc2fgnidcdf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -627,7 +683,7 @@
   
     <article id="post-HDU3085-Nightmare-Ⅱ（双向BFS）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/05/31/cjsyojuo80023lkc2ehmhwu5e/" class="article-date">
+    <a href="/2017/05/31/cjta019d6003qhcc2lwz8rqkp/" class="article-date">
   <time datetime="2017-05-31T12:50:32.000Z" itemprop="datePublished">2017-05-31</time>
 </a>
     
@@ -643,7 +699,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/31/cjsyojuo80023lkc2ehmhwu5e/">HDU3085 - Nightmare Ⅱ（双向BFS）</a>
+      <a class="article-title" href="/2017/05/31/cjta019d6003qhcc2lwz8rqkp/">HDU3085 - Nightmare Ⅱ（双向BFS）</a>
     </h1>
   
 
@@ -709,113 +765,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/05/31/cjsyojuo80023lkc2ehmhwu5e/" data-id="cjsyojuo80023lkc2ehmhwu5e" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-常见错误清单（长期更新）" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/05/22/cjsyojuww007nlkc2gvipvh4z/" class="article-date">
-  <time datetime="2017-05-22T09:22:24.000Z" itemprop="datePublished">2017-05-22</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/知识小结/">知识小结</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/22/cjsyojuww007nlkc2gvipvh4z/">常见错误清单（长期更新）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li><p>素数筛打表的时候默认为1为素数</p>
-</li>
-<li><p>DP转移过程中记录路径的情况，如果是从后向前算的，可能路径会被更新掉</p>
-</li>
-<li><p>每组数据初始化的时候，注意把建的边清掉一下</p>
-</li>
-<li><p>对一堆数字进行取LCM的时候，可能会爆int</p>
-</li>
-<li><p>结构体注意初始化问题，不要以为默认会被初始化为0，最好手写构造函数</p>
-</li>
-<li><p>～是按位取反，只需要把一位取反的时候不要用</p>
-</li>
-<li><p>线段树区间更新时updata忘记加lazy标记</p>
-</li>
-<li><p>输出结果的时候，有时直接输出结构体本地不会错，交上RE，注意下要输出结构体的属性</p>
-</li>
-<li><p>容斥原理判断某范围内模一些数为0的数的个数的时候，要求这些数之间不能一个数是另一个的倍数，比如2, 3, 4, 5，那么应该舍弃掉4，只取2</p>
-</li>
-<li><p>SPFA用栈替换成队列后，要注意出栈的顺序，要在加入新元素前把旧的出栈，加入新元素后取消出栈元素的标记</p>
-</li>
-<li><p>BFS某些情况应该在入队的时候标记，如果在出队的时候标记，有可能会出现一些不可描述的情况导致MLE</p>
-</li>
-<li><p>数据太大爆int</p>
-</li>
-<li><p>计算过程中爆int</p>
-</li>
-<li><p>取模姿势不对爆int</p>
-</li>
-<li><p>vis，book等标记数组没初始化</p>
-</li>
-<li><p>bfs队列没有pop</p>
-</li>
-<li><p>类似走迷宫那样的题，下一步要走的地方计算错误(比如ty 本应该是y+dirc[i][0]，结果写成x+dirc[i][0])</p>
-</li>
-<li><p>浮点数精度误差，要加eps</p>
-</li>
-<li><p>数组过大每次都要memset初始化，导致超时</p>
-</li>
-<li><p>Case： 和数组之间有个空格，导致pe</p>
-</li>
-<li><p>直接拿输入的数据当下标，因为有负数re</p>
-</li>
-<li><p>DP过程累加爆int</p>
-</li>
-<li><p>题目卡SPFA换Dijstra AC</p>
-</li>
-<li><p>题目卡Vector，用前向星AC</p>
-</li>
-<li><p>DP输出路径时，尽量要从末状态从后往前推，这样容易处理字典序</p>
-</li>
-<li><p>解方程中，可能爆 int ，比如二元一次方程中的 B 来自输入的两个数据相乘，然后又用到了 B * B 结果 1000 的数据就会爆 int</p>
-</li>
-<li><p>位运算一定要括起来，某些位运算操作优先级比等于号还低</p>
-</li>
-<li><p>计算一组数据需要取膜时，记得手动初始化的也要取膜，比如斐波那契数列，f(1) = f(0) = 1 时， 如果模数为 1 那么应该初始化为 0 才对，保险写法为 f(1) = f(0) = 1 % mod</p>
-</li>
-<li><p>代码WA的时候要多检查下比较长的公式是否错误</p>
-</li>
-<li><p>对于 long long a = b <em> b </em> b 这样的式子要注意 b 是否为 long long 类型，如果不是运算过程中为 int 类型，检查下是否爆 int</p>
-</li>
-<li><p>注意数据范围， 2^31 是爆 int 的</p>
-</li>
-<li><p>用矩阵存图的时候，注意重边，如果有重边看情况更新</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2017/05/22/cjsyojuww007nlkc2gvipvh4z/" data-id="cjsyojuww007nlkc2gvipvh4z" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2017/05/31/cjta019d6003qhcc2lwz8rqkp/" data-id="cjta019d6003qhcc2lwz8rqkp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -868,23 +818,23 @@
       <ul>
         
           <li>
-            <a href="/2019/03/07/cjsyojuya008mlkc25p7bhv3z/">腾讯 IEG 后台开发面试</a>
+            <a href="/2019/03/15/cjta019jo0088hcc220a0y8nw/">依图研发工程师面试经历</a>
           </li>
         
           <li>
-            <a href="/2019/02/26/cjsyojuwe007blkc28j84ag52/">吉比特实习面试</a>
+            <a href="/2019/03/07/cjta019pq00evhcc2eb0a1766/">腾讯 IEG 后台开发面试</a>
           </li>
         
           <li>
-            <a href="/2019/01/15/cjsyojuxu0089lkc2um2ehdcz/">概率论笔记</a>
+            <a href="/2019/02/26/cjta019k2008ihcc2q82uz987/">吉比特实习面试</a>
           </li>
         
           <li>
-            <a href="/2018/11/16/cjsyojuwb0078lkc22v23vzy5/">二维ST表</a>
+            <a href="/2019/01/15/cjta019lg009ehcc2kpqd9yzk/">概率论笔记</a>
           </li>
         
           <li>
-            <a href="/2018/10/16/cjsyojutc004zlkc2kjvk6d3r/">SDUTACM十周年题解（Fish出题部分）</a>
+            <a href="/2018/11/16/cjta019jv008dhcc25btb5l0m/">二维ST表</a>
           </li>
         
       </ul>
