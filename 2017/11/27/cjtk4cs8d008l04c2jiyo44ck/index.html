@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>线性基小结 | Fish&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="感谢Sengxian’s Blog 前言感觉 Sengxian 的博客里面写的太好了，然后这里只打算添加一下自己的理解了。 首先所谓的线性基，就是把若干个整数，看成 n 维 01 向量（通常 n 不会超过 64，即 long long 的范围），然后求这些向量的一个极大无关组。需要注意的一点是，对于这里的 01 向量，只有异或运算。 不过一般为了方便处理，我们会把极大无关组进行列变换化最简形。一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线性基小结">
+<meta property="og:url" content="https://li-fish.github.io/2017/11/27/cjtk4cs8d008l04c2jiyo44ck/index.html">
+<meta property="og:site_name" content="Fish&#39;s Blog">
+<meta property="og:description" content="感谢Sengxian’s Blog 前言感觉 Sengxian 的博客里面写的太好了，然后这里只打算添加一下自己的理解了。 首先所谓的线性基，就是把若干个整数，看成 n 维 01 向量（通常 n 不会超过 64，即 long long 的范围），然后求这些向量的一个极大无关组。需要注意的一点是，对于这里的 01 向量，只有异或运算。 不过一般为了方便处理，我们会把极大无关组进行列变换化最简形。一个">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-01-22T11:28:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="线性基小结">
+<meta name="twitter:description" content="感谢Sengxian’s Blog 前言感觉 Sengxian 的博客里面写的太好了，然后这里只打算添加一下自己的理解了。 首先所谓的线性基，就是把若干个整数，看成 n 维 01 向量（通常 n 不会超过 64，即 long long 的范围），然后求这些向量的一个极大无关组。需要注意的一点是，对于这里的 01 向量，只有异或运算。 不过一般为了方便处理，我们会把极大无关组进行列变换化最简形。一个">
+  
+    <link rel="alternate" href="/atom.xml" title="Fish&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Fish&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://li-fish.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-线性基小结" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/27/cjtk4cs8d008l04c2jiyo44ck/" class="article-date">
+  <time datetime="2017-11-27T02:45:00.000Z" itemprop="datePublished">2017-11-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/数学/">数学</a>►<a class="article-category-link" href="/categories/ACM/数学/线性基/">线性基</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      线性基小结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h1><p><a href="https://blog.sengxian.com/algorithms/linear-basis" target="_blank" rel="noopener">Sengxian’s Blog</a></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>感觉 Sengxian 的博客里面写的太好了，然后这里只打算添加一下自己的理解了。</p>
+<p>首先所谓的线性基，就是把若干个整数，看成 n 维 01 向量（通常 n 不会超过 64，即 long long 的范围），然后求这些向量的一个极大无关组。需要注意的一点是，对于这里的 01 向量，只有异或运算。</p>
+<p>不过一般为了方便处理，我们会把极大无关组进行列变换化最简形。<strong>一个向量空间可以有多个基，但是化为最简形后基是唯一的。化为最简形后和原来是等价的，由化最简形后的向量组可以表示的向量都可以由原向量组来表示。</strong></p>
+<p>下面是利用高斯消元求解线性基的代码，由 Sengxian 的代码改过来的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cal</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = MAX_BASE; j &gt;= <span class="number">0</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (data[i] &gt;&gt; j &amp; <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (b[j]) data[i] ^= b[j];</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    b[j] = data[i];</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> k = j - <span class="number">1</span>; k &gt;= <span class="number">0</span>; k--) <span class="keyword">if</span> (b[k] &amp;&amp; b[j] &gt;&gt; k &amp; <span class="number">1</span>) b[j] ^= b[k];</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> k = j + <span class="number">1</span>; k &lt;= MAX_BASE; k++) <span class="keyword">if</span> (b[k] &gt;&gt; j &amp; <span class="number">1</span>) b[k] ^= b[j];</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="SGU-275"><a href="#SGU-275" class="headerlink" title="SGU-275"></a>SGU-275</h1><p>给出 N 个数，求 N 个数异或可以得到的最大值，数的范围在 long long 内。</p>
+<p>求出线性基，然后异或就是答案，这里 Sengxian 博客有证明，不过这里补充一点，<strong>对于上面算法得到的线性基是唯一的</strong>。</p>
+<h2 id="AC代码"><a href="#AC代码" class="headerlink" title="AC代码"></a>AC代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_BASE = <span class="number">63</span>;</span><br><span class="line"></span><br><span class="line">ll b[<span class="number">200</span>];</span><br><span class="line">ll a[<span class="number">11234</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cal</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = MAX_BASE; j &gt;= <span class="number">0</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[i] &gt;&gt; j &amp; <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (b[j]) a[i] ^= b[j];</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    b[j] = a[i];</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> k = j - <span class="number">1</span>; k &gt;= <span class="number">0</span>; k--) <span class="keyword">if</span> (b[k] &amp;&amp; b[j] &gt;&gt; k &amp; <span class="number">1</span>) b[j] ^= b[k];</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> k = j + <span class="number">1</span>; k &lt;= MAX_BASE; k++) <span class="keyword">if</span> (b[k] &gt;&gt; j &amp; <span class="number">1</span>) b[k] ^= b[j];</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n)) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">memset</span>(b, <span class="number">0</span>, <span class="keyword">sizeof</span>(b));</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, a + i);</span><br><span class="line">        &#125;</span><br><span class="line">        cal(n);</span><br><span class="line">        ll ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= MAX_BASE; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (b[i] &gt;&gt; i &amp; <span class="number">1</span>) ans ^= b[i];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="CF-895C"><a href="#CF-895C" class="headerlink" title="CF-895C"></a>CF-895C</h1><p>给出 N 个数的集合，问能取出多少不同的子集，使得乘积是平方数。输入的数字小于 70 。</p>
+<p>对平方数进行质因数分解，会发现每个质因子的幂都是偶数。现在对输入的 N 个数进行质因数分解，对每个质因子只对它的幂的奇偶性有关，可以计算小于 70 的质因子只有 20 个，那么我们用一个 01 变量来表示每个数质因子奇偶性的情况。</p>
+<p>然后我们对这 N 个 01 向量求线性基，那么答案就是 $2^{N - BaseSize} - 1$，注意线性基其实就是选了若干个线性无关的向量并且化简后的结果。这时候对于没有选中的向量，取任意子集，异或得到的向量都可以由线性基基来表示，总共有上面答案数的子集（减去了空集）。对于线性基选中的向量，因为是线性无关，所以不能互相表示，不贡献答案。</p>
+<h2 id="AC代码-1"><a href="#AC代码-1" class="headerlink" title="AC代码"></a>AC代码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX = <span class="number">112345</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MOD = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_BASE = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">bool</span> now_prime[<span class="number">200</span>];</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; primes;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_primes</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= <span class="number">70</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (now_prime[i]) <span class="keyword">continue</span>;</span><br><span class="line">        primes.push_back(i);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i * <span class="number">2</span>; j &lt;= <span class="number">70</span>; j += i) &#123;</span><br><span class="line">            now_prime[j] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> raw_data[MAX];</span><br><span class="line"><span class="keyword">int</span> data[MAX];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> rst = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; primes.size(); i++) &#123;</span><br><span class="line">        <span class="keyword">while</span> (n % primes[i] == <span class="number">0</span>) &#123;</span><br><span class="line">            rst ^= (<span class="number">1</span> &lt;&lt; i);</span><br><span class="line">            n /= primes[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> rst;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> b[<span class="number">200</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cal</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = MAX_BASE; j &gt;= <span class="number">0</span>; j--) &#123;</span><br><span class="line">            <span class="keyword">if</span> (data[i] &gt;&gt; j &amp; <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="keyword">if</span> (b[j]) data[i] ^= b[j];</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    b[j] = data[i];</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> k = j - <span class="number">1</span>; k &gt;= <span class="number">0</span>; k--) <span class="keyword">if</span> (b[k] &amp;&amp; b[j] &gt;&gt; k &amp; <span class="number">1</span>) b[j] ^= b[k];</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> k = j + <span class="number">1</span>; k &lt;= MAX_BASE; k++) <span class="keyword">if</span> (b[k] &gt;&gt; j &amp; <span class="number">1</span>) b[k] ^= b[j];</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pow_mod</span><span class="params">(ll a, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    ll rst = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (k) &#123;</span><br><span class="line">        <span class="keyword">if</span> (k &amp; <span class="number">1</span>) rst = rst * a % MOD;</span><br><span class="line">        a = a * a % MOD;</span><br><span class="line">        k &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (<span class="keyword">int</span>)rst;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    get_primes();</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, raw_data + i);</span><br><span class="line">        data[i] = solve(raw_data[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    cal(n);</span><br><span class="line">    <span class="keyword">int</span> cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= MAX_BASE; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (b[i]) cnt++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, (pow_mod(<span class="number">2</span>, n - cnt) - <span class="number">1</span> + MOD) % MOD);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2017/11/27/cjtk4cs8d008l04c2jiyo44ck/" data-id="cjtk4cs8d008l04c2jiyo44ck" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/11/28/cjtk4crt9000u04c26u1pvzfc/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          CodeForce727E - Games on a CD（字符串双hash模板）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/11/20/cjtk4csh900g704c2vrc77yzg/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">K-D树小结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/">DP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/区间DP/">区间DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/数位DP/">数位DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/斜率优化/">斜率优化</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/树型DP/">树型DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/状压DP/">状压DP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/二分/">二分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/二进制/">二进制</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/命题/">命题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/">图论</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/2-SAT/">2-SAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/匹配/">匹配</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/差分约束/">差分约束</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/最短路/">最短路</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/网络流/">网络流</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/连通性/">连通性</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/">字符串</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/AC自动机/">AC自动机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/后缀数组/">后缀数组</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/回文树/">回文树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/字符串Hash/">字符串Hash</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/搜索/">搜索</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/搜索/BFS/">BFS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/">数学</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/数论/">数论</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/矩阵快速幂/">矩阵快速幂</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/线性基/">线性基</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/高斯消元/">高斯消元</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/">数据结构</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/K-D树/">K-D树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/LCT/">LCT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/ST表/">ST表</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/Splay/">Splay</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/主席树/">主席树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/并查集/">并查集</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/栈/">栈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/树/">树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/树链剖分/">树链剖分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/线段树/">线段树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/虚树/">虚树</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/模拟/">模拟</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/知识小结/">知识小结</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/计算几何/">计算几何</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/贪心/">贪心</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/CS课程/">CS课程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/历程/">历程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/命题/">命题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/想法/">想法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂物/">杂物</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/游戏/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/爬虫-数据处理/">爬虫&数据处理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/Java/">Java</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网页设计/">网页设计</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/网页设计/Web服务器/">Web服务器</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/音乐/">音乐</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/音乐/乐理/">乐理</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/15/cjtk4cs5j007504c2z2js6g54/">依图研发工程师面试经历</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/07/cjtk4csgc00fy04c20b0udoco/">腾讯 IEG 后台开发面试</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/26/cjtk4cs6m007c04c2hfdnwt9r/">吉比特实习面试</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/15/cjtk4cs7x008804c2md0758yf/">概率论笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/16/cjtk4cs5d007204c26oslbpd4/">二维ST表</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Fish<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+				<!-- MathJax -->
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+				showProcessingMessages: false,
+				tex2jax: {
+					inlineMath: [["$", "$"], ["\\\\(", "\\\\)"]],
+					processEscapes:true
+				},
+				menuSettings: {
+					zoom: "Hover"
+    			}
+			});
+		</script>
+		<script src="//cdn.bootcss.com/mathjax/2.6.0/MathJax.js?config=TeX-AMS_HTML"></script>
+				
+  </div>
+</body>
+</html>

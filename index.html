@@ -64,7 +64,7 @@
   
     <article id="post-依图研发工程师面试经历" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/03/15/cjta019jo0088hcc220a0y8nw/" class="article-date">
+    <a href="/2019/03/15/cjtk4cs5j007504c2z2js6g54/" class="article-date">
   <time datetime="2019-03-15T11:42:51.000Z" itemprop="datePublished">2019-03-15</time>
 </a>
     
@@ -80,7 +80,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/15/cjta019jo0088hcc220a0y8nw/">依图研发工程师面试经历</a>
+      <a class="article-title" href="/2019/03/15/cjtk4cs5j007504c2z2js6g54/">依图研发工程师面试经历</a>
     </h1>
   
 
@@ -112,7 +112,7 @@
 <li><p>从 cache 的角度优化矩阵乘法。</p>
 <ul>
 <li><p>先写个矩阵乘法。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mat_mul</span><span class="params">(<span class="keyword">float</span> *A, <span class="keyword">float</span> *B, <span class="keyword">float</span> *C, <span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">    	<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">            C[i * N + j] = <span class="number">0</span>;</span><br><span class="line">        	<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; N; k++) &#123;</span><br><span class="line">                C[i * N + j] += A[i * N + k] * B[k * N + j];</span><br><span class="line">        	&#125;</span><br><span class="line">    	&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mat_mul</span><span class="params">(<span class="keyword">float</span> *A, <span class="keyword">float</span> *B, <span class="keyword">float</span> *C, <span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">   		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">            C[i * N + j] = <span class="number">0</span>;</span><br><span class="line">        	<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; N; k++) &#123;</span><br><span class="line">                C[i * N + j] += A[i * N + k] * B[k * N + j];</span><br><span class="line">        	&#125;</span><br><span class="line">    	&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>考虑访问 B 数组时，下标不是连续访问，进行优化。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mat_mul</span><span class="params">(<span class="keyword">float</span> *A, <span class="keyword">float</span> *B, <span class="keyword">float</span> *C, <span class="keyword">int</span> N)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">    	<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; N; j++) &#123;</span><br><span class="line">            C[i * N + j] = <span class="number">0</span>;</span><br><span class="line">        	<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; N; k++) &#123;</span><br><span class="line">                C[i * N + k] += A[i * N + j] * B[j * N + k];</span><br><span class="line">        	&#125;</span><br><span class="line">    	&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -145,7 +145,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2019/03/15/cjta019jo0088hcc220a0y8nw/" data-id="cjta019jo0088hcc220a0y8nw" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2019/03/15/cjtk4cs5j007504c2z2js6g54/" data-id="cjtk4cs5j007504c2z2js6g54" class="article-share-link">Share</a>
       
       
     </footer>
@@ -157,7 +157,7 @@
   
     <article id="post-腾讯-IEG-后台开发面试" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/03/07/cjta019pq00evhcc2eb0a1766/" class="article-date">
+    <a href="/2019/03/07/cjtk4csgc00fy04c20b0udoco/" class="article-date">
   <time datetime="2019-03-07T13:04:22.000Z" itemprop="datePublished">2019-03-07</time>
 </a>
     
@@ -173,7 +173,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/07/cjta019pq00evhcc2eb0a1766/">腾讯 IEG 后台开发面试</a>
+      <a class="article-title" href="/2019/03/07/cjtk4csgc00fy04c20b0udoco/">腾讯 IEG 后台开发面试</a>
     </h1>
   
 
@@ -304,11 +304,41 @@
 <p>直接被问的自闭了，这里抢答了，“那，再见”。然后面试官就说了下再见就结束了。（感觉他可能是要说 “那你有什么问题问我吗”）</p>
 </li>
 </ul>
+<h1 id="三面"><a href="#三面" class="headerlink" title="三面"></a>三面</h1><p>隔了两周才接到了电话，面试官说大概只用二十分钟就 ok，然后就直接开始面试了。</p>
+<ul>
+<li><p>你为什么参加 ACM 竞赛?</p>
+<p>一是为了可以和别的学校更更强的人同台竞技，二是本身就喜欢算法和数据结构。</p>
+</li>
+<li><p>你认为 ACM 竞赛中那些可以应用到工程中？</p>
+<p>应该是经典的数据结构和算法吧，对于一个工程的需求，我可以考虑用哪种算法和数据结构，可以实现怎样的时间复杂度和空间复杂度。</p>
+</li>
+<li><p>你学校课程中比较喜欢那几个?</p>
+<p>操作系统和计算机网络。</p>
+</li>
+<li><p>你认为编译原理中的知识对你有用吗？</p>
+<p>我认为我最受用的知识是状态机，在竞赛中就用到了 AC 自动机，SAM 等字符串自动机。另外工程中，服务器 IO 复用可以建立状态机的模型进行编程。</p>
+</li>
+<li><p>你讲一下从客户端发送一个 TCP 包到 服务器吧。</p>
+<p>首先先给需要发送的数据加上 TCP 首部，其中包含端口号、序列号等信息；然后将 TCP 包递交给网络层，网络层会加入 IP 首部，其中包括 IP 地址、校验和等信息；然后通过数据链路层发送出去。</p>
+<p>服务器收到数据包后递交给网络层，网络层拆掉 IP 首部，并且进行简单的校验，并且递交给传输层；传输层收到后拆掉 TCP 首部，并且验证数据包的是否正确（损坏、失序等），验证通过后讲数据包递交给对应端口号的程序。</p>
+</li>
+<li><p>子网掩码和网关了解吗？</p>
+<p>解释了一下子网掩码，因为之前都在看运输层，</p>
+</li>
+<li><p>那聊一下操作系统吧，介绍一下进程和线程吧？</p>
+<p>进程是操作系统进行分配资源的基本单位，线程是 CPU 调度的基本单位。（面试官问了一下用户态线程了解吗…直接没听说过）</p>
+<p>然后聊了下虚拟内存，进程间通信和线程通信。</p>
+</li>
+<li><p>总结</p>
+<p>面试官就直接说你基础不怎么好，如果我这过了的话，下一次就是 HR 面了。如果来实习的话一定要多看看基础知识，Unix 网络编程和 Unix 环境高级编程不错你可以看一下。剩下如果来的话需要补很多基础知识很费时间。</p>
+<p>这两本书正好前几天刚买，面试官说的东西正好是最近刚看的，如果能有实习的话，就安心啃书了。</p>
+</li>
+</ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2019/03/07/cjta019pq00evhcc2eb0a1766/" data-id="cjta019pq00evhcc2eb0a1766" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2019/03/07/cjtk4csgc00fy04c20b0udoco/" data-id="cjtk4csgc00fy04c20b0udoco" class="article-share-link">Share</a>
       
       
     </footer>
@@ -320,7 +350,7 @@
   
     <article id="post-吉比特实习面试经历" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/02/26/cjta019k2008ihcc2q82uz987/" class="article-date">
+    <a href="/2019/02/26/cjtk4cs6m007c04c2hfdnwt9r/" class="article-date">
   <time datetime="2019-02-26T07:29:53.000Z" itemprop="datePublished">2019-02-26</time>
 </a>
     
@@ -336,7 +366,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/26/cjta019k2008ihcc2q82uz987/">吉比特实习面试</a>
+      <a class="article-title" href="/2019/02/26/cjtk4cs6m007c04c2hfdnwt9r/">吉比特实习面试</a>
     </h1>
   
 
@@ -410,7 +440,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2019/02/26/cjta019k2008ihcc2q82uz987/" data-id="cjta019k2008ihcc2q82uz987" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2019/02/26/cjtk4cs6m007c04c2hfdnwt9r/" data-id="cjtk4cs6m007c04c2hfdnwt9r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -422,7 +452,7 @@
   
     <article id="post-概率论笔记" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/01/15/cjta019lg009ehcc2kpqd9yzk/" class="article-date">
+    <a href="/2019/01/15/cjtk4cs7x008804c2md0758yf/" class="article-date">
   <time datetime="2019-01-15T02:29:48.000Z" itemprop="datePublished">2019-01-15</time>
 </a>
     
@@ -438,7 +468,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/15/cjta019lg009ehcc2kpqd9yzk/">概率论笔记</a>
+      <a class="article-title" href="/2019/01/15/cjtk4cs7x008804c2md0758yf/">概率论笔记</a>
     </h1>
   
 
@@ -469,7 +499,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2019/01/15/cjta019lg009ehcc2kpqd9yzk/" data-id="cjta019lg009ehcc2kpqd9yzk" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2019/01/15/cjtk4cs7x008804c2md0758yf/" data-id="cjtk4cs7x008804c2md0758yf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -481,7 +511,7 @@
   
     <article id="post-二维ST表" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/11/16/cjta019jv008dhcc25btb5l0m/" class="article-date">
+    <a href="/2018/11/16/cjtk4cs5d007204c26oslbpd4/" class="article-date">
   <time datetime="2018-11-15T20:04:11.000Z" itemprop="datePublished">2018-11-16</time>
 </a>
     
@@ -497,7 +527,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/16/cjta019jv008dhcc25btb5l0m/">二维ST表</a>
+      <a class="article-title" href="/2018/11/16/cjtk4cs5d007204c26oslbpd4/">二维ST表</a>
     </h1>
   
 
@@ -514,7 +544,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/11/16/cjta019jv008dhcc25btb5l0m/" data-id="cjta019jv008dhcc25btb5l0m" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/11/16/cjtk4cs5d007204c26oslbpd4/" data-id="cjtk4cs5d007204c26oslbpd4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -526,7 +556,7 @@
   
     <article id="post-SDUTACM十周年题解（Fish出题部分）" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/10/16/cjta019gs006ehcc2yg1rwxrr/" class="article-date">
+    <a href="/2018/10/16/cjtk4cs0n005004c2xpsanvay/" class="article-date">
   <time datetime="2018-10-15T19:48:54.000Z" itemprop="datePublished">2018-10-16</time>
 </a>
     
@@ -542,7 +572,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/16/cjta019gs006ehcc2yg1rwxrr/">SDUTACM十周年题解（Fish出题部分）</a>
+      <a class="article-title" href="/2018/10/16/cjtk4cs0n005004c2xpsanvay/">SDUTACM十周年题解（Fish出题部分）</a>
     </h1>
   
 
@@ -575,7 +605,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/10/16/cjta019gs006ehcc2yg1rwxrr/" data-id="cjta019gs006ehcc2yg1rwxrr" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/10/16/cjtk4cs0n005004c2xpsanvay/" data-id="cjtk4cs0n005004c2xpsanvay" class="article-share-link">Share</a>
       
       
     </footer>
@@ -587,7 +617,7 @@
   
     <article id="post-LCT-模板-待填坑" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/25/cjta019ek004shcc2l819eupu/" class="article-date">
+    <a href="/2018/09/25/cjtk4crwi003804c2q1itznvs/" class="article-date">
   <time datetime="2018-09-25T13:02:34.000Z" itemprop="datePublished">2018-09-25</time>
 </a>
     
@@ -603,7 +633,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/25/cjta019ek004shcc2l819eupu/">LCT(模板-待填坑)</a>
+      <a class="article-title" href="/2018/09/25/cjtk4crwi003804c2q1itznvs/">LCT(模板-待填坑)</a>
     </h1>
   
 
@@ -619,7 +649,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/09/25/cjta019ek004shcc2l819eupu/" data-id="cjta019ek004shcc2l819eupu" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/09/25/cjtk4crwi003804c2q1itznvs/" data-id="cjtk4crwi003804c2q1itznvs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -631,7 +661,7 @@
   
     <article id="post-回文树模板" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/11/cjta019kc008phcc2jubm508t/" class="article-date">
+    <a href="/2018/09/11/cjtk4cs75007k04c2mrff7ao7/" class="article-date">
   <time datetime="2018-09-11T13:29:48.000Z" itemprop="datePublished">2018-09-11</time>
 </a>
     
@@ -647,7 +677,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/11/cjta019kc008phcc2jubm508t/">回文树模板</a>
+      <a class="article-title" href="/2018/09/11/cjtk4cs75007k04c2mrff7ao7/">回文树模板</a>
     </h1>
   
 
@@ -668,7 +698,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/09/11/cjta019kc008phcc2jubm508t/" data-id="cjta019kc008phcc2jubm508t" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/09/11/cjtk4cs75007k04c2mrff7ao7/" data-id="cjtk4cs75007k04c2mrff7ao7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -680,7 +710,7 @@
   
     <article id="post-2018年暑假集训" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/04/cjta019ms00aahcc20ovlhhci/" class="article-date">
+    <a href="/2018/09/04/cjtk4csfg00fr04c2qiectjbg/" class="article-date">
   <time datetime="2018-09-04T10:48:35.000Z" itemprop="datePublished">2018-09-04</time>
 </a>
     
@@ -696,7 +726,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/04/cjta019ms00aahcc20ovlhhci/">2018年暑假集训（应付学校社会实践）</a>
+      <a class="article-title" href="/2018/09/04/cjtk4csfg00fr04c2qiectjbg/">2018年暑假集训（应付学校社会实践）</a>
     </h1>
   
 
@@ -746,7 +776,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/09/04/cjta019ms00aahcc20ovlhhci/" data-id="cjta019ms00aahcc20ovlhhci" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/09/04/cjtk4csfg00fr04c2qiectjbg/" data-id="cjtk4csfg00fr04c2qiectjbg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -758,7 +788,7 @@
   
     <article id="post-斜率DP小结" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/04/cjta019kp008zhcc2z6ixuw0p/" class="article-date">
+    <a href="/2018/09/04/cjtk4cs7h007w04c2octhuvrl/" class="article-date">
   <time datetime="2018-09-03T21:11:05.000Z" itemprop="datePublished">2018-09-04</time>
 </a>
     
@@ -774,7 +804,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/04/cjta019kp008zhcc2z6ixuw0p/">斜率DP小结（待填坑）</a>
+      <a class="article-title" href="/2018/09/04/cjtk4cs7h007w04c2octhuvrl/">斜率DP小结（待填坑）</a>
     </h1>
   
 
@@ -786,7 +816,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://li-fish.github.io/2018/09/04/cjta019kp008zhcc2z6ixuw0p/" data-id="cjta019kp008zhcc2z6ixuw0p" class="article-share-link">Share</a>
+      <a data-url="https://li-fish.github.io/2018/09/04/cjtk4cs7h007w04c2octhuvrl/" data-id="cjtk4cs7h007w04c2octhuvrl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -839,23 +869,23 @@
       <ul>
         
           <li>
-            <a href="/2019/03/15/cjta019jo0088hcc220a0y8nw/">依图研发工程师面试经历</a>
+            <a href="/2019/03/15/cjtk4cs5j007504c2z2js6g54/">依图研发工程师面试经历</a>
           </li>
         
           <li>
-            <a href="/2019/03/07/cjta019pq00evhcc2eb0a1766/">腾讯 IEG 后台开发面试</a>
+            <a href="/2019/03/07/cjtk4csgc00fy04c20b0udoco/">腾讯 IEG 后台开发面试</a>
           </li>
         
           <li>
-            <a href="/2019/02/26/cjta019k2008ihcc2q82uz987/">吉比特实习面试</a>
+            <a href="/2019/02/26/cjtk4cs6m007c04c2hfdnwt9r/">吉比特实习面试</a>
           </li>
         
           <li>
-            <a href="/2019/01/15/cjta019lg009ehcc2kpqd9yzk/">概率论笔记</a>
+            <a href="/2019/01/15/cjtk4cs7x008804c2md0758yf/">概率论笔记</a>
           </li>
         
           <li>
-            <a href="/2018/11/16/cjta019jv008dhcc25btb5l0m/">二维ST表</a>
+            <a href="/2018/11/16/cjtk4cs5d007204c26oslbpd4/">二维ST表</a>
           </li>
         
       </ul>

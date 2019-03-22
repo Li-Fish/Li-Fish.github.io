@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>POJ3694 - Network（强连通+LCA） | Fish&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="题目链接：http://poj.org/problem?id=3694  题目大意：给出一个无向图。 有 q 次操作，每次增加一条边，询问图中有多少桥。 q &amp;lt; 1e3, n &amp;lt; 1e5, m &amp;lt; 2e5  解题过程：不会写，思路到是有，不知道该怎么维护一条路径上的点，并让其缩点成一个点，到时想起来了树链剖分（昨天刚写了一个模板）。 想法是缩成树型图，每个边权值为1，增加一条边就">
+<meta property="og:type" content="article">
+<meta property="og:title" content="POJ3694 - Network（强连通+LCA）">
+<meta property="og:url" content="https://li-fish.github.io/2017/08/11/cjtk4crzy004l04c2u0oez5rr/index.html">
+<meta property="og:site_name" content="Fish&#39;s Blog">
+<meta property="og:description" content="题目链接：http://poj.org/problem?id=3694  题目大意：给出一个无向图。 有 q 次操作，每次增加一条边，询问图中有多少桥。 q &amp;lt; 1e3, n &amp;lt; 1e5, m &amp;lt; 2e5  解题过程：不会写，思路到是有，不知道该怎么维护一条路径上的点，并让其缩点成一个点，到时想起来了树链剖分（昨天刚写了一个模板）。 想法是缩成树型图，每个边权值为1，增加一条边就">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-29T08:52:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="POJ3694 - Network（强连通+LCA）">
+<meta name="twitter:description" content="题目链接：http://poj.org/problem?id=3694  题目大意：给出一个无向图。 有 q 次操作，每次增加一条边，询问图中有多少桥。 q &amp;lt; 1e3, n &amp;lt; 1e5, m &amp;lt; 2e5  解题过程：不会写，思路到是有，不知道该怎么维护一条路径上的点，并让其缩点成一个点，到时想起来了树链剖分（昨天刚写了一个模板）。 想法是缩成树型图，每个边权值为1，增加一条边就">
+  
+    <link rel="alternate" href="/atom.xml" title="Fish&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Fish&#39;s Blog</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://li-fish.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-POJ3694-Network（强连通-LCA）" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/11/cjtk4crzy004l04c2u0oez5rr/" class="article-date">
+  <time datetime="2017-08-11T03:05:45.000Z" itemprop="datePublished">2017-08-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/ACM/">ACM</a>►<a class="article-category-link" href="/categories/ACM/图论/">图论</a>►<a class="article-category-link" href="/categories/ACM/图论/连通性/">连通性</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      POJ3694 - Network（强连通+LCA）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="题目链接："><a href="#题目链接：" class="headerlink" title="题目链接："></a>题目链接：</h1><p><a href="http://poj.org/problem?id=3694" target="_blank" rel="noopener">http://poj.org/problem?id=3694</a></p>
+<hr>
+<h1 id="题目大意："><a href="#题目大意：" class="headerlink" title="题目大意："></a>题目大意：</h1><p>给出一个无向图。</p>
+<p>有 q 次操作，每次增加一条边，询问图中有多少桥。</p>
+<p>q &lt; 1e3, n &lt; 1e5, m &lt; 2e5</p>
+<hr>
+<h1 id="解题过程："><a href="#解题过程：" class="headerlink" title="解题过程："></a>解题过程：</h1><p>不会写，思路到是有，不知道该怎么维护一条路径上的点，并让其缩点成一个点，到时想起来了树链剖分（昨天刚写了一个模板）。</p>
+<p>想法是缩成树型图，每个边权值为1，增加一条边就让路径上的所有边的边权置零，每次输出整棵树的权值和即可。</p>
+<p>感觉太麻烦了，于是偷偷去看了下讨论区，发现用 LCA（最近公共祖先） 加并查集就很容易解决这个问题</p>
+<hr>
+<h1 id="题目分析："><a href="#题目分析：" class="headerlink" title="题目分析："></a>题目分析：</h1><p>首先缩点成树形图，对于每一次操作，新加的一条边 (u, v) ，让 u，v 两点确定的路径上的所有点的用并查集缩成一个点（包括u，v），缩成的点为u，v的LCA，这样缩掉几个点，原图就减少了几个桥。用一个值来维护答案即可。</p>
+<hr>
+<h1 id="AC代码："><a href="#AC代码：" class="headerlink" title="AC代码："></a>AC代码：</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX = <span class="number">100000</span> + <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, q, Case, sum;</span><br><span class="line"><span class="keyword">int</span> head[MAX], etot;</span><br><span class="line"><span class="keyword">int</span> deep[MAX], f[MAX], fa[MAX];</span><br><span class="line"><span class="keyword">int</span> pre[MAX], low[MAX], mark[MAX], dfs_clock, scc_cnt;</span><br><span class="line"><span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; S;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> u, v, nxt;</span><br><span class="line">&#125; edge[MAX &lt;&lt; <span class="number">4</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add_edge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    edge[etot].v = v;</span><br><span class="line">    edge[etot].u = u;</span><br><span class="line">    edge[etot].nxt = head[u];</span><br><span class="line">    head[u] = etot++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fat)</span> </span>&#123;</span><br><span class="line">    pre[u] = low[u] = ++dfs_clock;</span><br><span class="line">    S.push(u);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = head[u]; ~i; i = edge[i].nxt) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = edge[i].v;</span><br><span class="line">        <span class="keyword">if</span> (!pre[v]) &#123;</span><br><span class="line">            dfs(v, i);</span><br><span class="line">            low[u] = min(low[u], low[v]);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (i != (fat^<span class="number">1</span>)) &#123;</span><br><span class="line">            low[u] = min(low[u], pre[v]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (low[u] == pre[u]) &#123;</span><br><span class="line">        <span class="keyword">int</span> x;</span><br><span class="line">        scc_cnt++;</span><br><span class="line">        <span class="keyword">do</span> &#123;</span><br><span class="line">            x = S.top();</span><br><span class="line">            S.pop();</span><br><span class="line">            mark[x] = scc_cnt;</span><br><span class="line">        &#125; <span class="keyword">while</span> (x != u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(pre, <span class="number">0</span>, <span class="keyword">sizeof</span>(pre));</span><br><span class="line">    <span class="built_in">memset</span>(mark, <span class="number">0</span>, <span class="keyword">sizeof</span>(mark));</span><br><span class="line">    <span class="built_in">memset</span>(head, <span class="number">-1</span>, <span class="keyword">sizeof</span>(head));</span><br><span class="line">    scc_cnt = dfs_clock = sum = etot = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> u, v;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;u, &amp;v);</span><br><span class="line">        add_edge(u, v);</span><br><span class="line">        add_edge(v, u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">tarjan</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!pre[i]) dfs(i, <span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_deep</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fat, <span class="keyword">int</span> dep)</span> </span>&#123;</span><br><span class="line">    deep[u] = dep, f[u] = u;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = head[u]; ~i; i = edge[i].nxt) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = edge[i].v;</span><br><span class="line">        <span class="keyword">if</span> (v != fat) &#123;</span><br><span class="line">            fa[v] = u;</span><br><span class="line">            get_deep(v, u, dep + <span class="number">1</span>);</span><br><span class="line">            sum++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">rebuild</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tail = etot;</span><br><span class="line">    <span class="built_in">memset</span>(head, <span class="number">-1</span>, <span class="keyword">sizeof</span>(head));</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; tail; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> u = edge[i].u;</span><br><span class="line">        <span class="keyword">int</span> v = edge[i].v;</span><br><span class="line">        <span class="keyword">if</span> (mark[u] != mark[v]) &#123;</span><br><span class="line">            add_edge(mark[u], mark[v]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">root</span><span class="params">(<span class="keyword">int</span> t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (t == f[t]) <span class="keyword">return</span> t;</span><br><span class="line">    <span class="keyword">return</span> f[t] = root(f[t]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">lca</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    u = root(u), v = root(v);</span><br><span class="line">    <span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; st;</span><br><span class="line">    <span class="comment">//循环直到找到公共祖先</span></span><br><span class="line">    <span class="keyword">while</span> (u != v) &#123;</span><br><span class="line">        <span class="comment">//让u为较深的节点</span></span><br><span class="line">        <span class="keyword">if</span> (deep[u] &lt; deep[v]) swap(u, v);</span><br><span class="line">        <span class="comment">//通过减少的节点数维护答案</span></span><br><span class="line">        sum--;</span><br><span class="line">        st.push(u);</span><br><span class="line">        <span class="comment">//让u爬到他的父亲节点</span></span><br><span class="line">        u = root(fa[u]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//最后让路径上经过的点都缩成LCA一个点</span></span><br><span class="line">    <span class="keyword">while</span> (!st.empty()) &#123;</span><br><span class="line">        f[st.top()] = u;</span><br><span class="line">        st.pop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">//边双连通划分+缩点</span></span><br><span class="line">    tarjan();</span><br><span class="line">    rebuild();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//获得新图的每个点的深度和父亲</span></span><br><span class="line">    get_deep(<span class="number">1</span>, <span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Case %d:\n"</span>, ++Case);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;q);</span><br><span class="line">    <span class="keyword">while</span> (q--) &#123;</span><br><span class="line">        <span class="keyword">int</span> u, v;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;u, &amp;v);</span><br><span class="line">        <span class="comment">//对每次操作通过并查集缩点</span></span><br><span class="line">        lca(mark[u], mark[v]);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, sum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m) &amp;&amp; (n + m)) &#123;</span><br><span class="line">        init();</span><br><span class="line">        solve();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://li-fish.github.io/2017/08/11/cjtk4crzy004l04c2u0oez5rr/" data-id="cjtk4crzy004l04c2u0oez5rr" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/16/cjtk4crti001004c2dgs5h9mr/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          CodeForces740D - Alyona and a tree (二分+树上差分)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/08/09/cjtk4crvq002r04c2u51euj89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">HDU3966 - Aragorn&#39;s Story（树链剖分+模板）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/">ACM</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/">DP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/区间DP/">区间DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/数位DP/">数位DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/斜率优化/">斜率优化</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/树型DP/">树型DP</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/DP/状压DP/">状压DP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/二分/">二分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/二进制/">二进制</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/命题/">命题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/">图论</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/2-SAT/">2-SAT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/匹配/">匹配</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/差分约束/">差分约束</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/最短路/">最短路</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/网络流/">网络流</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/图论/连通性/">连通性</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/">字符串</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/AC自动机/">AC自动机</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/后缀数组/">后缀数组</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/回文树/">回文树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/字符串/字符串Hash/">字符串Hash</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/搜索/">搜索</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/搜索/BFS/">BFS</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/">数学</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/数论/">数论</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/矩阵快速幂/">矩阵快速幂</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/线性基/">线性基</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数学/高斯消元/">高斯消元</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/">数据结构</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/K-D树/">K-D树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/LCT/">LCT</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/ST表/">ST表</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/Splay/">Splay</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/主席树/">主席树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/并查集/">并查集</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/栈/">栈</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/树/">树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/树链剖分/">树链剖分</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/线段树/">线段树</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/数据结构/虚树/">虚树</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/模拟/">模拟</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/知识小结/">知识小结</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/计算几何/">计算几何</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ACM/贪心/">贪心</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/CS课程/">CS课程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/历程/">历程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/命题/">命题</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/想法/">想法</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/杂物/">杂物</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/游戏/">游戏</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/爬虫-数据处理/">爬虫&数据处理</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/">编程语言</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/C/">C++</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/编程语言/Java/">Java</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/网页设计/">网页设计</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/网页设计/Web服务器/">Web服务器</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/音乐/">音乐</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/音乐/乐理/">乐理</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">February 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">December 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">October 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">May 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/03/15/cjtk4cs5j007504c2z2js6g54/">依图研发工程师面试经历</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/07/cjtk4csgc00fy04c20b0udoco/">腾讯 IEG 后台开发面试</a>
+          </li>
+        
+          <li>
+            <a href="/2019/02/26/cjtk4cs6m007c04c2hfdnwt9r/">吉比特实习面试</a>
+          </li>
+        
+          <li>
+            <a href="/2019/01/15/cjtk4cs7x008804c2md0758yf/">概率论笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/16/cjtk4cs5d007204c26oslbpd4/">二维ST表</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Fish<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+				<!-- MathJax -->
+		<script type="text/x-mathjax-config">
+			MathJax.Hub.Config({
+				showProcessingMessages: false,
+				tex2jax: {
+					inlineMath: [["$", "$"], ["\\\\(", "\\\\)"]],
+					processEscapes:true
+				},
+				menuSettings: {
+					zoom: "Hover"
+    			}
+			});
+		</script>
+		<script src="//cdn.bootcss.com/mathjax/2.6.0/MathJax.js?config=TeX-AMS_HTML"></script>
+				
+  </div>
+</body>
+</html>
